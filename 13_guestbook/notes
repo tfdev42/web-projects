@@ -1,0 +1,7 @@
+Account(-ID-, Email, Password, Name, Birthdate, Admin:bool, Newsletter:bool)
+Comment(-ID-, FK Account ID, Titel, Text, Published:bool, Date)
+
+User(-id, email[UK], password, name, birthdate, admin, newsletter)
+Comment(-id, user_id[FK], title, content, published_date, approved)
+
+
