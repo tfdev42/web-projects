@@ -1,0 +1,23 @@
+main {
+    width: 900px;
+    margin: 0 auto;
+}
+
+header ul li {
+    display: inline;
+    padding: 6px 10px; /* Innenabstand: 6px oben, 10 px links rechts Abstand */
+}
+
+header ul li a {
+    color: black;
+    text-decoration: none; /* underline weg */
+}
+
+* {
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+header {
+    width: 900px;
+    margin: 0 auto;
+}
