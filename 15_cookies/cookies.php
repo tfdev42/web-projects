@@ -1,3 +1,15 @@
+<?php
+    // um ein Cookie setzen zu koennen darf zuvor keine Ausgabe erfolgt sein
+    if(isset($_POST['bt_ok'])){
+        $currencyCode = $_POST['currency']; // EUR, USD, CHF
+
+        // Cookie erstellen
+        // time()+60*60 > 1 stnd gueltig
+        setcookie('currency', $currencyCode, time()+60*60);
+        header('Location: cookies.php');
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +21,7 @@
     <?php
         // Gibt es das Cookie?
         if(isset($_COOKIE['currency'])){
-
+            echo '<p>Cookie currency: '.htmlspecialchars($_COOKIE['currency']).'</p>';
         } else {
             // Cookie existiert nicht
             echo '<p><b>Cookie currency existiert nicht.</b></p>';
