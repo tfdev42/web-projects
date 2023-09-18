@@ -7,6 +7,15 @@
         // time()+60*60 > 1 stnd gueltig
         setcookie('currency', $currencyCode, time()+60*60);
         header('Location: cookies.php');
+    } elseif(isset($_POST['bt_delete'])){
+        // Cookie loeschen
+        // zum loeschen ist das Expiration Date in die Vergangenheit
+        // zu setzen
+        if(isset($_COOKIE['currency'])){
+            unset($_COOKIE['currency']);
+            setcookie('currency', '', time() - 60 * 60 * 24, '/');
+            header('Location: cookies.php');
+        }
     }
 ?>
 
@@ -35,6 +44,7 @@
         <input type="radio" name="currency" value="CHF">
         <label>CHF</label><br>
         <button name="bt_ok">Waehrung seichern</button>
+        <button name="bt_delete">Waehrung loeschen</button>
     </form>
 </body>
 </html>
