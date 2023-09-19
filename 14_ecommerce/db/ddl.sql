@@ -1,3 +1,12 @@
+-- Attributschreibweise
+-- User(id, fname, lname, emailUK, password, is_admin)
+-- Order(id, user_idFK, order_date, zip, country, address, total)
+-- Order_position(id, product_idFK, order_idFK, stock, unit_price)
+-- Brand(id, name)
+-- Category(id, name)
+-- Product(id, skuUK, brand_idFK, category_idFK, name, description, picture, price, stock, is_removed)
+
+
 CREATE DATABASE IF NOT EXISTS 20230911_ecommerce;
 USE 20230911_ecommerce;
 
