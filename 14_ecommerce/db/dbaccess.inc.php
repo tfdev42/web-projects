@@ -128,6 +128,77 @@ class DbAccess
         return $ps->fetchObject('User');
     }
 
+    public function getUserById(int $id) : User|false {
+        $ps = $this->conn->prepare(
+            'SELECT *
+            FROM user
+            WHERE id = :id'
+        );
+        $ps->bindValue('id', $id);
+        $ps->execute();
+        return $ps->fetchObject('User');
+    }
+
+    public function isLoggedIn() : bool {
+        if(isset($_SESSION['userid']) && ctype_digit(''.$_SESSION['userid'])){ // ctype_digit benoetigt einen STRING -->> ''.
+            return true;
+        }
+        return false;
+    }
+
+    public function getCurrentUser() : User|false {
+        if($this->isLoggedIn()){
+            // wenn angemeldet, user laden
+            // mit der aktuellen User-ID die in der Session steht.
+            // Diese steht nur in der Session wenn man gerade angemeldet ist.
+            return $this->getUserById($_SESSION['userid']);
+        }
+        // nicht angemeldet
+        return false;
+    }
+
+
+
+    // wird aufgerufen wenn man NICHT angemeldet
+    // sein darf um eine Seite yu laden
+    // leitet auf den Index weiter wenn der User
+    // bereits angemeldet ist.
+    public function requireNotLoggedIn(){
+        if($this->isLoggedIn()){
+            header('Location: index.php');
+            exit();
+        }
+    }
+
+    // wenn man nicht angemeldet sind --> weiterleitung yur Loginseite
+    public function requireLoggedIn(){
+        if($this->isLoggedIn() == FALSE){
+            header('Location: login.php');
+        }
+    }
+
+
+
+    public function login(string $email, string $password) : int|false{
+        // Lade User an hand der Email
+        $user = $this->getUserByEmail($email);
+        if($user == FALSE){
+            // es gibt keinen user mit dieser Email
+            return false;
+        }
+        // Password check
+        if(password_verify($password, $user->password)){
+            // PW korrekt  anmeldung durchfuehren
+            // --> in der Session di user-ID speichern
+            $_SESSION['userid'] = $user->id;
+
+            // die ID des eingeloggten Users returnen
+            return $user->id;
+        }
+        // PW falsch
+        return false;
+    }
+
     public function __construct()
     {
         // Zugangsdaten zur Datenbank

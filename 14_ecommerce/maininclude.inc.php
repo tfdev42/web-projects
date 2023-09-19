@@ -11,4 +11,8 @@ $dba = new DbAccess();
 
 $errors = [];
 
+// aktuell angemeldeten User laden
+// $user ist FALSE wenn nicht angemeldet
+$user = $dba->getCurrentUser();
+
 ?>
