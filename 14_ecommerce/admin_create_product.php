@@ -9,6 +9,11 @@
     <?php include 'header.inc.php'; ?>
     <main>
         <h1>Produkt erstellen</h1>
+        <?php include 'showerrors.inc.php'; ?>
+        Bei File-Uploads IMMER enctype="multipart/form-data"
+        <form action="admin_create_product.php" method="POST" enctype="multipart/form-data">
+
+        </form>
     </main>
 </body>
 </html>
