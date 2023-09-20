@@ -170,7 +170,7 @@ class DbAccess
         }
     }
 
-    // wenn man nicht angemeldet sind --> weiterleitung yur Loginseite
+    // wenn man nicht angemeldet sind --> weiterleitung zur Loginseite
     public function requireLoggedIn(){
         if($this->isLoggedIn() == FALSE){
             header('Location: login.php');
