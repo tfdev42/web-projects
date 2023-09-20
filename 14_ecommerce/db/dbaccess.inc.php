@@ -224,6 +224,33 @@ class DbAccess
         }
     }
 
+
+    public function getCategoryById(int $id) : Category|false {
+        $ps = $this->conn->prepare('
+            SELECT * 
+            FROM category 
+            WHERE id = :id 
+        ');
+        $ps->bindValue('id', $id);
+        $ps->execute();
+        // erzeig aus eine SQL datensatz ein Objekt der Klasse Category
+        // FALSE wenn kein Datensatz gefunden wurde
+        return $ps->fetchObject('Category');
+    }
+
+    public function getCategories() : array {
+        $ps = $this->conn->prepare('
+        SELECT *
+        FROM category
+        ');
+        $ps->execute();
+
+        // erzeugt aus jedem Datensatz ein Obj der Klasse Category
+        // sammelt diese im Array und gibt das Array zurueck
+        return $ps->fetchAll(PDO::FETCH_CLASS, 'Category');
+    }
+
+
     public function __construct()
     {
         // Zugangsdaten zur Datenbank
