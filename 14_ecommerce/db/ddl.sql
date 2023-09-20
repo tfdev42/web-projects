@@ -28,3 +28,28 @@ CREATE TABLE user
     PRIMARY KEY (id),
     UNIQUE KEY (email)
 );
+
+CREATE TABLE category
+(
+    id INT AUTO_INCREMENT,
+    name VARCHAR(255),
+    PRIMARY KEY(id)
+);
+
+CREATE TABLE product 
+(
+    id INT AUTO_INCREMENT,
+    sku VARCHAR(100) NOT NULL,
+    brand_id INT NOT NULL,
+    category_id INT,
+    name VARCHAR(200) NOT NULL,
+    description TEXT NOT NULL,
+    picture VARCHAR(2000) NOT NULL,
+    price DECIMAL(16,2) NOT NULL,
+    stock INT NOT NULL,
+    is_removed TINYINT(1) NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY(brand_id) REFERENCES brand(id),
+    FOREIGN KEY(category_id) REFERENCES category(id),
+    UNIQUE KEY (sku)
+);
