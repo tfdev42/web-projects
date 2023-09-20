@@ -274,6 +274,17 @@ class DbAccess
                                         return $this->conn->lastInsertId();
     }
 
+    public function getProductBySku(string $sku) : Product | FALSE {
+        $ps = $this->conn->prepare('
+        SELECT *
+        FROM product
+        WHERE sku = :sku
+        ');
+        $ps->bindValue('sku', $sku);
+        $ps->execute();
+        return $ps->fetchObject('Product');
+    }
+
 
 
 
