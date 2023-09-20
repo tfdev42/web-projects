@@ -250,6 +250,32 @@ class DbAccess
         return $ps->fetchAll(PDO::FETCH_CLASS, 'Category');
     }
 
+    public function createProduct(string $sku, int $brand_id, ?int $category_id,
+                                    string $name, string $description, string $picture,
+                                    float $price, int $stock, bool $is_removed) : int {
+                                        $ps = $this->conn->prepare('
+                                        INSERT INTO poduct
+                                        (sku, brand_id, category_id, name,
+                                        description, picture, price, stock, is_removed)
+                                        VALUES
+                                        (:sku, :brand_id, :category_id, :name,
+                                        :description, :picture, :price, :stock, :is_removed)
+                                        ');
+
+                                        $ps->bindValue('sku', $sku);
+                                        $ps->bindValue('brand_id', $brand_id);
+                                        $ps->bindValue('category_id', $category_id);
+                                        $ps->bindValue('name', $name);
+                                        $ps->bindValue('description', $description);
+                                        $ps->bindValue('picture', $picture);
+                                        $ps->bindValue('price', $price);
+                                        $ps->bindValue('stock', $stock);
+                                        $ps->bindValue('is_removed', $is_removed, PDO::PARAM_BOOL);
+                                        return $this->conn->lastInsertId();
+    }
+
+
+
 
     public function __construct()
     {
