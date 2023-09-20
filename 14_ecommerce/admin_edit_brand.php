@@ -1,6 +1,9 @@
 <?php 
 require_once 'maininclude.inc.php';
 
+//Seite darf nur als Admin aufgerufen werden
+$dba->requireAdmin();
+
 // Welche Brand soll bearbeitet werden?
 if(empty($_GET['id']) || !ctype_digit($_GET['id'])){
     exit('GET-Parameter ID fehlt!');

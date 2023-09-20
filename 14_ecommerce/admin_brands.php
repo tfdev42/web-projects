@@ -1,5 +1,7 @@
 <?php
 require_once 'maininclude.inc.php';
+//Seite darf nur als Admin aufgerufen werden
+$dba->requireAdmin();
 
 $brands = $dba->getBrands();
 

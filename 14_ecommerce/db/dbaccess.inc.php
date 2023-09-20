@@ -212,6 +212,7 @@ class DbAccess
         if($user == FALSE || $user->is_admin == FALSE){
             return false;
         }
+        return true;
     }
 
     // beim aufruf einer Seite die Adminrechte erfordert
