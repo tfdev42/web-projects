@@ -53,3 +53,11 @@ CREATE TABLE product
     FOREIGN KEY(category_id) REFERENCES category(id),
     UNIQUE KEY (sku)
 );
+
+INSERT INTO category
+(name)
+VALUES
+('Garten'),
+('Haus'),
+('Haustiere'),
+('Farbe');
