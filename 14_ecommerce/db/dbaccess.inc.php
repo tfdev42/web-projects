@@ -207,14 +207,19 @@ class DbAccess
     }
 
     public function isAdmin() : bool {
-
-    }
-
-    public function requireAdmin(){
         $user =$this->getCurrentUser();
         // nicht angemeldet oder nicht admin
-        if($user == FALSE || $user->isAdmin == FALSE){
+        if($user == FALSE || $user->is_admin == FALSE){
             return false;
+        }
+    }
+
+    // beim aufruf einer Seite die Adminrechte erfordert
+    // leitet zum index weiter wenn user nicht admin ist
+    public function requireAdmin(){
+        if($this->isAdmin() == FALSE){
+            header('Location: index.php');
+            exit();
         }
     }
 
