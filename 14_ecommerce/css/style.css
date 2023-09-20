@@ -21,3 +21,7 @@ header {
     width: 900px;
     margin: 0 auto;
 }
+
+header ul li form{
+    display: inline;
+}

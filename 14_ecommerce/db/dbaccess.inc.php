@@ -199,6 +199,25 @@ class DbAccess
         return false;
     }
 
+
+    public function logout(){
+        session_destroy();
+        // loesche alle Session-Variablen
+        // --> $_SESSION['userid']
+    }
+
+    public function isAdmin() : bool {
+
+    }
+
+    public function requireAdmin(){
+        $user =$this->getCurrentUser();
+        // nicht angemeldet oder nicht admin
+        if($user == FALSE || $user->isAdmin == FALSE){
+            return false;
+        }
+    }
+
     public function __construct()
     {
         // Zugangsdaten zur Datenbank
