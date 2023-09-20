@@ -18,4 +18,23 @@ class User {
     public bool $is_admin;
 }
 
+class Category {
+    public int $id;
+    public string $name;
+}
+
+class Product {
+    public int $id;
+    public string $sku;
+    public int $brand_id;
+    // ?int: int oder NULL fuer optionale werte
+    public ?int $category_id;
+    public string $name;
+    public string $description;
+    public string $picture;
+    public float $price;
+    public int $stock;
+    public bool $is_removed;
+}
+
 ?>
