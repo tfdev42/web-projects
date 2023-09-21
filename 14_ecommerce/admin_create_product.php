@@ -41,7 +41,7 @@
             <input type="text" name="name"><br>
             <label>Descrition</label><br>
             <textarea name="descpription"></textarea><br>
-            <label>Picture</label>
+            <label>Picture</label><br>
             <input type="file" name="picture"><br>
             <label>Price</label>
             <input type="text" name="price"><br>
