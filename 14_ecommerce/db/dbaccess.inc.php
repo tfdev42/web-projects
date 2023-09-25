@@ -285,6 +285,16 @@ class DbAccess
         return $ps->fetchObject('Product');
     }
 
+    // liefert ALLE Produkte zurueck (auch stock 0 bzw. is_removed)
+    public function getProducts() : array {
+        $ps = $this -> conn -> prepare('
+        SELECT *
+        FROM product
+        ');
+        $ps->execute();
+        return $ps->fetchAll(PDO::FETCH_CLASS, 'Product');
+    }
+
 
 
 
