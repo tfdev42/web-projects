@@ -254,7 +254,7 @@ class DbAccess
                                     string $name, string $description, string $picture,
                                     float $price, int $stock, bool $is_removed) : int {
                                         $ps = $this->conn->prepare('
-                                        INSERT INTO poduct
+                                        INSERT INTO product
                                         (sku, brand_id, category_id, name,
                                         description, picture, price, stock, is_removed)
                                         VALUES
@@ -271,6 +271,7 @@ class DbAccess
                                         $ps->bindValue('price', $price);
                                         $ps->bindValue('stock', $stock);
                                         $ps->bindValue('is_removed', $is_removed, PDO::PARAM_BOOL);
+                                        $ps->execute();
                                         return $this->conn->lastInsertId();
     }
 

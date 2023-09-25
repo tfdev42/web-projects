@@ -19,6 +19,29 @@
 
         <?php
             // Lade alle Produkte
+            $products = $dba -> getProducts();
+
+            echo count($products);
+            
+            foreach($products as $p){
+                echo '<div lass="product">';
+                echo '<h2>' . $p->name .'</h2>';
+                // Hersteller laden
+                $brand = $dba -> getBrandById($p->brand_id);
+                echo '<p>Marke: ' . $brand -> name . '</p>';
+                echo '<p>Preis: <strong>nur ' . $p -> price . 'EUR</strong></p>';
+
+
+                echo '<img src="' . $p -> picture . '"class="product-img">';
+
+                // Link zum bearbeiten
+                echo '<p>
+                <a href="admin_edit_product.php?id=' . $p -> id . '">Bearbeiten</a>
+                </p>';
+
+                echo '</div>';
+            }
+            
         ?>
     </main>
 </body>
