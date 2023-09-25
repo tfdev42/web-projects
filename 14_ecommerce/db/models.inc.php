@@ -35,6 +35,18 @@ class Product {
     public float $price;
     public int $stock;
     public bool $is_removed;
+
+    // Prueft ob das Produkt verfugbar ist / sonst false
+    
+    public function isAvailable() : bool {
+        if($this->stock <=0 || $this -> is_removed){
+            return false;
+        }
+        return true;
+    }
+
+
+
 }
 
 ?>

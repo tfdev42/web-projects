@@ -295,6 +295,15 @@ class DbAccess
         return $ps->fetchAll(PDO::FETCH_CLASS, 'Product');
     }
 
+    public function getProductById($productId, bool $includeUnavailable=FALSE) : Product | False {
+        $products = $this->getProducts();
+        foreach($products as $p){
+            if($p->id == $productId){
+                
+            }
+        }
+    }
+
 
 
 
