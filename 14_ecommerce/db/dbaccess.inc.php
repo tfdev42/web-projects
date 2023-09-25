@@ -299,9 +299,20 @@ class DbAccess
         $products = $this->getProducts();
         foreach($products as $p){
             if($p->id == $productId){
-                
+                if($includeUnavailable == TRUE){
+                    // Produkt gefunden
+                    return $p;
+                } else {
+                    // Produkt gefunden, muss verfuegbar sein
+                    if($p->isAvailable()){
+                        return $p;
+                    }
+                    return false;
+                }
             }
         }
+        // es gibt kein Produkt mit der ID
+        return false;
     }
 
 
