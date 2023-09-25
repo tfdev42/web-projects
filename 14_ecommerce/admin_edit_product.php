@@ -170,6 +170,7 @@ if(isset($_POST['bt_create_product'])){
                     echo '<input type="checkbox" name="is_removed">';
                 }
             ?>
+            <label for="">Removed?</label><br>
 
             <button name="bt_edit_product">Speichern</button>
         </form>
