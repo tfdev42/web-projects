@@ -8,6 +8,9 @@ function generateProductFileName($originalName){
 
     // Hole alle Zeichen ab dem Index vom letzten '.' bis zum Ende
     $filetype = substr($originalName, $dotIndex);
+
+    $filename = time() . '_' . rand(10000, 99999) . $filetype;
+    return $filename;
 }
 
 // nur Admin
