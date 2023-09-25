@@ -16,6 +16,10 @@
     <main>
         <h1>Produkte (Admin)</h1>
         <p><a href="admin_create_product.php">Neues Produkt</a></p>
+
+        <?php
+            // Lade alle Produkte
+        ?>
     </main>
 </body>
 </html>

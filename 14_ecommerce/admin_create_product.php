@@ -11,12 +11,13 @@ function generateProductFileName($originalName){
 
     $filename = time() . '_' . rand(10000, 99999) . $filetype;
     return $filename;
+
 }
 
 // nur Admin
 $dba->requireAdmin();
 
-if(isset($_POST['bt_create_prduct'])){
+if(isset($_POST['bt_create_product'])){
     $sku = trim($_POST['sku']);
     $brand_id = trim($_POST['brand_id']);
     $category_id = trim($_POST['category_id']);
@@ -31,6 +32,62 @@ if(isset($_POST['bt_create_prduct'])){
     $originalFilename = $_FILES['picture']['name'];
     $tmpUploadPath = $_FILES['picture']['tmp_name'];
     echo "<p>Original: $originalFilename, TMP: $tmpUploadPath</p>";
+
+    // Verschiebe die hochgeladene Datei in den projekteigenen uploads ordner
+    $uploadPath = 'uploads/' . generateProductFileName($originalFilename);
+    // verschieben
+    $uploadOk = move_uploaded_file($tmpUploadPath, $uploadPath);
+
+    if(!$uploadOk){
+        $errors[] = 'Keine Datei ausgewaehlt!';
+    }
+
+    if(strlen($sku) == 0){
+        $errors[] = 'SKU darf nicht leer sein';
+    }elseif ($dba->getProductBySku($sku) != FALSE){
+        // es darf nicht 2 Produkte mit gleicher SKU geben
+        $errors[] = 'Es existiert bereits ein Produkt mit dieser SKU';
+    }
+
+    // Brand: Pflichtfeld
+    $brand = $dba->getBrandById($brand_id);
+    if($brand == FALSE){
+        $errors[] = 'Brand darf nicht leer sein';
+    }
+
+    // Category: Optional
+    $category = $dba->getCategoryById((int)$category_id);
+
+    if(empty($name)){
+        $errors[] = 'Name darf nicht leer sein';
+    }
+
+    if(is_numeric($price) == FALSE){
+        $errors[] = 'Preis muss eine Zahl sein';
+    }
+
+    if(ctype_digit($stock) == FALSE){
+        $errors[] = 'Stock muss eine ganze Zahl sein';
+    }
+
+    if(count($errors) == 0){
+        if($category == FALSE){
+            $categoryID = NULL;
+        } else {
+            $categoryID = $category->id;
+        }
+        $dba->createProduct($sku, $brand->id, $categoryID, $name, $description, $uploadPath, $price, $stock, false);
+
+        header('Location: admin_product.php');
+        exit();
+    } else {
+        // wenn es Fehler gab -> die upload Datei loeschen:
+        unlink($uploadPath);
+    }
+
+
+    
+    
 }
 
 
@@ -76,7 +133,7 @@ if(isset($_POST['bt_create_prduct'])){
             <label>Name</label><br>
             <input type="text" name="name"><br>
             <label>Descrition</label><br>
-            <textarea name="descpription"></textarea><br>
+            <textarea name="description"></textarea><br>
             <label>Picture</label><br>
             <input type="file" name="picture"><br>
             <label>Price</label>

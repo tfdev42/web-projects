@@ -225,7 +225,7 @@ class DbAccess
     }
 
 
-    public function getCategoryById(int $id) : Category|false {
+    public function getCategoryById($id) : Category|false {
         $ps = $this->conn->prepare('
             SELECT * 
             FROM category 
