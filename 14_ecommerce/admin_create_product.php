@@ -1,4 +1,37 @@
-<?php require_once 'maininclude.inc.php'; ?>
+<?php require_once 'maininclude.inc.php';
+
+// Generiert einen zufaelligen Dateinamen fuer das hochgeladene Produkt-Bild
+function generateProductFileName($originalName){
+    // --> finde die Dateiendung heraus
+    // finde den Index vom letyten Punkt im String
+    $dotIndex = strrpos($originalName, '.');
+
+    // Hole alle Zeichen ab dem Index vom letzten '.' bis zum Ende
+    $filetype = substr($originalName, $dotIndex);
+}
+
+// nur Admin
+$dba->requireAdmin();
+
+if(isset($_POST['bt_create_prduct'])){
+    $sku = trim($_POST['sku']);
+    $brand_id = trim($_POST['brand_id']);
+    $category_id = trim($_POST['category_id']);
+    $name = trim($_POST['name']);
+    $description = trim($_POST['description']);
+    //picture
+    $price = trim($_POST['price']);
+    $stock = trim($_POST['stock']);
+
+    // File upload
+    // wie ist der Originale Dateiname?
+    $originalFilename = $_FILES['picture']['name'];
+    $tmpUploadPath = $_FILES['picture']['tmp_name'];
+    echo "<p>Original: $originalFilename, TMP: $tmpUploadPath</p>";
+}
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
