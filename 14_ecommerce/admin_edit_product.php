@@ -162,6 +162,15 @@ if(isset($_POST['bt_create_product'])){
             <label>Stock</label>
             <input type="text" name="stock"><br>
 
+            <?php
+                // checkbox fuer is_removed
+                if($product->is_removed){
+                    echo '<input type="checkbox" name="is_removed" checked>';
+                } else {
+                    echo '<input type="checkbox" name="is_removed">';
+                }
+            ?>
+
             <button name="bt_edit_product">Speichern</button>
         </form>
 
