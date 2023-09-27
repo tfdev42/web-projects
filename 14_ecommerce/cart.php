@@ -50,6 +50,7 @@ if(isset($_POST['bt_add_to_cart'])){
                     <th>Einzelpreis</th>
                     <th>Menge</th>
                     <th>Gesamt</th>
+                    <th>Loeschen</th>
                 </tr>
             </thead>
             <tbody>
@@ -80,7 +81,14 @@ if(isset($_POST['bt_add_to_cart'])){
                     echo '<td>'.$productTotalPrice.' EUR</td>';
 
                     // Loeschen Button
-                    echo '</tr>';                    
+                    ?>
+                    <td>
+                        <form action="cart.php" method="post">
+                            <input type="hidden" name="product_id" value="<?php echo $product->id; ?>">
+                            <button name="bt_delete_from_cart">Loeschen</button>
+                        </form>
+                    </td>
+                    <?php echo '</tr>';                    
                 }
                 ?>
             </tbody>
