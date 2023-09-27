@@ -338,7 +338,7 @@ class DbAccess
                 array_splice($_SESSION['cart'], $i, 1);
             }
         }
-        $_SESSION['cart'][]
+        
     }
 
 
