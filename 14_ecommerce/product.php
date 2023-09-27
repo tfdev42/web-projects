@@ -44,6 +44,15 @@ if($product == FALSE){
 
             echo '<img src="' . $product -> picture . '"class="product-img">';
 
+            // Button: in den Warenkorb einfuegen
+            echo '<form action="cart.php" method="post">';
+            echo '<input type="text" name="qty" value="1">';
+            // Hidden Input wird nicht im Form dargestellt!
+            // Daten werden aber als POST-Parameter an den Server gesendet
+            echo '<input type="hidden" name="product_id" value="'.$product->id.'">';
+            echo '<button name="bt_add_to_cart">In den Warenkorb</button>';
+            echo '</form>';
+
             // Link zum Produkt
             echo '<p>
             <a href="product.php?id=' . $product -> id . '">Details</a>
