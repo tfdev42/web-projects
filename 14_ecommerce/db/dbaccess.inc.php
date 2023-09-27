@@ -336,6 +336,7 @@ class DbAccess
             if($_SESSION['cart'][$i]['product_id'] == $productId){
                 // loesche Eintrag aus dem Warenkorb
                 array_splice($_SESSION['cart'], $i, 1);
+                return;
             }
         }
         
