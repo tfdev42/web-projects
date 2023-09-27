@@ -68,7 +68,7 @@ if(isset($_POST['bt_add_to_cart'])){
                         continue; // wenn das Produkt nicht mehr verfuegbar ist
                     }
                     echo '<tr>'; // Zeile
-                    echo '<td>'.htmlspecialchars($product->sku).'</td>'; // Spalte
+                    echo '<td><a href="product.php?id="'.$product->id.'">'.htmlspecialchars($product->sku).'</a></td>'; // Spalte
                     echo '<td>'.htmlspecialchars($product->name).'</td>';
                     echo '<td><img src="'.$product->picture.'" style="max-height: 60px;"></td>';
 
@@ -78,6 +78,8 @@ if(isset($_POST['bt_add_to_cart'])){
                     echo '<td>'.$unitPrice.' EUR</td>';
                     echo '<td>'.$qty.' Stueck</td>';
                     echo '<td>'.$productTotalPrice.' EUR</td>';
+
+                    // Loeschen Button
                     echo '</tr>';                    
                 }
                 ?>
