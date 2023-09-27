@@ -1,34 +1,7 @@
 <?php
 require_once 'maininclude.inc.php';
 
-if(isset($_POST['bt_add_to_cart'])){
-    $productId = trim($_POST['product_id']);
-    $qty = trim($_POST['qty']);
 
-    if ($qty <= 0){
-        $errors[] = 'Menge muss mind. 1 betragen!';
-    } elseif(ctype_digit($qty) == FALSE){
-        $errors[] = 'Menge muss ein ganze Zahl sein!';
-    }
-    // Laese Produkt, schaue ob es existiert bzw ob es verfuegbar ist
-    $product = $dba->getProductById($productId);
-    if($product == FALSE){
-        $errors[] = 'Produkt ist nicht mehr verfuegbar!';
-    }
-
-    if(count($errors) == 0){
-        $dba->addToCart($productId, $qty);
-        header('Location: cart.php');
-        exit();
-    }
-}
-
-if(isset($_POST['bt_delete_from_cart'])){
-    $productId = trim($_POST['product_id']);
-    $dba->deleteFromCart($productId);
-    header('Location: cart.php');
-    exit();
-}
 
 ?>
 
@@ -43,7 +16,7 @@ if(isset($_POST['bt_delete_from_cart'])){
 <body>
     <?php include 'header.inc.php';?>
     <main>
-        <h1>Warenkorb</h1>
+        <h1>Bestellung abschicken</h1>
         <?php
             include 'showerrors.inc.php';
 
@@ -56,8 +29,7 @@ if(isset($_POST['bt_delete_from_cart'])){
                     <th>Bild</th>
                     <th>Einzelpreis</th>
                     <th>Menge</th>
-                    <th>Gesamt</th>
-                    <th>Loeschen</th>
+                    <th>Gesamt</th>                    
                 </tr>
             </thead>
             <tbody>
@@ -86,16 +58,7 @@ if(isset($_POST['bt_delete_from_cart'])){
                     echo '<td>'.$unitPrice.' EUR</td>';
                     echo '<td>'.$qty.' Stueck</td>';
                     echo '<td>'.$productTotalPrice.' EUR</td>';
-
-                    // Loeschen Button
-                    ?>
-                    <td>
-                        <form action="cart.php" method="post">
-                            <input type="hidden" name="product_id" value="<?php echo $product->id; ?>">
-                            <button name="bt_delete_from_cart">Loeschen</button>
-                        </form>
-                    </td>
-                    <?php echo '</tr>';                    
+                    echo '</tr>';                    
                 }
                 ?>
             </tbody>
@@ -103,8 +66,17 @@ if(isset($_POST['bt_delete_from_cart'])){
         <p>
             Gesamtsumme: <strong><?php echo $total; ?> EUR.</strong>
         </p>
-        <form action="checkout.php" method="get">
-            <button>Bestellen</button>
+
+        <form action="checkout.php" method="post">
+            <label>Strasse</label><br>
+            <input type="text" name="address"><br>
+            <label>PLZ</label><br>
+            <input type="text" name="zip"><br>
+            <label>Ort</label><br>
+            <input type="text" name="city"><br>
+            <label>Land</label><br>
+            <input type="text" name="country">
+            <button name="bt_checkout">Kostenpflichtig Bestellen</button>
         </form>
     </main>
 </body>
