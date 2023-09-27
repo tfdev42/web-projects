@@ -17,6 +17,7 @@ if($product == FALSE){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
     <?php include 'header.inc.php';?>
@@ -45,7 +46,7 @@ if($product == FALSE){
 
             // Link zum Produkt
             echo '<p>
-            <a href="product.php?id=' . $p -> id . '">Details</a>
+            <a href="product.php?id=' . $product -> id . '">Details</a>
             </p>';
             echo '<p>Preis: <strong>nur ' . $product -> price . 'EUR</strong></p>';
             echo '</div>';

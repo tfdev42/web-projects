@@ -1,5 +1,8 @@
 <header>
         <ul>
+            <li>
+                <a href="./">Index</a>
+            </li>
             <?php if($dba->isLoggedIn()){ ?>
 
                 <li>
