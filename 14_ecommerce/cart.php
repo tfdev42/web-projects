@@ -23,6 +23,13 @@ if(isset($_POST['bt_add_to_cart'])){
     }
 }
 
+if(isset($_POST['bt_delete_from_cart'])){
+    $productId = trim($_POST['produt_id']);
+    $dba->deleteFromCart($productId);
+    header('Location: cart.php');
+    exit();
+}
+
 ?>
 
 <!DOCTYPE html>

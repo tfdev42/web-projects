@@ -328,6 +328,19 @@ class DbAccess
         $_SESSION['cart'][] = $cartEntry;
     }
 
+    // loescht ein Produkt aus dem Warenkorb
+    public function deleteFromCart(int $productId) : void {
+        // aus einem Array loeschen: array_splice()
+        for($i = 0; $i < count($_SESSION['cart']); $i++){
+            // hat das EElement am Index i die gesuchte productId?
+            if($_SESSION['cart'][$i]['product_id'] == $productId){
+                // loesche Eintrag aus dem Warenkorb
+                array_splice($_SESSION['cart'], $i, 1);
+            }
+        }
+        $_SESSION['cart'][]
+    }
+
 
 
 
