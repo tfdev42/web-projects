@@ -24,5 +24,11 @@
                 <li><a href="login.php">Login</a></li>
                 <li><a href="registration.php">Registration</a></li>
             <?php } ?>
+
+            <li>
+                <a href="cart.php">Warenkorb
+                    (<?php echo count($_SESSION['cart']); ?>)
+                </a>
+            </li>
         </ul>
 </header>

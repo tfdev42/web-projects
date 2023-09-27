@@ -317,6 +317,18 @@ class DbAccess
     }
 
 
+    public function addToCart(int $productId, int $qty) : void {
+        // einzelnen Warenkorbeintrag erstellen
+        $cartEntry = [];
+        // Key-Value pair im Assoziativen array
+        $cartEntry['product_id'] = $productId;
+        $cartEntry['qty'] = $qty;
+
+        // eienzelnen Eintrag in das Session-Array speichern
+        $_SESSION['cart'][] = $cartEntry;
+    }
+
+
 
 
     public function __construct()
