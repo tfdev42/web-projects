@@ -4,7 +4,14 @@
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
+// Session immer erstellen
 session_start();
+
+// Warenkorb erstellen falls nicht existiert
+if(!isset($_SESSION['cart'])){
+    $_SESSION['cart'] = [];
+}
+
 require_once 'db/dbaccess.inc.php';
 // Objekt der Klasse DbAccess erzeugen 
 $dba = new DbAccess();
