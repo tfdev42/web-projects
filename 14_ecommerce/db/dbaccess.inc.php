@@ -318,6 +318,28 @@ class DbAccess
 
 
     public function addToCart(int $productId, int $qty) : void {
+
+        // wann soll ein besetehender Eintrag bearbeitet werden?
+        // wenn product-ID schon einthalten ist
+        $cartEdited = false;
+        // foreach($_SESSION['cart'] as $entry){
+        //     if($entry['product_id'] == $productId){
+        //         // gefunden! aktualisieren!
+        //         $entry['qty'] += $qty;
+        //         $cartEdited = true;
+        //         break;
+        //     }
+        // }
+        // FUNKTIONIERT NICHT, WEIL MIT FOREACH EINE KOPIE ERSTELLT WIRD
+
+        for($i=0; $i < count($_SESSION['cart']); $i++){
+            if($_SESSION['cart'][$i]['product_id'] == $productId){
+                // gefunden! aktualisieren!
+                $_SESSION['cart'][$i]['qty'] += $qty;
+                return;
+            }
+        }
+
         // einzelnen Warenkorbeintrag erstellen
         $cartEntry = [];
         // Key-Value pair im Assoziativen array

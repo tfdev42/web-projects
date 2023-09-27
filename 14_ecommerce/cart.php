@@ -76,7 +76,7 @@ if(isset($_POST['bt_delete_from_cart'])){
                         continue; // wenn das Produkt nicht mehr verfuegbar ist
                     }
                     echo '<tr>'; // Zeile
-                    echo '<td><a href="product.php?id="'.$product->id.'">'.htmlspecialchars($product->sku).'</a></td>'; // Spalte
+                    echo '<td><a href="product.php?id='.$product->id.'">'.htmlspecialchars($product->sku).'</a></td>'; // Spalte
                     echo '<td>'.htmlspecialchars($product->name).'</td>';
                     echo '<td><img src="'.$product->picture.'" style="max-height: 60px;"></td>';
 
