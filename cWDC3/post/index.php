@@ -17,7 +17,7 @@
         if($isKnown){
             echo '<p>Hi there, <strong>' . $_POST['name'] . '</strong>!</p>';
             echo '<p>Your age is, <strong>' . $_POST['age'] . '</strong>!</p>';
-        }
+        } else echo '<p><strong>I dont know you</strong>!</p>';
     }
 
 
