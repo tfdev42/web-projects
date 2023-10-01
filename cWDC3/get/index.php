@@ -23,7 +23,7 @@
             echo '<p>' . $theNumber . ' is NOT a prime number.</p>';
         }
     } elseif($_GET){
-        echo "<p>Please enter a positive shole number.</p>";
+        echo "<p>Please enter a positive whole number.</p>";
     }
 
 
