@@ -21,7 +21,7 @@ require_once 'models.inc.php';
         }
 
         public function createPerson(string $name, float $heightCm, float $weightKg) : int {
-            // Speichert eine neue Person in der Datenbank, gibt die ID der erzeigten Person zurueck
+            // Speichert eine neue Person in der Datenbank, gibt die ID der erzeugten Person zurueck
 
             // erstelle eine prepared statement
             $ps = $this->conn->prepare('
