@@ -3,7 +3,21 @@
     ini_set('display_errors', '1');
 
     if($_POST){
-        print_r($_POST);
+        $family = array("Henry", "Ellen", "Jackson", "John");
+
+        $isKnown = false;
+
+        foreach($family as $member){
+            if($member == $_POST['name']){
+                $isKnown = true;
+                break;
+            }
+        }
+
+        if($isKnown){
+            echo '<p>Hi there, <strong>' . $_POST['name'] . '</strong>!</p>';
+            echo '<p>Your age is, <strong>' . $_POST['age'] . '</strong>!</p>';
+        }
     }
 
 
@@ -19,8 +33,9 @@
 <body>
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post">
     <p>What is your name?</p>
-
-    <p><input type="text" name="name"></p>
+    <p><input type="text" name="name"></p>    
+    <p>What is your age?</p>
+    <p><input type="text" name="age"></p>
     <p><input type="submit" value="Submit"></p>
     </form>    
 </body>
