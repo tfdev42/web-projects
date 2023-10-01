@@ -3,7 +3,7 @@
     error_reporting(E_ALL);
     ini_set('display_errors', '1');
 
-    if(isset(is_numeric($_GET['number']))
+    if(is_numeric($_GET['number'])
     && $_GET['number'] > 0
     && $_GET['number'] == round($_GET['number'], 0)){
         $theNumber = $_GET['number'];
@@ -18,12 +18,12 @@
         }
 
         if($isPrime){
-            echo '<p>' . $theNumber . 'is a prime number.</p>';
+            echo '<p>' . $theNumber . ' is a prime number.</p>';
         } else {
-            echo '<p>' . $theNumber . 'is NOT a prime number.</p>';
+            echo '<p>' . $theNumber . ' is NOT a prime number.</p>';
         }
     } elseif($_GET){
-        echo "<p>Please enter a positive shole number.</p>"
+        echo "<p>Please enter a positive shole number.</p>";
     }
 
 
@@ -37,8 +37,9 @@
     <title>GET</title>
 </head>
 <body>
+    <p>Please enter a number.</p>
     <form action="index.php" method="get">
-        <input type="text" >
+        <input type="text" name="number">    
         <input type="submit" value="Go!">
     </form>
 </body>
