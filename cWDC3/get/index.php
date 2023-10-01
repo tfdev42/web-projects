@@ -37,8 +37,9 @@
     <title>GET</title>
 </head>
 <body>
-    <p>Please enter a number.</p>
+    <!-- <p>Please enter a number.</p> -->
     <form action="index.php" method="get">
+        <label for="number">Please enter a number.</label><br>
         <input type="text" name="number">    
         <input type="submit" value="Go!">
     </form>
