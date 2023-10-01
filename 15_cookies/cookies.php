@@ -43,7 +43,7 @@
         <label>USD</label><br>
         <input type="radio" name="currency" value="CHF">
         <label>CHF</label><br>
-        <button name="bt_ok">Waehrung seichern</button>
+        <button name="bt_ok">Waehrung speichern</button>
         <button name="bt_delete">Waehrung loeschen</button>
     </form>
 </body>

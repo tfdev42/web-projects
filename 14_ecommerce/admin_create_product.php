@@ -98,6 +98,7 @@ if(isset($_POST['bt_create_product'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Produkt Erstellen</title>
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
     <?php include 'header.inc.php'; ?>
