@@ -53,7 +53,7 @@
                     $ergebnis = $z1 + $z2;
                     $operatorAusgabe = '+';
                 } elseif ($op == 'minus'){
-                    $ergebnis = $z1 + $z2;
+                    $ergebnis = $z1 - $z2;
                     $operatorAusgabe = '-';
                 } elseif ($op == 'multi'){
                     $ergebnis = $z1 * $z2;
