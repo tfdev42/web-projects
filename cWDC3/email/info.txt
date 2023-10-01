@@ -1,0 +1,4 @@
+1. send email automatically if user sibmits form
+
+mail(to, subject, message, headers)
+header = from
