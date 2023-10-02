@@ -44,9 +44,40 @@ class Product {
         }
         return true;
     }
+}
 
 
+class Orders{
+    public int $id;
+    public int $user_id;
+    public DateTime $orderDate;
+    public string $zip;
+    public string $country;
+    public string $address;
+    public float $total;
 
+    // DateTime muss manuell umgewandelt weden!
+    public function __set($property, $value){
+        // $property: Spaltenname in der DB
+        if($property === 'order_date'){
+            // DB: 2023-10-02 18:30
+            $date = DateTime :: createFromFormat('Y-m-d H:i:s', $value);
+            // setze DateTime_Objekt als eigenschaft im Objekt
+            $this->orderDate = $date;
+        } else {
+            // alle anderen Eigenschaften die genau so heissen wie in der DB
+            $this->$property = $value;
+        }
+    }
+}
+
+
+class OrderPosition{
+    public int $id;
+    public int $product_id;
+    public int $order_id;
+    public int $stock;
+    public float $unit_price;
 }
 
 ?>
