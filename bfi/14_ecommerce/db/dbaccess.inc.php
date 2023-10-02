@@ -365,6 +365,68 @@ class DbAccess
     }
 
 
+    public function createOrder($address, $city, $zip, $country) : int {
+        $now = new DateTime();
+        $user = $this->getCurrentUser();
+
+        // Speichere Order, damit wir eine OrderID bekommen
+        // total wird erst spaeter ermittelt
+        $total = 0;
+
+        $ps = $this->conn->prepare('
+            INSERT INTO orders
+            (user_id, order_date, zip, country, address, city, total)
+            VALUES
+            (:user_id, :order_date, :zip, :country, :address, :city, :total)
+        ');
+        $ps->bindValue('user_id', $user->id);
+        $ps->bindValue('order_date', $now->format('Y-m-d H:i:s'));
+        $ps->bindValue('zip', $zip);
+        $ps->bindValue('country', $country);
+        $ps->bindValue('address', $address);
+        $ps->bindValue('city', $city);
+        // total anfangs 0! wird spaeter aktualisiert
+        $ps->bindValue('total', $total);
+        $ps->execute();
+        $orderId = $this->conn->lastInsertId();
+
+        // nachdem eine Bestellung angelegt wurde (ID!)
+        // koennen nun die einzelnen Bestellpositionen gespeichert werden.
+        // Bestellpositionen -- Warenkorbeintraege
+        // fuer jeden Warenkorbeintrag wird eine bestellposition gespeichert.
+        // waehrenddessen die Gesamtsumme der Bestellung ermitteln
+
+
+        // NO UPDATE Values in foreach!! foreach akes a copy of the array!!
+        foreach($_SESSION['cart'] as $entry){
+            
+            $productId = $entry['product_id'];
+            
+            $qty = $entry['qty'];
+
+            $product = $this->getProductById($productId);
+            $productPrice = $product->price;
+
+            $ps = $this->conn->prepare('
+                INSERT INTO order_position
+                (product_id, order_id, stock, unit_price)
+                VALUES
+                (:product_id, :order_id, :stock, :unit_price)
+            ');
+            $ps->bindValue('product_id', $productId);
+            $ps->bindValue('order_id', $orderId);
+            $ps->bindValue('stock', $qty);
+            $ps->bindValue('unit_price', $productPrice);
+            $ps->execute();
+
+            // Position zum Gesamtpreis addieren
+            $total += $qty * $productPrice;
+
+        }
+
+    }
+
+
 
 
     public function __construct()

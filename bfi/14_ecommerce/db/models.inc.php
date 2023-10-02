@@ -54,6 +54,7 @@ class Orders{
     public string $zip;
     public string $country;
     public string $address;
+    public string $city;
     public float $total;
 
     // DateTime muss manuell umgewandelt weden!
