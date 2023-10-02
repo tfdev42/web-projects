@@ -18,6 +18,7 @@
                 <li><a href="admin_brands.php">Brands (Admin)</a></li>
                 <li><a href="admin_product.php">Products (Admin)</a></li>
                 <li><a href="admin_create_product.php">New Product (Admin)</a></li>
+                <li><a href="admin_analytics.php">Analytics (Admin)</a></li>
                 <?php } ?>
 
             <?php } else { ?>

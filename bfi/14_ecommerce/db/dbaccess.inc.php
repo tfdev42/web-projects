@@ -4,6 +4,12 @@ class DbAccess
 { 
     private PDO $conn;
 
+    // public getter-Methode fuer private Eigenschaft
+    // um ausserhalb der Klasse auf die Variable zugreifen zu koennen
+    public function getConn() : PDO {
+        return $this->conn;
+    }
+
     public function createBrand(string $name) : int {
         $ps = $this->conn->prepare('
         INSERT INTO brand 
