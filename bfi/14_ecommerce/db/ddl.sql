@@ -66,7 +66,8 @@ VALUES
 ('Farbe');
 
 
-CREATE TABLE order (
+-- FOREIGN KEY Constraint fuer die referentielle Integritaet
+CREATE TABLE orders (
     id INT AUTO_INCREMENT,
     user_id INT NOT NULL,
     order_date DATETIME NOT NULL,
@@ -74,6 +75,20 @@ CREATE TABLE order (
     country VARCHAR(100) NOT NULL,
     address VARCHAR(200) NOT NULL,
     total DECIMAL(20, 8) NOT NULL,
-    PRIMARY KEY(id),
+    PRIMARY KEY(id),    
     FOREIGN KEY(user_id) REFERENCES user(id)    
+);
+
+
+-- UNIQUE KEY
+CREATE TABLE order_position (
+    id INT AUTO_INCREMENT,
+    product_id INT NOT NULL,
+    order_id INT NOT NULL,
+    stock INT NOT NULL,
+    unit_price DECIMAL(10,2) NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY(product_id) REFERENCES product(id),
+    FOREIGN KEY(order_id) REFERENCES orders(id),
+    UNIQUE KEY(product_id, order_id)
 );
