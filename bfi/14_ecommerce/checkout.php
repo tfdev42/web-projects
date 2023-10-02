@@ -1,5 +1,34 @@
 <?php
 require_once 'maininclude.inc.php';
+$dba->requireLoggedIn();
+
+if(isset($_POST['bt_checkout'])){
+    $address = trim($_POST['address']);
+    $zip = trim($_POST['zip']);
+    $city = trim($_POST['city']);
+    $country = trim($_POST['country']);
+
+    if(empty($address)){
+        $errors[] = 'Adresse eingeben!';
+    }
+    if(empty($zip)){
+        $errors[] = 'ZIP eingeben!';
+    }
+    if(empty($city)){
+        $errors[] = 'City eingeben!';
+    }
+    if(empty($country)){
+        $errors[] = 'Country eingeben!';
+    }
+
+    if(count($errors) == 0){
+        // bestellung speichern!
+        $orderId = $dba->createOrder($address, $city, $zip, $country);
+
+        header('Location: thanks.php?id='.$orderId);
+        exit();
+    }
+}
 
 
 
