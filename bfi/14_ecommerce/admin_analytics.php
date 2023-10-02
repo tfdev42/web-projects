@@ -146,6 +146,24 @@ require_once 'maininclude.inc.php';
                 echo '</p>';
             }
         ?>
+        <h2>Umsatz pro Marke?</h2>
+        <?php
+            $conn = $dba->getConn();
+            $ps = $conn->prepare('
+                SELECT COALESCE(SUM(op.stock * op.unit_price), 0) AS umsatz, b.name
+                FROM brand b
+                LEFT JOIN product p ON(b.id = p.brand_id)
+                LEFT JOIN order_position op ON(p.id = op.product_id)
+                GROUP BY b.id
+            ');
+            $ps->execute();
+            while($row = $ps->fetch()){
+                echo '<p>';
+                echo $row['name'] . ' ';
+                echo $row['umsatz'];                
+                echo '</p>';
+            }
+        ?>
     </main>
 </body>
 </html>
