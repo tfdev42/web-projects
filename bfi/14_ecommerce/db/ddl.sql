@@ -5,6 +5,9 @@
 -- Brand(id, name)
 -- Category(id, name)
 -- Product(id, skuUK, brand_idFK, category_idFK, name, description, picture, price, stock, is_removed)
+-- !!! Entity relation diagramm >>> Attributdiagramm (Krehenfuss-Diagramm)
+-- !!! FK ist immer auf der Krehenfuss seite
+-- User ||--O< Order ||--|< order_position >O--|| Product
 
 
 CREATE DATABASE IF NOT EXISTS 20230911_ecommerce;
@@ -61,3 +64,16 @@ VALUES
 ('Haus'),
 ('Haustiere'),
 ('Farbe');
+
+
+CREATE TABLE order (
+    id INT AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    order_date DATETIME NOT NULL,
+    zip VARCHAR(50) NOT NULL,
+    country VARCHAR(100) NOT NULL,
+    address VARCHAR(200) NOT NULL,
+    total DECIMAL(20, 8) NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY(user_id) REFERENCES user(id)    
+);
