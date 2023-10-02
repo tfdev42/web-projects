@@ -18,10 +18,12 @@ require_once 'maininclude.inc.php';
         <h2>Wie oft wurde jedes Produkt bestellt?</h2>
         <?php
             $conn = $dba->getConn();
+            // COALESCE liefert den ersten NICHT-NULL-Wert einer Aufzaehlung
             $ps = $conn->prepare('
-                SELECT COUNT(op.product_id) AS anzahl, p.name AS name
+                SELECT COALESCE(SUM(op.stock), 0) AS anzahl, p.name AS name
                 FROM order_position op
-                INNER JOIN product p ON(p.id = op.product_id)
+                RIGHT JOIN product p ON(p.id = op.product_id)
+                GROUP BY op.product_id
                 ORDER BY anzahl DESC
             ');
             $ps->execute();
