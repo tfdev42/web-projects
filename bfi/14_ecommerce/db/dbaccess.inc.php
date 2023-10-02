@@ -424,6 +424,17 @@ class DbAccess
 
         }
 
+        // Aktualisierung des Gesamtbetrags der Bestellung
+        $ps = $this->conn->prepare('
+            UPDATE orders
+            SET total = :total
+            WHERE id = :id
+        ');
+        
+        $ps->bindValue('total', $total);
+        $ps->bindValue('id', $orderId);
+        $ps->execute();
+
     }
 
 
