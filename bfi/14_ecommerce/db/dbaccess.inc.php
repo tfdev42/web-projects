@@ -430,10 +430,16 @@ class DbAccess
             SET total = :total
             WHERE id = :id
         ');
-        
+
         $ps->bindValue('total', $total);
         $ps->bindValue('id', $orderId);
         $ps->execute();
+
+
+        // Warenkorb leeren
+        $_SESSION['cart'] = [];
+
+        return $orderId;
 
     }
 
