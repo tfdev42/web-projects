@@ -113,6 +113,39 @@ require_once 'maininclude.inc.php';
                 echo '</p>';
             }
         ?>
+        <h2>Anzahl der bestellungen von jeden Kunden</h2>
+        <?php
+            $conn = $dba->getConn();
+            $ps = $conn->prepare('
+                SELECT COALESCE(COUNT(o.id)) AS anzahl, u.fname, u.lname
+                FROM user u 
+                LEFT JOIN orders o ON(u.id = o.user_id)
+                GROUP BY u.id
+            ');
+            $ps->execute();
+            while($row = $ps->fetch()){
+                echo '<p>';
+                echo htmlspecialchars($row['fname'] . ' ' . $row['lname'] . ': ');
+                echo $row['anzahl'];
+                echo '</p>';
+            }
+        ?>
+        <h2>Welche Bestellungen wurden in den Letzten 60 Minuten gemacht?</h2>
+        <?php
+            $conn = $dba->getConn();
+            $ps = $conn->prepare('
+                SELECT id, order_date
+                FROM orders
+                WHERE order_date > NOW() - INTERVAL 1 HOUR 
+            ');
+            $ps->execute();
+            while($row = $ps->fetch()){
+                echo '<p>';
+                echo $row['id'] . ' ';
+                echo $row['order_date'];                
+                echo '</p>';
+            }
+        ?>
     </main>
 </body>
 </html>
