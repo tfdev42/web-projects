@@ -1,6 +1,6 @@
 -- Attributschreibweise
 -- User(id, fname, lname, emailUK, password, is_admin)
--- Order(id, user_idFK, order_date, zip, country, address, total)
+-- Orders(id, user_idFK, order_date, zip, country, address, city, total)
 -- Order_position(id, product_idFK, order_idFK, stock, unit_price)
 -- Brand(id, name)
 -- Category(id, name)
@@ -92,3 +92,7 @@ CREATE TABLE order_position (
     FOREIGN KEY(order_id) REFERENCES orders(id),
     UNIQUE KEY(product_id, order_id)
 );
+
+
+ALTER TABLE orders
+ADD COLUMN city VARCHAR(100) NOT NULL;
