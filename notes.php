@@ -47,6 +47,9 @@ if (!empty($errors)) {
 *** DSGVO - Eckpunkte
 *** EULA - End User License Agreement - AGBs
 *** HTTPS - Funktion
+*** SQL Injection
+*** XSS: Cross Site Scripting
+<script>alert('XSS');</script>
 
 TODO: Orders auslesen aus dem WebShop
 
@@ -58,3 +61,5 @@ APIS:
 ** JSON
 ** XML
 ** CSV
+
+

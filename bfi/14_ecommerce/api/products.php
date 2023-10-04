@@ -2,15 +2,15 @@
 require_once __DIR__ . '/../maininclude.inc.php';
 
 // Lade Brands als Array
-$brands = $dba->getBrands();
+$products = $dba->getProducts();
 
 
-class BrandsDto{
-    public array $brands;
+class ProductDto{
+    public array $products;
 }
 
-$dto = new BrandsDto();
-$dto->brands = $brands;
+$dto = new ProductDto();
+$dto->products = $products;
 
 
 // Gebe es als JSON aus
