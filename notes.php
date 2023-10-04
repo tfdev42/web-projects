@@ -47,3 +47,14 @@ if (!empty($errors)) {
 *** DSGVO - Eckpunkte
 *** EULA - End User License Agreement - AGBs
 *** HTTPS - Funktion
+
+TODO: Orders auslesen aus dem WebShop
+
+
+
+
+APIS:
+
+** JSON
+** XML
+** CSV
