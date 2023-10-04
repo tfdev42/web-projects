@@ -47,8 +47,8 @@ if (!empty($errors)) {
 *** DSGVO - Eckpunkte
 *** EULA - End User License Agreement - AGBs
 *** HTTPS - Funktion
-*** SQL Injection
-*** XSS: Cross Site Scripting
+*** SQL Injection !!!!!!! ABSICHERN
+*** XSS: Cross Site Scripting !!!!!!! ABSICHERN
 <script>alert('XSS');</script>
 
 TODO: Orders auslesen aus dem WebShop
@@ -62,4 +62,13 @@ APIS:
 ** XML
 ** CSV
 
+
+
+Filezilla: sftp://ip username:lnux pw
+
+
+start project:
+1. register
+2. login
+3. Raussuchen was keine FK hat >> die zu erst machen
 
