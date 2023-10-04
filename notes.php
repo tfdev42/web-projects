@@ -39,3 +39,11 @@ if (!empty($errors)) {
     // Handle validation errors
 }
 ?>
+
+
+*** Log4J - CVE-2022-23307
+*** Software-Lizenzen
+*** AT Copyright vs USA copyright
+*** DSGVO - Eckpunkte
+*** EULA - End User License Agreement - AGBs
+*** HTTPS - Funktion
