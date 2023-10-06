@@ -11,12 +11,12 @@ CREATE TABLE user(
     fname VARCHAR(200) NOT NULL,
     lname VARCHAR(200) NOT NULL,
     email VARCHAR(200) NOT NULL,
+    password VARCHAR(100) NOT NULL,
     street VARCHAR(200) NOT NULL,
     city VARCHAR(200) NOT NULL,
     country VARCHAR(200) NOT NULL,
     zip VARCHAR(200) NOT NULL,
-    paymentMethod VARCHAR(200),
-    password VARCHAR(100) NOT NULL,
+    paymentMethod VARCHAR(200),    
     is_admin TINYINT(1),
     PRIMARY KEY (id),
     UNIQUE KEY (email)
@@ -39,5 +39,5 @@ CREATE TABLE insurance(
     licensePlate VARCHAR(255),
     PRIMARY KEY (id),
     FOREIGN KEY (customerId) REFERENCES user(id),
-    FOREIGN KEY (productId) REFERENCES product(id),
+    FOREIGN KEY (productId) REFERENCES product(id)
 );
