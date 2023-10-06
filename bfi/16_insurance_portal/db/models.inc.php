@@ -44,6 +44,17 @@ class Product {
     public string $productName;
     public string $productDescription;
     public float $pricePerMinute;
+    public function __construct(
+        int $productId,
+        string $productName,
+        string $productDescription,
+        float $pricePerMinute
+    ) {
+        $this->productId = $productId;
+        $this->productName = $productName;
+        $this->productDescription = $productDescription;
+        $this->pricePerMinute = $pricePerMinute;
+    }
 }
 
 class Insurance {
@@ -55,6 +66,25 @@ class Insurance {
     public DateTime $endTime;
     public ?string $comment;
     public string $licensePlate;
+    public function __construct(
+        int $insureId,
+        int $customerId,
+        int $productId,
+        string $status,
+        DateTime $startTime,
+        DateTime $endTime,
+        ?string $comment,
+        string $licensePlate
+    ) {
+        $this->insureId = $insureId;
+        $this->customerId = $customerId;
+        $this->productId = $productId;
+        $this->status = $status;
+        $this->startTime = $startTime;
+        $this->endTime = $endTime;
+        $this->comment = $comment;
+        $this->licensePlate = $licensePlate;
+    }
 }
 
 
