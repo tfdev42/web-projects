@@ -9,9 +9,10 @@ require_once 'db/dbaccess.inc.php';
 $dba = new DbAccess();
 
 $errors = [];
-if($_SESSION['user']){    
-    $user = $_SESSION['user'];
-}
+$user = $_SESSION['userId']
+// if($_SESSION['userId']){    
+//     $user = $_SESSION['user'];
+// }
 
 
 

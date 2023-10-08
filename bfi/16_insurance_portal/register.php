@@ -1,13 +1,16 @@
 <?php
 require_once 'main.include.php';
+require_once 'validation.php';
+require_once 'showerrors.inc.php';
 
-if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    if(isset($_POST['bt_register'])){
-        if(count($errors) == 0){
-            $userId = $dba->createUser($fname, $lname, $email, $password, $street, $city, $country, $zip, $paymentMethod, false);
-            header('Location: login.php?userid='.$userId);
-            exit();
-        }
+if (isset($_POST['bt_register'])){
+    if(count($errors) == 0){
+        $userId = $dba->createUser($fname, $lname, $email, $password, $street, $city, $country, $zip, 'null', false);
+        $_SESSION['userId'] = $userId;
+        $_SESSION['userFname'] = $fname;
+        $_SESSION['userLname'] = $lname;
+        header('Location: profile.php?userId=' . $_SESSION['userId']);
+        exit();
     }
 }
 
@@ -25,10 +28,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 <body>
     <main>
         <?php
-            include 'validation.php';
-            include 'showerrors.inc.php';
+            
         ?>
-        <form action="<?php echo htmlspecialchars($_SERVER['./login.php']); ?>" method="post">
+        <form action="register.php" method="post">
             <label for="fname">Firstname: </label>
             <input type="text" name="fname"><br>
             <!-- <span class="error"><?php echo $fnameErr; ?></span><br> -->

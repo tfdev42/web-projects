@@ -1,6 +1,6 @@
 <?php
 
-    $fname=$lname=$email=$password=$street=$city=$country=$zip='';
+    $fname=$lname=$email=$password=$street=$city=$country=$zip=
     $fnameErr=$lnameErr=$emailErr=$passwordErr=$streetErr=$cityErr=$countryErr=$zipErr='';
 
     // $paymentMethod
