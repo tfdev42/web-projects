@@ -9,7 +9,7 @@ class DbAccess {
         return $this->pdo;
     }
 
-    private function createUser(
+    public function createUser(
         string $fname,
         string $lname,
         string $email,
