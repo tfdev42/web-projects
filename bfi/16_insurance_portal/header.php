@@ -1,18 +1,17 @@
 <header>
-    <div class="user-menu">
-        <nav>
+    <nav class="user-menu">
         <ul>
             <li>
                 <a href="./">Portal</a>
             </li>
             <?php if (isset($_SESSION['userId'])) { ?>
                 <li>
-                    <form action="index.php" method="POST">
-                        <button name="bt_logout">Logout</button>
-                    </form>
+                    <a href="profile.php">Personennummer: <?php echo htmlspecialchars($_SESSION['userId']);?></a>                    
                 </li>
                 <li>
-                    <a href="profile.php"><?php echo htmlspecialchars($_SESSION['userFname'] . ' ' . $_SESSION['userLname']);?></a>                    
+                    <form action="logout.php" method="POST">
+                        <button name="bt_logout">Logout</button>
+                    </form>
                 </li>
                 <?php } else { ?>
                     <li>
@@ -27,8 +26,7 @@
                     </li>
                     <?php } ?>
         </ul>
-        </nav>        
-    </div>
+    </nav>    
 </header>
 
 

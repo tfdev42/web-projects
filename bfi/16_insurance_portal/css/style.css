@@ -1,8 +1,8 @@
-.user-menu ul li {
+nav.user-menu ul li {
     display: inline-block;
 }
 
-.user-menu a {
+nav.user-menu a {
     text-decoration: none;
     margin-right: 5px;
 }

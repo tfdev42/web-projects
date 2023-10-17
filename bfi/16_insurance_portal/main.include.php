@@ -9,12 +9,5 @@ require_once 'db/dbaccess.inc.php';
 $dba = new DbAccess();
 
 $errors = [];
-$user = $_SESSION['user_id'];
-// if($_SESSION['userId']){    
-//     $user = $_SESSION['user'];
-// }
-
-
-
 
 ?>

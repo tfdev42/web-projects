@@ -7,8 +7,6 @@ if (isset($_POST['bt_register'])){
     if(count($errors) == 0){
         $userId = $dba->createUser($fname, $lname, $email, $password, $street, $city, $country, $zip, 'null', false);
         $_SESSION['userId'] = $userId;
-        $_SESSION['userFname'] = $fname;
-        $_SESSION['userLname'] = $lname;
         header('Location: profile.php?userId=' . $_SESSION['userId']);
         exit();
     }
@@ -33,35 +31,35 @@ if (isset($_POST['bt_register'])){
         <form action="register.php" method="post">
             <label for="fname">Firstname: </label>
             <input type="text" name="fname"><br>
-            <!-- <span class="error"><?php echo $fnameErr; ?></span><br> -->
+            <span class="error"><?php echo $fnameErr; ?></span><br>
 
             <label for="lname">Lastname: </label>
             <input type="text" name="lname"><br>
-            <!-- <span class="error"><?php echo $lnameErr; ?></span><br> -->
+            <span class="error"><?php echo $lnameErr; ?></span><br>
 
             <label for="email">Email: </label>
             <input type="email" name="email"><br>
-            <!-- <span class="error"><?php echo $emailErr; ?></span><br> -->
+            <span class="error"><?php echo $emailErr; ?></span><br>
 
             <label for="password">Password: </label>
             <input type="password" name="password"><br>
-            <!-- <span class="error"><?php echo $passwordErr; ?></span><br> -->
+            <span class="error"><?php echo $passwordErr; ?></span><br>
 
             <label for="street">Street: </label>
             <input type="text" name="street"><br>
-            <!-- <span class="error"><?php echo $streetErr; ?></span><br> -->
+            <span class="error"><?php echo $streetErr; ?></span><br>
 
             <label for="city">City: </label>
             <input type="text" name="city"><br>
-            <!-- <span class="error"><?php echo $cityErr; ?></span><br> -->
+            <span class="error"><?php echo $cityErr; ?></span><br>
 
             <label for="country">Country</label>
             <input type="text" name="country"><br>
-            <!-- <span class="error"><?php echo $countryErr; ?></span><br> -->
+            <span class="error"><?php echo $countryErr; ?></span><br>
 
             <label for="zip">ZIP</label>
             <input type="text" name="zip"><br>
-            <!-- <span class="error"><?php echo $zipErr; ?></span><br> -->
+            <span class="error"><?php echo $zipErr; ?></span><br>
 
             <button name="bt_register">Register</button>
 
