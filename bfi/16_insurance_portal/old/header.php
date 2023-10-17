@@ -1,4 +1,3 @@
-<?session_start();?>
 <header>
     <div class="user-menu">
         <nav>
