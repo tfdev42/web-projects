@@ -12,6 +12,10 @@ class User {
     public string $country;
     public ?string $payment_type;
     public string $iban;
+    public array $roles;
+
+
+    
 }
 
 class Product {

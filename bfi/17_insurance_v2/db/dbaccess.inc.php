@@ -31,7 +31,23 @@ class DbAccess
         $ps->bindValue('payment_type', $payment_type);
         $ps->bindValue('iban', $iban);
         $ps->execute();
-        return $this->conn->lastInsertId();
+        // userID herausfinden um die Rolle zuweisen zu koennen
+        $userId = $this->conn->lastInsertId();
+        $this->addUserRole($userId, 'C');
+        return $userId;
+    }
+
+    // Add User roles
+    public function addUserRole(int $userId, string $roleId) {
+        $ps = $this->conn->prepare('
+        INSERT INTO user_has_role
+        (user_id, role_id)
+        VALUES
+        (:user_id, :role_id)
+        ');
+        $ps->bindValue('user_id', $userId);
+        $ps->bindValue('role_id', $roleId);
+        $ps->execute();
     }
 
 
@@ -45,15 +61,59 @@ class DbAccess
     }
 
 
+    // public function getUserById(int $id) : User|false {
+    //     $ps = $this->conn->prepare(
+    //         'SELECT * 
+    //         FROM user u
+    //         LEFT JOIN user_has_role uhr ON(u.id = uhr.user_id)
+    //         LEFT JOIN role r ON(uhr.role_id = r.id)
+    //         WHERE u.id = :id'
+    //     );
+    //     $ps->bindValue('id', $id);
+    //     $ps->execute();
+    //     $user = new User();
+    //     while ($row = $ps->fetch()){
+    //         $user->id = $row['id'];
+    //         $user->fname = $row['fname'];
+    //         $user->lname = $row['lname'];
+    //         $user->email = $row['email'];
+    //         $user->password = $row['password'];
+    //         $user->street = $row['street'];
+    //         $user->zip = $row['zip'];
+    //         $user->city = $row['city'];
+    //         $user->country = $row['country'];
+    //         $user->payment_type = $row['payment_type'];
+    //         $user->iban = $row['iban'];
+    //         $user->roles = json_decode($row['roles'], true);
+    //     }
+    // }
+
     public function getUserById(int $id) : User|false {
         $ps = $this->conn->prepare(
-            'SELECT * 
-            FROM user 
-            WHERE id = :id'
+            'SELECT u.*, r.id AS roleId, r.name AS roleName
+            FROM user u
+            LEFT JOIN user_has_role uhr ON(u.id = uhr.user_id)
+            LEFT JOIN role r ON(uhr.role_id = r.id)
+            WHERE u.id = :id'
         );
         $ps->bindValue('id', $id);
         $ps->execute();
-        return $ps->fetchObject('User');
+        $user = new User();
+        $user->roles = [];
+        while ($row = $ps->fetch()){
+            $user->id = $row['id'];
+            $user->fname = $row['fname'];
+            $user->lname = $row['lname'];
+            $user->email = $row['email'];
+            $user->password = $row['password'];
+            $user->street = $row['street'];
+            $user->zip = $row['zip'];
+            $user->city = $row['city'];
+            $user->country = $row['country'];
+            $user->payment_type = $row['payment_type'];
+            $user->iban = $row['iban'];
+            $user->roles[] = $row['roleName'];
+        }
     }
 
 
