@@ -11,7 +11,7 @@ require_once 'main.include.php';
 </head>
 <body>
     <main>
-        <div class="d.loginform">
+        <div>
             <form name="login" action="<?php htmlspecialchars($_SESSION['PHP_SELF']);?>" method="post">
                 <label for="username">Personennummer</label><br>
                 <input name="personennummer" type="text"><br>
