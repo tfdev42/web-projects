@@ -1,5 +1,7 @@
 <?php
 require_once 'main.include.php';
+
+//if($_SERVER)
 ?>
 
 <!DOCTYPE html>
@@ -8,11 +10,12 @@ require_once 'main.include.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <main>
         <div>
-            <form name="login" action="<?php htmlspecialchars($_SESSION['PHP_SELF']);?>" method="post">
+            <form name="login" action="index.php" method="post">
                 <label for="username">Personennummer</label><br>
                 <input name="personennummer" type="text"><br>
                 <label for="username">Passwort</label><br>

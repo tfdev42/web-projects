@@ -1,7 +1,7 @@
 <?php
 require_once 'main.include.php';
 require_once 'validation.php';
-require_once 'showerrors.inc.php';
+//require_once 'showerrors.inc.php';
 
 if (isset($_POST['bt_register'])){
     if(count($errors) == 0){
@@ -21,7 +21,7 @@ if (isset($_POST['bt_register'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <link rel="stylesheet" href="css/style.css">;
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <main>
@@ -31,35 +31,35 @@ if (isset($_POST['bt_register'])){
         <form action="register.php" method="post">
             <label for="fname">Firstname: </label>
             <input type="text" name="fname"><br>
-            <span class="error"><?php echo $fnameErr; ?></span><br>
+            <span class="error"><?php echo isset($errors['fnameErr']) ? $errors['fnameErr'] : ''; ?></span><br>
 
             <label for="lname">Lastname: </label>
             <input type="text" name="lname"><br>
-            <span class="error"><?php echo $lnameErr; ?></span><br>
+            <span class="error"><?php echo isset($errors['lnameErr']) ? $errors['lnameErr'] : ''; ?></span><br>
 
             <label for="email">Email: </label>
             <input type="email" name="email"><br>
-            <span class="error"><?php echo $emailErr; ?></span><br>
+            <span class="error"><?php echo isset($errors['emailErr']) ? $errors['emailErr'] : ''; ?></span><br>
 
             <label for="password">Password: </label>
             <input type="password" name="password"><br>
-            <span class="error"><?php echo $passwordErr; ?></span><br>
+            <span class="error"><?php echo isset($errors['passwordErr']) ? $errors['passwordErr'] : ''; ?></span><br>
 
             <label for="street">Street: </label>
             <input type="text" name="street"><br>
-            <span class="error"><?php echo $streetErr; ?></span><br>
+            <span class="error"><?php echo isset($errors['streetErr']) ? $errors['streetErr'] : ''; ?></span><br>
 
             <label for="city">City: </label>
             <input type="text" name="city"><br>
-            <span class="error"><?php echo $cityErr; ?></span><br>
+            <span class="error"><?php echo isset($errors['cityErr']) ? $errors['cityErr'] : ''; ?></span><br>
 
             <label for="country">Country</label>
             <input type="text" name="country"><br>
-            <span class="error"><?php echo $countryErr; ?></span><br>
+            <span class="error"><?php echo isset($errors['countryErr']) ? $errors['countryErr'] : ''; ?></span><br>
 
             <label for="zip">ZIP</label>
             <input type="text" name="zip"><br>
-            <span class="error"><?php echo $zipErr; ?></span><br>
+            <span class="error"><?php echo isset($errors['zipErr']) ? $errors['zipErr'] : ''; ?></span><br>
 
             <button name="bt_register">Register</button>
 
