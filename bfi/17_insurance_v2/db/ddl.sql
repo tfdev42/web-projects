@@ -1,0 +1,46 @@
+CREATE DATABASE IF NOT EXISTS boatinsurance;
+USE boatinsurance;
+
+CREATE TABLE user
+(
+    id INT AUTO_INCREMENT,
+    fname VARCHAR(255) NOT NULL,
+    lname VARCHAR(255) NOT NULL,
+    email VARCHAR(320) NOT NULL,
+    password VARCHAR(100) NOT NULL,
+    street VARCHAR(100) NOT NULL,
+    zip VARCHAR(20) NOT NULL,
+    city VARCHAR(100) NOT NULL,
+    country VARCHAR(100) NOT NULL,
+    payment_type CHAR(1) DEFAULT NULL,
+    iban VARCHAR(100) NOT NULL,
+    PRIMARY KEY (id),
+    UNIQUE KEY (email)
+);
+
+CREATE TABLE product 
+(
+    id INT AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    price_per_minute DECIMAL(10,2) NOT NULL,
+    PRIMARY KEY(id)
+);
+
+
+
+CREATE TABLE contract 
+(
+    id INT AUTO_INCREMENT,
+    customer_id INT NOT NULL,
+    product_id INT NOT NULL,
+    status CHAR(1) NOT NULL,
+    start DATETIME NOT NULL,
+    end DATETIME DEFAULT NULL,
+    comment TEXT NOT NULL,
+    boat_registration_number VARCHAR(20) NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY(customer_id) REFERENCES user(id),
+    FOREIGN KEY(product_id) REFERENCES product(id)
+);
+

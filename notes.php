@@ -72,3 +72,11 @@ start project:
 2. login
 3. Raussuchen was keine FK hat >> die zu erst machen
 
+
+
+
+SQL
+
+many to many relation
+kardinalitaeten tauschen fuer zwischentabellen
+
