@@ -43,6 +43,16 @@ class DbAccess {
     }
 
 
+    public function istEmailVorhanden() : bool {
+        $stmt = $this->pdo->prepare('
+        SELECT email
+        FROM users
+        WHERE email = :email
+        ');
+        $stmt->bindValue('email', $email);
+    }
+
+
 
 
     public function __construct() {

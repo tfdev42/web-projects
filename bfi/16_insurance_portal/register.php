@@ -1,7 +1,6 @@
 <?php
 require_once 'main.include.php';
 require_once 'validation.php';
-//require_once 'showerrors.inc.php';
 
 if (isset($_POST['bt_register'])){
     if(count($errors) == 0){
