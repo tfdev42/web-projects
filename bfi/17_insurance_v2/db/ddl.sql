@@ -44,3 +44,27 @@ CREATE TABLE contract
     FOREIGN KEY(product_id) REFERENCES product(id)
 );
 
+-- M Manager, C Customer, A Agent
+CREATE TABLE role (
+    id CHAR(1),
+    name VARCHAR(20) NOT NULL,
+    PRIMARY KEY(id)
+);
+
+CREATE TABLE user_has_role(
+    user_id INT,
+    role_id CHAR(1),
+    PRIMARY KEY (user_id ,role_id),
+    FOREIGN KEY (user_id) REFERENCES user(id),
+    FOREIGN KEY (role_id) REFERENCES role(id)
+);
+
+
+
+INSERT INTO role
+(id, name)
+VALUES
+('M', 'MANAGER'),
+('C', 'CUSTOMER'),
+('A', 'AGENT');
+
