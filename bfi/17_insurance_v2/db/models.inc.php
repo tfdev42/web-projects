@@ -15,7 +15,17 @@ class User {
     public array $roles;
 
 
-    
+    public function isManager() : bool {
+        return in_array('MANAGER', $this->roles);
+    }
+
+    public function isAgent() : bool {
+        return in_array('AGENT', $this->roles);
+    }
+
+    public function isCustomer() : bool {
+        return in_array('CUSTOMER', $this->roles);
+    }
 }
 
 class Product {

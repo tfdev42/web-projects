@@ -1,6 +1,12 @@
 <?php
 require_once 'maininclude.inc.php';
 
+// darf nur Manager sehen
+if(!$user->isManager()){
+    header('location: index.php');
+    exit();
+}
+
 // Seite darf nur als Manager aufgerufen werden
 
 $products = $dba->getProducts();
