@@ -19,7 +19,13 @@
     <button id="secondButton">Replace the "..."</button>
 
     <p id="moreText">This is some text</p>
-    <button id="styleText">Style Text</button>
+
+    <p>
+    <button id="styleText">Style Text</button><br><br>
+    <label>
+        <input type="checkbox" id="switch" onchange="toggleVisibility()">Hide/Unhide Text
+    </label>
+    </p>
 
 
     <script type="text/javascript">
@@ -35,6 +41,17 @@
             document.getElementById("moreText").style.color = "red";
             document.getElementById("moreText").style.fontSize = "50px";
         }
+        var original = document.getElementById("moreText").style.display;
+
+        function toggleVisibility(){
+            var checkbox = document.getElementById("switch");
+            if (checkbox.checked){
+                document.getElementById("moreText").style.display = "none";
+            } else {
+                document.getElementById("moreText").style.display = original;
+            }
+        }
+        
     </script>
 
 </body>
