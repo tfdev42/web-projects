@@ -10,7 +10,7 @@
     />
   </head>
   <body>
-    <form action="process-signup.php" method="post">
+    <form action="process-signup.php" method="post" novalidate>
       <div>
         <label for="name">Name</label>
         <input type="text" id="name" name="name" />
@@ -29,7 +29,7 @@
       <div>
         <label for="password">Repeat Password</label>
         <input
-          type="password_confirmation"
+          type="password"
           id="password_confirmation"
           name="password_confirmation"
         />
