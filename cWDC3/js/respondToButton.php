@@ -13,10 +13,19 @@
     <p>
         <button id="button">Change Text</button>
     </p>
+    <p id="secondParagraph">
+        Javascript is ...
+    </p>
+    <button id="secondButton">Replace the "..."</button>
+
 
     <script type="text/javascript">
         document.getElementById("button").onclick = function(){
             document.getElementById("text").innerHTML = prompt("Please enter the text to be changed to!");
+        }
+
+        document.getElementById("secondButton").onclick = function(){
+            document.getElementById("secondParagraph").innerHTML = document.getElementById("secondParagraph").innerHTML.replace("...", prompt("What is JavaScript like?"));
         }
     </script>
 
