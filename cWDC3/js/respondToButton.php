@@ -41,6 +41,8 @@
             document.getElementById("moreText").style.color = "red";
             document.getElementById("moreText").style.fontSize = "50px";
         }
+
+        
         var original = document.getElementById("moreText").style.display;
 
         function toggleVisibility(){
