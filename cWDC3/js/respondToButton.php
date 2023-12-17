@@ -18,6 +18,9 @@
     </p>
     <button id="secondButton">Replace the "..."</button>
 
+    <p id="moreText">This is some text</p>
+    <button id="styleText">Style Text</button>
+
 
     <script type="text/javascript">
         document.getElementById("button").onclick = function(){
@@ -26,6 +29,11 @@
 
         document.getElementById("secondButton").onclick = function(){
             document.getElementById("secondParagraph").innerHTML = document.getElementById("secondParagraph").innerHTML.replace("...", prompt("What is JavaScript like?"));
+        }
+
+        document.getElementById("styleText").onclick = function(){
+            document.getElementById("moreText").style.color = "red";
+            document.getElementById("moreText").style.fontSize = "50px";
         }
     </script>
 
