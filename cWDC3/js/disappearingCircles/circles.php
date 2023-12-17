@@ -1,3 +1,8 @@
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,15 +12,23 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div>
-        <div class="circle" name="red-circle" id="redCircle"></div>
-        <div class="circle" name="blue-circle" id="blueCircle"></div>
-        <div class="circle" name="yellow-circle" id="yellowCircle"></div>
+    <div class="circle-container">
+        <div id="red" class="circle" onclick="hideOnClick('red')"></div>
+        <div id="blue" class="circle" onclick="hideOnClick('blue')"></div>
+        <div id="yellow" class="circle" onclick="hideOnClick('yellow')"></div>
     </div>
     
 
     <script>
 
+        function hideOnClick(color){
+            var circle = document.getElementById(color)
+            if (circle.classList.contains('hidden')) {
+                circle.classList.remove('hidden');
+            } else {
+                circle.classList.add('hidden');
+      }
+        }
     </script>
 </body>
 </html>
