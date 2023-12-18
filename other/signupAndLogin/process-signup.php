@@ -31,13 +31,13 @@ $password_hash = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
 $mysqli = require __DIR__ . "/database.php";
 
-$sql = "INSERT INTO users (name, email, password_hash)
-        VALUES (?, ?, ?)";
-
 // check mysqli Object
 if (!($mysqli instanceof mysqli)) {
     die("Invalid mysqli object");
 }
+
+$sql = "INSERT INTO user (name, email, password_hash)
+        VALUES (?, ?, ?)";
 
 $stmt = $mysqli->stmt_init();
 if (!$stmt) {
