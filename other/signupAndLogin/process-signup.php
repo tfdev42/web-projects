@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 
 if (empty($_POST["name"])){
     die("Name is required!");
@@ -26,6 +28,37 @@ if ($_POST["password"] !== $_POST["password_confirmation"]) {
 
 $password_hash = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
-print_r($_POST);
-var_dump($password_hash);
+
+$mysqli = require __DIR__ . "/database.php";
+
+$sql = "INSERT INTO users (name, email, password_hash)
+        VALUES (?, ?, ?)";
+
+// check mysqli Object
+if (!($mysqli instanceof mysqli)) {
+    die("Invalid mysqli object");
+}
+
+$stmt = $mysqli->stmt_init();
+if (!$stmt) {
+    die("Stmt init failed: " . $mysqli->error);
+}
+
+if ( ! $stmt->prepare($sql)) {
+    die("SQL error: " . $mysqli->error);
+}
+
+$stmt->bind_param("sss",
+                $_POST["name"],
+                $_POST["email"],
+                $password_hash);
+if ($stmt->execute()) {
+    echo "Signup successful!";
+} else {
+    die($mysqli->error . " " . $mysqli->errno);
+}
+
+// print_r($_POST);
+// var_dump($password_hash);
+
 ?>
