@@ -8,7 +8,7 @@
 <body>
     <h1>Sign Up</h1>
 
-    <form action="" method="post" novalidate>
+    <form id="signup" action="" method="post" novalidate>
         <div>
             <label for="name">Name</label>
             <input id="name" type="text" placeholder="Name">
@@ -21,12 +21,12 @@
 
         <div>
             <label for="password">Password</label>
-            <input id="password" type="text" placeholder="Password123!">
+            <input id="password" type="password" placeholder="Password123!">
         </div>
 
         <div>
             <label for="password_confirm">Confirm Password</label>
-            <input id="password_confirm" type="text" placeholder="Repeat password">
+            <input id="password_confirm" type="password" placeholder="Repeat password">
         </div>
         <div>
             <button type="submit">Submit</button>
