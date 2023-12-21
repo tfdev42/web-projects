@@ -30,7 +30,7 @@
             <input id="password_confirm" type="password" placeholder="Repeat password">
         </div>
         <div>
-            <button type="submit">Submit</button>
+            <button name="bt_submit" type="submit">Submit</button>
         </div>
     </form>
     
