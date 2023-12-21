@@ -26,10 +26,6 @@ if(isset($_POST["bt_submit"])){
         $errors[] = "Password must contain at least one number";
     }
 
-    if(empty($_POST["password_confirm"])) {
-        $errors[] = "Confirm Password";
-    }
-
     if( clenseInput($_POST["password"]) !== clenseInput($_POST["password_confirm"])) {
         $errors[] = "Entered passwords don't match";
     }
