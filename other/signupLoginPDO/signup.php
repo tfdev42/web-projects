@@ -1,4 +1,4 @@
-<?php require_once "./inc/main.inc.php";
+<?php require_once "main.inc.php";
 
 if(isset($_POST["bt_submit"])){
 

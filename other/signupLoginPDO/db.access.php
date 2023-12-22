@@ -1,5 +1,5 @@
 <?php
-require_once "../inc/models.inc.php";
+require_once "./models.inc.php";
 
 class DBAccess {
     private PDO $pdo;

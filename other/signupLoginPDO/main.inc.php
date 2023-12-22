@@ -8,4 +8,5 @@ session_start();
 
 $errors = [];
 
-require_once "../db/db.access.php";
+require_once "./db.access.php";
+$dba = new DBAccess();
