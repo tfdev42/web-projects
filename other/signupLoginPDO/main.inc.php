@@ -10,3 +10,5 @@ $errors = [];
 
 require_once "./db.access.php";
 $dba = new DBAccess();
+
+$userId;

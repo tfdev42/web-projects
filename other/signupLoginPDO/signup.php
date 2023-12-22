@@ -30,6 +30,27 @@ if(isset($_POST["bt_submit"])){
         $errors[] = "Entered passwords don't match";
     }
 
+    if(count($errors) == 0){
+        try {
+            $dba->createUser(
+                clenseInput($_POST["name"]),
+                clenseInput($_POST["email"]),
+                clenseInput($_POST["password"])
+            );
+            header("Location: login.php");
+            exit();
+        }
+        catch (PDOException $e){
+            // Log the error internally
+        error_log('PDOException: ' . $e->getMessage() . ', Code: ' . $e->getCode());
+
+        // Provide a generic error message to the user
+        echo "An error occurred while creating the user. Please try again later.";
+        }   
+        
+        
+    }
+
     
 
 }

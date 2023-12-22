@@ -8,7 +8,19 @@ class DBAccess {
         return $this->pdo;
     }
 
-    public function createUser($name, $email, $password){
+    public function isEmailTaken($email) : bool {
+        $stmt = $this->pdo->prepare('
+        SELECT COUNT(*)
+        FROM user
+        WHERE email = :email
+        ');
+        $stmt->bindValue('email', $email);
+        $result = $stmt->execute();
+
+        return $result > 0;
+    }
+
+    public function createUser($name, $email, $password) : int {
 
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
