@@ -1,5 +1,5 @@
 <?php
-require_once "./inc/models.inc.php";
+require_once "../inc/models.inc.php";
 
 class DBAccess {
     private PDO $pdo;
@@ -24,6 +24,20 @@ class DBAccess {
 
         $userId = $this->pdo->lastInsertId();
         return $userId;
+    }
+
+    public function __construct(){
+        
+        $host = 'localhost';
+        $dbName = 'login_db_pdo_231220';
+        $dbUser = 'root';
+        $dbPassword = '';
+        
+        $pdo = new PDO("mysql:dbname=$dbName; host=$host", $dbUser, $dbPassword);
+        
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+        $this->pdo = $pdo;
     }
 
 }
