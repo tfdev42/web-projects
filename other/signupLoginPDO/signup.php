@@ -30,6 +30,8 @@ if(isset($_POST["bt_submit"])){
         $errors[] = "Entered passwords don't match";
     }
 
+    
+
 }
 
 function getInputValue($field){
