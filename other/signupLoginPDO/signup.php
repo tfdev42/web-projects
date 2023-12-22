@@ -10,43 +10,39 @@ if(isset($_POST["bt_submit"])){
         $errors[] = "Email is required";
     }
 
-    if(strlen(clenseInput($_POST["password"]) < 8)){
+    if(strlen($_POST["password"]) < 8){
         $errors[] = "Password must be at least 8 characters long";
     }
 
-    if( ! preg_match("/[a-z]/i", clenseInput($_POST["password"]))) {
+    if( ! preg_match("/[a-z]/i", $_POST["password"])) {
         $errors[] = "Password must contain at least one letter";
     }
 
-    if( ! preg_match('/[!@#$%^&*(),.?":{}|<>]/', clenseInput($_POST["password"]))){
+    if( ! preg_match('/[!@#$%^&*(),.?":{}|<>]/', $_POST["password"])){
         $errors[] = "Password must contain at least one special character";
     }
 
-    if( ! preg_match('/\d/', clenseInput($_POST["password"]))){
+    if( ! preg_match('/\d/', $_POST["password"])){
         $errors[] = "Password must contain at least one number";
     }
 
-    if( clenseInput($_POST["password"]) !== clenseInput($_POST["password_confirm"])) {
+    if( $_POST["password"] !== $_POST["password_confirm"]) {
         $errors[] = "Entered passwords don't match";
     }
 
-    if(count($errors) == 0){
-        try {
-            $dba->createUser(
-                clenseInput($_POST["name"]),
-                clenseInput($_POST["email"]),
-                clenseInput($_POST["password"])
-            );
-            header("Location: login.php");
-            exit();
-        }
-        catch (PDOException $e){
-            // Log the error internally
-        error_log('PDOException: ' . $e->getMessage() . ', Code: ' . $e->getCode());
+    if($dba->isEmailTaken(clenseInput($_POST["email"]))){
+        $errors[] = "Email already taken";
+    }
 
-        // Provide a generic error message to the user
-        echo "An error occurred while creating the user. Please try again later.";
-        }   
+    if(count($errors) == 0){
+        $userId = $dba->createUser(
+            clenseInput($_POST["name"]),
+            clenseInput($_POST["email"]),
+            clenseInput($_POST["password"])
+        );
+        header("Location: login.php?userId=" . $userId);
+        exit();
+           
         
         
     }

@@ -8,14 +8,53 @@ class DBAccess {
         return $this->pdo;
     }
 
-    public function isEmailTaken($email) : bool {
+    public function getUserByEmail(string $email) : User | false {
+        $stmt = $this->pdo->prepare('
+        SELECT id, name, email
+        FROM user
+        WHERE email = :email
+        ');
+        $stmt->bindValue('email', trim($email));
+        $stmt->execute();
+
+        $user = new User();
+        while ($row = $stmt->fetch()){
+            $user->id = $row['id'];
+            $user->name = $row['name'];
+            $user->email = $row['email'];
+            
+        }
+
+        return $user ? $user : false;
+
+    }
+
+    public function getEmailByID(int $id){
+        $stmt = $this->pdo->prepare('
+        SELECT email
+        FROM user
+        WHERE id = :id
+        ');
+
+        $stmt->bindValue('id', $id);
+        $stmt->execute();
+
+        $result = $stmt->fetchColumn();
+
+        return $result;
+    }
+
+    public function isEmailTaken(string $email) : bool {
         $stmt = $this->pdo->prepare('
         SELECT COUNT(*)
         FROM user
         WHERE email = :email
         ');
         $stmt->bindValue('email', $email);
-        $result = $stmt->execute();
+        $stmt->execute();
+
+        // fetch count of rows with given email
+        $result = $stmt->fetchColumn();
 
         return $result > 0;
     }
