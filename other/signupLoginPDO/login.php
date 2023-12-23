@@ -1,6 +1,30 @@
 <?php
 require_once "main.inc.php";
 
+if(isset($_POST["submit"])){
+    if ( ! $dba->isEmailTaken($_POST['email'])) {
+        $errors[] = "Wrong email";
+    }
+
+    // $pwd = htmlspecialchars(trim($_POST["password"]));
+    $user = $dba->getUserByEmail($_POST["email"]);
+    $user_pw = $user->password;
+    if ( ! password_verify($_POST["password"], $user_pw)){
+        $errors[] = "Wrong password";
+    }
+
+    if(count($errors) == 0){
+        $_SESSION["userid"] = $user->id;
+        $_SESSION["user_name"] = $user->name;
+        $_SESSION["user_email"] = $user->email;
+
+        header("location: index.php");
+        exit();
+    }
+
+    
+
+}
 
 
 ?>
@@ -16,20 +40,23 @@ require_once "main.inc.php";
 <body>
     <main>
         <h1>Login</h1>
-        <div class="login-area">
-            <div class="input-field">
-                <label for="email">Email</label>
-                <input 
-                type="email" 
-                name="email" 
-                id="email-login">
+        <?php include "./inc/showErrors.inc.php"; ?>
+        <form action="login.php" method="post">
+            <div class="login-area">
+                <div class="input-field">
+                    <label for="email">Email</label>
+                    <input 
+                    type="email" 
+                    name="email" 
+                    id="email-login">
+                </div>
+                <div class="input-field">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password-login">
+                </div>
+                <input type="submit" name="submit" value="Login">
             </div>
-            <div class="input-field">
-                <label for="password">Password</label>
-                <input type="password" name="password" id="password-login">
-            </div>
-            <input type="submit" value="Submit">
-        </div>
+        </form>
     </main>
     
 </body>

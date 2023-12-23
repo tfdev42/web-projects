@@ -10,7 +10,7 @@ class DBAccess {
 
     public function getUserByEmail(string $email) : User | false {
         $stmt = $this->pdo->prepare('
-        SELECT id, name, email
+        SELECT *
         FROM user
         WHERE email = :email
         ');
@@ -22,6 +22,7 @@ class DBAccess {
             $user->id = $row['id'];
             $user->name = $row['name'];
             $user->email = $row['email'];
+            $user->password = $row['password'];
             
         }
 
