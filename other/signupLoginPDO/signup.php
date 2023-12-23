@@ -40,7 +40,7 @@ if(isset($_POST["bt_submit"])){
             clenseInput($_POST["email"]),
             clenseInput($_POST["password"])
         );
-        header("Location: login.php?userId=" . $userId);
+        header("Location: login.php");
         exit();
            
         
