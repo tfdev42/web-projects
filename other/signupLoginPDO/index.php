@@ -16,7 +16,12 @@ require_once "./inc/header.inc.php";
     <main>
         <h1>Welcome</h1>
         <p>
-            
+            <?php
+            echo "For debugging:";
+            echo '<pre>';
+            print_r($_SESSION);
+            echo '</pre>';
+            ?>
         </p>
     </main>
     
