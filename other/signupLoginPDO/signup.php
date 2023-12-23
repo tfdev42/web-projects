@@ -92,7 +92,7 @@ function clenseInput($data){
                 <input 
                 name="email" 
                 id="name" 
-                type="text" 
+                type="email" 
                 placeholder="email@example.com"
                 value="<?php echo clenseInput(getInputValue("email")); ?>">
             </div>
