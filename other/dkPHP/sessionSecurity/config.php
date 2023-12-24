@@ -27,7 +27,7 @@ if ( ! isset($_SESSION['last_regeneration'])) {
     // anytime other in the future the 'else' statement is ran
 } else {
 
-    $interval = 60 * 30; // 60sec * ...
+    $interval = 60 * 30; // 60sec * 30 = 30min
 
     if (time() - $_SESSION['last_regeneration'] >= $interval){
 
