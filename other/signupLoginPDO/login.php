@@ -6,7 +6,6 @@ if(isset($_POST["submit"])){
         $errors[] = "Wrong email";
     }
 
-    // $pwd = htmlspecialchars(trim($_POST["password"]));
     $user = $dba->getUserByEmail($_POST["email"]);
     $user_pw = $user->password;
     if ( ! password_verify($_POST["password"], $user_pw)){
