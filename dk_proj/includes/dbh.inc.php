@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 
 $dsn = "mysql:host=localhost;dbname=20231226_dk_db";
 $dbusername = "root";
