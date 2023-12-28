@@ -30,7 +30,7 @@
     <form action="includes/userdelete.inc.php" method="post">
         <input type="text" name="username" placeholder="Username">
         <input type="password" name="pwd" placeholder="Password">
-        <button>Update</button>
+        <button>Delete</button>
     </form>
 
     <h3>Search</h3>
