@@ -17,26 +17,39 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // ERROR HANDLERS
         $errors = [];
 
-        if (is_input_empty($username, $pwd, $email)){
+        if (is_input_empty($username, $pwd)){
             $errors["empty_input"] = "Fill in all fields!";
+        }
+
+        $result = get_user($pdo, $username); // can be User or False
+
+        // check $result if it is a User for Username and PW match
+        if (is_username_wrong($result)){
+            $errors["login_incorrect"] = "Incorrect login info!";
+        }
+
+        if ( ! is_username_wrong($result) && is_password_wrong($pwd, $result["pwd"])){
+            $errors["login_incorrect"] = "Incorrect login info!";
         }
 
         require_once "config_session.inc.php";
 
         if($errors){
             $_SESSION["errors_signup"] = $errors;
-
-            $signupData = [
-                'username' => $username,
-                'email' => $email,
-            ];
-            $_SESSION["signup_data"] = $signupData;
+            // shouldn't preserve input value if wrong
 
             // print out errors on index page
             header("Location: ../index.php");
             // exit script if errors true
             die();
         }
+
+        // IF USER COULD LOG IN >> UPDATE SESSION COOKIE
+        // grab user_id and associate with session_id
+        $newSessionId = session_create_id();
+        $sessionId = $newSessionId . $result["id"]; // APPEND THE USER'S ID
+        session_id($sessionId); // SET SESSION ID TO THE NEWLY CREATED SESSION ID
+        // since config_session.inc.php regenerates session_id every 30 minutes > have to change function too
 
 
 
