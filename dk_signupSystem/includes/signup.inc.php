@@ -35,6 +35,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
 
         if($errors){
             $_SESSION["errors_signup"] = $errors;
+
+            $signupData = [
+                'username' => $username,
+                'email' => $email,
+            ];
+            $_SESSION["signup_data"] = $signupData;
+
             // print out errors on index page
             header("Location: ../index.php");
             // exit script if errors true
