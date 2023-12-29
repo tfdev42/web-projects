@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 
 // dbh is required in signup.inc.php
-function get_username(object $pdo, string $username) : object|false{
+function get_username(object $pdo, string $username) {
     $query =
     "SELECT username
     FROM users
@@ -27,7 +27,7 @@ function get_username(object $pdo, string $username) : object|false{
 }
 
 
-function get_email(object $pdo, string $email) : object|false{
+function get_email(object $pdo, string $email) {
     $query =
     "SELECT email
     FROM users
