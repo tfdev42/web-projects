@@ -1,5 +1,6 @@
 <?php
 
+
 $host = 'localhost';
 $dbname = '20231228_DK_signup';
 $dbusername = 'root';

@@ -15,7 +15,7 @@ function signup_inputs(){
     if(isset($_SESSION["signup_data"]["email"]) 
         && ! isset($_SESSION["errors_signup"]["invalid_email"])
         && ! isset($_SESSION["errors_signup"]["email_used"])){
-        echo '<input type="text" name="username" placeholder="Username" value="' . $_SESSION["signup_data"]["email"] . '">';
+        echo '<input type="text" name="email" placeholder="E-Mail" value="' . $_SESSION["signup_data"]["email"] . '">';
     } else {
         echo '<input type="text" name="email" placeholder="E-Mail">';
     }
