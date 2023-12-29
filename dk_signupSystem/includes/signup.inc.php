@@ -35,8 +35,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
 
         if($errors){
             $_SESSION["errors_signup"] = $errors;
-            header("Location: ../index.php");
             // print out errors on index page
+            header("Location: ../index.php");
+            // exit script if errors true
+            die();
         }
 
         // CEATE THE USER
