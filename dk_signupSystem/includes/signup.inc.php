@@ -38,6 +38,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
             header("Location: ../index.php");
             // print out errors on index page
         }
+
+        // CEATE THE USER
+        create_user($pdo, $username, $pwd, $email);
+
+        header("Location: ../index.php?signup=success");
+
+        // close down connections
+        $pdo = null;
+        $stmt = null;
+
+        die();
          
     } catch (PDOException $e) {
 
