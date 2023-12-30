@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         require_once "config_session.inc.php";
 
         if($errors){
-            $_SESSION["errors_signup"] = $errors;
+            $_SESSION["errors_login"] = $errors;
             // Login Form shouldn't preserve input value if wrong
 
             // print out errors on index page
@@ -59,7 +59,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         header("Location: ../index.php?login=success");
 
-
+        // BEST PRACTICE : CLOSE PDO AND STMT
+        $pdo = null;
+        $stmt = null;
+        die();
 
     } catch (PDOException $e) {
 

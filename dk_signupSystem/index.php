@@ -1,6 +1,7 @@
 <?php
 require_once 'includes/config_session.inc.php';
 require_once 'includes/signup_view.inc.php';
+require_once 'includes/login_view.inc.php';
 
 ?>
 
@@ -24,6 +25,10 @@ require_once 'includes/signup_view.inc.php';
             <button>Login</button>
         </form>
 
+        <?php
+        check_login_errors();
+        ?>
+
         <h3>Signup</h3>
 
         <form action="includes/signup.inc.php" method="post">
@@ -34,10 +39,14 @@ require_once 'includes/signup_view.inc.php';
         </form>
 
         <?php
-        check_signup_errors();
-        // VIEW model handels this
-        
+        check_signup_errors();// VIEW model handels this
         ?>
+
+        <h3>Logout</h3>
+
+        <form action="includes/logout.inc.php" method="post">
+            <button>Logout</button>
+        </form>
     </main>
 </body>
 </html>
