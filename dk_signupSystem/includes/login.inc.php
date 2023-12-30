@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         if($errors){
             $_SESSION["errors_signup"] = $errors;
-            // shouldn't preserve input value if wrong
+            // Login Form shouldn't preserve input value if wrong
 
             // print out errors on index page
             header("Location: ../index.php");
@@ -47,10 +47,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // IF USER COULD LOG IN >> UPDATE SESSION COOKIE
         // grab user_id and associate with session_id
         $newSessionId = session_create_id();
-        $sessionId = $newSessionId . $result["id"]; // APPEND THE USER'S ID
+        $sessionId = $newSessionId . "_" . $result["id"]; // APPEND THE USER'S ID
         session_id($sessionId); // SET SESSION ID TO THE NEWLY CREATED SESSION ID
         // since config_session.inc.php regenerates session_id every 30 minutes > have to change function too
 
+        $_SESSION["user_id"] = $result["id"];
+        $_SESSION["user_username"] = htmlspecialchars($result["username"]);
+
+        // reset session regen cookie
+        $_SESSION["last_regeneration"] = time();
+
+        header("Location: ../index.php?login=success");
 
 
 
