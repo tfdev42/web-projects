@@ -17,6 +17,12 @@ require_once 'includes/login_view.inc.php';
 <body>
     <main>
 
+        <h3>
+            <?php
+            output_username();
+            ?>
+        </h3>
+
         <h3>Login</h3>
 
         <form action="includes/login.inc.php" method="post">
