@@ -23,6 +23,8 @@ require_once 'includes/login_view.inc.php';
             ?>
         </h3>
 
+        <?php
+        if( ! isset($_SESSION["user_id"])){ ?>
         <h3>Login</h3>
 
         <form action="includes/login.inc.php" method="post">
@@ -30,6 +32,10 @@ require_once 'includes/login_view.inc.php';
             <input type="password" name="pwd" placeholder="Password">
             <button>Login</button>
         </form>
+
+        <?php } ?>
+
+        
 
         <?php
         check_login_errors();
