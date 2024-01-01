@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS 20240101_mvc_insurance;
-USE 20240101_mvc_insurance;
+CREATE DATABASE IF NOT EXISTS mvc_insurance_20240101;
+USE mvc_insurance_20240101;
 
 CREATE TABLE users (
     id INT NOT NULL AUTO_INCREMENT,
@@ -11,12 +11,10 @@ CREATE TABLE users (
     city VARCHAR(255) NOT NULL,
     country VARCHAR(255) NOT NULL,
     zip VARCHAR(255) NOT NULL,
-    role_id VARCHAR(100) NOT NULL,
+    role_id INT NOT NULL,
     payment_options_id INT,
-    PRIMARY KEY id,
-    UNIQUE KEY email,
-    FOREIGN KEY role_id REFERENCES user_roles(role_id) ON DELETE CASCADE,
-    FOREIGN KEY payment_options_id REFERENCES payment_options(option_id) ON DELETE CASCADE
+    PRIMARY KEY (id),
+    UNIQUE KEY (email)
 );
 
 CREATE TABLE user_roles (
@@ -41,16 +39,14 @@ INSERT INTO role_permissions (role, permission_name) VALUES
 CREATE TABLE user_has_role (
     user_id INT NOT NULL,
     role_id INT NOT NULL,
-    PRIMARY KEY (user_id, role_id),
-    FOREIGN KEY user_id REFERENCES users(id),
-    FOREIGN KEY role_id REFERENCES user_roles(role_id)
+    PRIMARY KEY (user_id, role_id)
 );
 
 
 CREATE TABLE payment_options (
     option_id INT PRIMARY KEY AUTO_INCREMENT,
     option_name VARCHAR(50) NOT NULL,
-    UNIQUE KEY option_name
+    UNIQUE KEY (option_name)
 );
 
 INSERT INTO payment_options (option_name) VALUES
@@ -63,8 +59,8 @@ CREATE TABLE product (
     name VARCHAR(255) NOT NULL,
     description VARCHAR(255) NOT NULL,
     price_per_minute DECIMAL(10,2) NOT NULL,    
-    PRIMARY KEY id,
-    UNIQUE KEY name
+    PRIMARY KEY (id),
+    UNIQUE KEY (name)
 );
 
 CREATE TABLE orders (
@@ -76,8 +72,19 @@ CREATE TABLE orders (
     status_name ENUM('pending', 'approved', 'denied') DEFAULT 'pending',
     comment TEXT,
     boat_registration_number VARCHAR(50) NOT NULL,
-    PRIMARY KEY id,
-    FOREIGN KEY customer_id REFERENCES users(id) ON DELETE CASCADE,
-    FOREIGN KEY product_id REFERENCES product(id) ON DELETE CASCADE
+    PRIMARY KEY (id)
 );
 
+
+-- ADD FOREIGN KEY CONSTRAINS AFTER TABLE CREATION
+ALTER TABLE users
+ADD FOREIGN KEY (role_id) REFERENCES user_roles(role_id) ON DELETE CASCADE,
+ADD FOREIGN KEY (payment_options_id) REFERENCES payment_options(option_id) ON DELETE CASCADE;
+
+ALTER TABLE user_has_role
+ADD FOREIGN KEY (user_id) REFERENCES users(id),
+ADD FOREIGN KEY (role_id) REFERENCES user_roles(role_id);
+
+ALTER TABLE orders
+ADD FOREIGN KEY (customer_id) REFERENCES users(id),
+ADD FOREIGN KEY (product_id) REFERENCES product(id);
