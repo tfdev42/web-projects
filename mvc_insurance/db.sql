@@ -1,5 +1,5 @@
 CREATE DATABASE IF NOT EXISTS 20240101_mvc_insurance;
-USE DATABASE 220240101_mvc_insurance;
+USE 20240101_mvc_insurance;
 
 CREATE TABLE users (
     id INT NOT NULL AUTO_INCREMENT,
@@ -14,9 +14,9 @@ CREATE TABLE users (
     role_id VARCHAR(100) NOT NULL,
     payment_options_id INT,
     PRIMARY KEY id,
-    UNIQUE KEY email (email),
-    FOREIGN KEY role_id REFERENCES user_roles(role_id) ON DELETE CASCADE;
-    FOREIGN KEY payment_options_id REFERENCES payment_options(option_id) ON DELETE CASCADE;
+    UNIQUE KEY email,
+    FOREIGN KEY role_id REFERENCES user_roles(role_id) ON DELETE CASCADE,
+    FOREIGN KEY payment_options_id REFERENCES payment_options(option_id) ON DELETE CASCADE
 );
 
 CREATE TABLE user_roles (
@@ -50,7 +50,7 @@ CREATE TABLE user_has_role (
 CREATE TABLE payment_options (
     option_id INT PRIMARY KEY AUTO_INCREMENT,
     option_name VARCHAR(50) NOT NULL,
-    UNIQUE KEY option_name (option_name)
+    UNIQUE KEY option_name
 );
 
 INSERT INTO payment_options (option_name) VALUES
@@ -64,7 +64,7 @@ CREATE TABLE product (
     description VARCHAR(255) NOT NULL,
     price_per_minute DECIMAL(10,2) NOT NULL,    
     PRIMARY KEY id,
-    UNIQUE KEY name (name)
+    UNIQUE KEY name
 );
 
 CREATE TABLE orders (
