@@ -1,10 +1,16 @@
+<?php
+// require_once "./includes/dbh.inc.php";
+?>
+
+
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Insurance Home</title>
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
 </head>
 <body>
     <main>
@@ -48,15 +54,6 @@
             <label>
                 <input type="radio" name="role" value="agent"> Agent
             </label>
-            <br>
-            <label>Payment Option</label>
-            <label>
-            <input type="radio" name="payment-type" value="1"> Bill 
-            </label>
-            <label>
-                <input type="radio" name="payment-type" value="2"> IBAN
-            </label>
-            <br>
             <button type="submit" name="bt_signup">Signup</button>        
         </form>
     </main>
