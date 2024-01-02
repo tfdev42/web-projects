@@ -88,3 +88,9 @@ ADD FOREIGN KEY (role_id) REFERENCES user_roles(role_id);
 ALTER TABLE orders
 ADD FOREIGN KEY (customer_id) REFERENCES users(id),
 ADD FOREIGN KEY (product_id) REFERENCES product(id);
+
+-- ADD USER ROLES
+INSERT INTO user_roles (role_name) VALUES
+    ('manager'),
+    ('agent'),
+    ('customer');

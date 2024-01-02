@@ -21,9 +21,33 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["role"])) {
         die();
     }
 
-    
+    if (isset($_POST["bt_signup"])){
+        $signupData = [];
+        $formFields = ["fname", "lname","email","pwd","street","city","country","zip", "paymentMethod"];
 
-    
+        foreach($formFields as $field){
+             $signupData[$field] = (isset($_POST[$field])) ? $_POST[$field] : null;
+        }
+
+        try {
+            require_once "./dbh.inc.php";
+            require_once "signup_model.inc.php";
+            require_once "signup_contr.inc.php";
+
+
+
+        } catch (PDOException $e) {
+            die("Query failed: " . $e->getMessage());
+        }
+
+        
+
+    }else {
+        header("Location: ../index.php");
+        die();
+    }
+    // Error handling
+
 
 
 
