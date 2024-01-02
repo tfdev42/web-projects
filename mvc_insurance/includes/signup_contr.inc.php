@@ -10,6 +10,7 @@ function is_input_empty(
     string $city,
     string $country,
     string $zip
+    string $role
 ) : bool {
 
 }
