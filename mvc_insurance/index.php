@@ -1,5 +1,10 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 require_once "./includes/config_session.inc.php";
+require_once "/opt/lampp/htdocs/web-projects/mvc_insurance/includes/signup.inc.php";
+require_once "./includes/signup_view.inc.php";
+
 ?>
 
 
@@ -14,6 +19,8 @@ require_once "./includes/config_session.inc.php";
 </head>
 <body>
     <main>
+
+        
         <h3>Login</h3>
 
         <form action="./includes/login.inc.php" method="post">
@@ -36,6 +43,20 @@ require_once "./includes/config_session.inc.php";
         <h3>Signup</h3>
 
         <form action="./includes/signup.inc.php" method="post">
+            <label>
+                <input type="radio" name="role" value="customer"> Customer
+            </label>
+            <label>
+                <input type="radio" name="role" value="manager"> Manager
+            </label>
+            <label>
+                <input type="radio" name="role" value="agent"> Agent
+            </label>
+            <br>
+            <button type="submit" name="bt_signup_role">Signup</button>
+        </form>
+
+        <form action="./includes/signup.inc.php" method="post">
             <input type="text" name="fname" placeholder="Firstname">
             <input type="text" name="lname" placeholder="Lastname">
             <input type="email" name="email" placeholder="Email">
@@ -44,17 +65,7 @@ require_once "./includes/config_session.inc.php";
             <input type="text" name="city" placeholder="City">
             <input type="text" name="country" placeholder="Country">
             <input type="text" name="zip" placeholder="ZIP">
-
-            <label>
-            <input type="radio" name="role" value="customer"> Customer
-            </label>
-            <label>
-                <input type="radio" name="role" value="manager"> Manager
-            </label>
-            <label>
-                <input type="radio" name="role" value="agent"> Agent
-            </label>
-            <button type="submit" name="bt_signup">Signup</button>        
+                    
         </form>
     </main>
     
