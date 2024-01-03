@@ -10,10 +10,5 @@ function is_input_empty(array $signupData, ?int $paymentMethod) : bool {
             return true;
         }
     }
-    if ($_SESSION["role_signup"] === 'customer') {
-        empty($_POST["payment_option"]) ?  true : false;
-    }
-    
-    $signupData["paymentMethod"] = $_POST["payment_option"];
-
+    return false;
 }

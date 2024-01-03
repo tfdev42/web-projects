@@ -16,12 +16,12 @@ require_once "./includes/signup_view.inc.php";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Insurance Home</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css"> -->
 </head>
 <body>
     <main>
         <div class="form-wrapper">
-            <h3>Login</ h3>
+            <h3>Login</h3>
 
             <form action="./includes/login.inc.php" method="post">
                 <label for="login_userid">UserID</label>
@@ -53,6 +53,11 @@ require_once "./includes/signup_view.inc.php";
             } ?><br>
             <?php isset($_SESSION["role_signup"]) ? display_signup_form() : ""; ?>
         </div>
+        <br>
+        <?php check_signup_errors(); 
+        var_dump($_SESSION["errors_signup"]);?>
+        
+        
         
 
         

@@ -2,6 +2,21 @@
 
 declare(strict_types=1);
 
+function check_signup_errors(){
+    if (isset($_SESSION["errors_signup"])) {
+        $errors = $_SESSION["errors_signup"];
+
+        echo "<br>";
+        // echo var_dump($_SESSION["errors_signup"]); 
+        foreach ($errors as $error){
+            echo '<p class="form-error">' . $error . '</p>';
+        }
+
+        unset($_SESSION["errors_signup"]);
+        
+    }
+}
+
 
 function display_reset_form(){ ?>
     <form action="index.php" method="post">
@@ -54,8 +69,8 @@ function display_payment_method() {
     ?> <label>
         Payment Option:
         <select name="payment_option">
-            <option value="bill">Bill</option>
-            <option value="IBAN">IBAN</option>
+            <option value="1">Bill</option>
+            <option value="2">IBAN</option>
         </select>
     </label>
     <?php }

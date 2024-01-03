@@ -94,3 +94,4 @@ INSERT INTO user_roles (role_name) VALUES
     ('manager'),
     ('agent'),
     ('customer');
+
