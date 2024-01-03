@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS mvc_insurance_20240101;
-USE mvc_insurance_20240101;
+CREATE DATABASE IF NOT EXISTS mvc_insurance_20240103_v2;
+USE mmvc_insurance_20240103_v2;
 
 CREATE TABLE users (
     id INT NOT NULL AUTO_INCREMENT,
@@ -12,16 +12,23 @@ CREATE TABLE users (
     country VARCHAR(255) NOT NULL,
     zip VARCHAR(255) NOT NULL,
     role_id INT NOT NULL,
-    payment_options_id INT,
+    payment_options_id INT DEFAULT NULL,
+    iban VARCHAR(100) DEFAULT NULL,
     PRIMARY KEY (id),
     UNIQUE KEY (email)
 );
 
 CREATE TABLE user_roles (
-    role_id INT NOT NULL AUTO_INCREMENT,
+    role_id INT NOT NULL,
     role_name VARCHAR(50) NOT NULL UNIQUE,
     PRIMARY KEY (role_id)
 );
+
+-- ADD USER ROLES
+INSERT INTO user_roles (role_name) VALUES
+    ('manager'),
+    ('agent'),
+    ('customer');
 
 CREATE TABLE role_permissions (
     role VARCHAR(50) NOT NULL,
@@ -44,7 +51,7 @@ CREATE TABLE user_has_role (
 
 
 CREATE TABLE payment_options (
-    option_id INT PRIMARY KEY AUTO_INCREMENT,
+    option_id INT PRIMARY KEY,
     option_name VARCHAR(50) NOT NULL,
     UNIQUE KEY (option_name)
 );
@@ -89,10 +96,5 @@ ALTER TABLE orders
 ADD FOREIGN KEY (customer_id) REFERENCES users(id),
 ADD FOREIGN KEY (product_id) REFERENCES product(id);
 
--- ADD USER ROLES
-INSERT INTO user_roles (role_name) VALUES
-    ('manager'),
-    ('agent'),
-    ('customer');
 
 
