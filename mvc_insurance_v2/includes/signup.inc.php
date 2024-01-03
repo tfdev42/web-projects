@@ -17,19 +17,27 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     if (isset($_POST["bt_signup"]) && isset($_SESSION["role_signup"])) {
-        // $signupData = [];
-        $role = $_SESSION["role_signup"];
-        $signupFieldsReq = ["fname", "lname","email","pwd","street","city","country","zip"];
+
+        $signupFieldsOpt = [];
         
-        if (isset($_SESSION["role_signup"]) == "customer"){
-            $signupFieldsOpt = ["payment_option", "iban"];
-            $signupFieldsReq = array_merge($signupFieldsReq, $signupFieldsOpt);
+        if ($_SESSION["role_signup"] === "customer"){
+            if ($_POST["payment_option"] === "iban"){
+                $signupFieldsOpt = ["payment_option", "iban"];
+            } else {
+                $signupFieldsOpt = ["payment_option"];
+            }            
         }
         
+        $signupFieldsReq = ["fname", "lname","email","pwd","street","city","country","zip"];
+
+        $signupFieldsReq = array_merge($signupFieldsReq, $signupFieldsOpt);
+
         foreach($signupFieldsReq as $field){
             $signupData[$field] = $_POST[$field];
         }
-        $signupData["role"] = $role;
+
+        $signupData["role"] = $_SESSION["role_signup"];        
+        
         
 
         try {
