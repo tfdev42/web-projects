@@ -44,9 +44,7 @@ require_once "./includes/signup_view.inc.php";
         </div>
 
         <section><?php check_signup_errors(); ?></section>
-        <section><?php print_r($_SESSION["role_signup"]) ?></section>
-        <section><?php var_dump($_SESSION["signup_data"]) ?></section>
-
+        
 
 
 

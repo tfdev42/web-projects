@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (isset($_POST["bt_signup"]) && isset($_SESSION["role_signup"])) {
 
         $signupFieldsOpt = [];
-        
+
         if ($_SESSION["role_signup"] === "customer"){
             if ($_POST["payment_option"] === "iban"){
                 $signupFieldsOpt = ["payment_option", "iban"];
@@ -50,7 +50,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $errors["empty_input"] = "Fill in all fields!";
             }
            
+            if(is_email_invalid($signupData["email"])){
+                $errors["email_invalid"] = "Add a valid Email!";
+            }
 
+            // and other input handling functions come here
 
             if($errors){
                 $_SESSION["errors_signup"] = $errors;
