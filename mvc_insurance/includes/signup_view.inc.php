@@ -73,4 +73,5 @@ function display_payment_method() {
             <option value="2">IBAN</option>
         </select>
     </label>
+    <input type="text" name="iban" placeholder="IBAN">
     <?php }

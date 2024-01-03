@@ -1,3 +1,12 @@
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+
+require_once "./includes/config_session.inc.php";
+require_once "./includes/signup_view.inc.php";
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,13 +33,14 @@
         <div class="form-wrapper">
             <h3>Signup</h3>
 
-            <form action="./includes/signup.inc.php" method="post">
-                <?php display_signup_role_select(); ?>
-            </form>
-
-            <form action="./includes/signup.inc.php" method="post">
-                <?php display_signup_form(); ?>
-            </form>
+            <?php if(!isset($_SESSION["role_signup"])){
+                display_signup_role_select();
+            } else {
+                echo "<h4>You are signing up as " . htmlspecialchars($_SESSION["role_signup"]) . "</h4><br>";
+                display_reset_form();
+            } ?>
+            <br>
+            <?php isset($_SESSION["role_signup"]) ? display_signup_form() : ""; ?>
         </div>
 
 
