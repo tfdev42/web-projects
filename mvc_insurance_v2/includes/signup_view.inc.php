@@ -20,7 +20,7 @@ function display_reset_form(){ ?>
     </form> <?php
     if(isset($_POST["bt_reset"])){
         unset($_SESSION["role_signup"]);
-
+        unset($_SESSION["signup_data"]);
         header("Location: index.php");
         exit();
     }

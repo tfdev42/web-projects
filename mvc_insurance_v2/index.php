@@ -36,7 +36,7 @@ require_once "./includes/signup_view.inc.php";
             <?php if(!isset($_SESSION["role_signup"])){
                 display_signup_role_select();
             } else {
-                echo "<h4>You are signing up as " . htmlspecialchars($_SESSION["role_signup"]) . "</h4><br>";
+                echo "<h4>You are signing up as " . htmlspecialchars($_SESSION["role_signup"]) . "</h4>";
                 display_reset_form();
             } ?>
             <br>
@@ -44,6 +44,8 @@ require_once "./includes/signup_view.inc.php";
         </div>
 
         <section><?php check_signup_errors(); ?></section>
+        <section><?php print_r($_SESSION["role_signup"]) ?></section>
+        <section><?php var_dump($_SESSION["signup_data"]) ?></section>
 
 
 

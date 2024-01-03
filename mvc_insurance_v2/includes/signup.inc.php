@@ -1,9 +1,12 @@
 <?php
 declare(strict_types=1);
+require_once "./config_session.inc.php";
+
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
-require_once "./config_session.inc.php";
+
+
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
@@ -13,23 +16,27 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit();
     }
 
-    if (isset($_POST["bt_signup"])) {
-        $signupData = [];
+    if (isset($_POST["bt_signup"]) && isset($_SESSION["role_signup"])) {
+        // $signupData = [];
+        $role = $_SESSION["role_signup"];
         $signupFieldsReq = ["fname", "lname","email","pwd","street","city","country","zip"];
         
-        if ($_SESSION["role_signup"] === 'customer'){
+        if (isset($_SESSION["role_signup"]) == "customer"){
             $signupFieldsOpt = ["payment_option", "iban"];
             $signupFieldsReq = array_merge($signupFieldsReq, $signupFieldsOpt);
         }
         
         foreach($signupFieldsReq as $field){
-            $signupData[$field] = isset($_POST[$field]) ? $_POST[$field] : "";
+            $signupData[$field] = $_POST[$field];
         }
+        $signupData["role"] = $role;
+        
 
         try {
             require_once "dbh.inc.php";
             require_once "signup_model.inc.php";
             require_once "signup_contr.inc.php";
+            
 
             if(is_input_empty($signupData)){
                 $errors["empty_input"] = "Fill in all fields!";
