@@ -1,6 +1,19 @@
 <?php
 declare(strict_types=1);
 
+
+function check_signup_errors() {
+    if(isset($_SESSION["errors_signup"])){
+        $errors = $_SESSION["errors_signup"];
+        foreach ($errors as $error){
+            echo '<p class="form-error">';
+            echo htmlspecialchars($error);
+            echo '</p><br>';
+        }
+    }
+    unset($_SESSION["errors_signup"]);
+}
+
 function display_reset_form(){ ?>
     <form action="index.php" method="post">
         <button type="submit" name="bt_reset">Reset</button>

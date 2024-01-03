@@ -43,6 +43,8 @@ require_once "./includes/signup_view.inc.php";
             <?php isset($_SESSION["role_signup"]) ? display_signup_form() : ""; ?>
         </div>
 
+        <section><?php check_signup_errors(); ?></section>
+
 
 
 
