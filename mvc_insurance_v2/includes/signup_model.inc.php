@@ -18,7 +18,7 @@ function set_user(object $pdo, array $signupData){
 
     foreach ($signupData as $key => $value) {
         // if $key === "pwd" $value = $hashedPwd else...
-        $stmt->bindValue(":$key", $value);
+        $stmt->bindParam(":$key", $value);
     }
     $stmt->execute();
 
