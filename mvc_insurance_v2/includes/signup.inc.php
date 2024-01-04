@@ -59,6 +59,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $errors["email_invalid"] = "Add a valid Email!";
             }
 
+            if(is_email_taken($pdo, $signupData["email"])){
+                $errors["email_taken"] = "Email is already registered";
+            }
+
             // and other input handling functions come here
 
             if($errors){

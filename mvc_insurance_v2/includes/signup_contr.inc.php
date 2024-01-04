@@ -1,6 +1,19 @@
 <?php
 declare(strict_types=1);
 
+
+
+function is_email_taken(object $pdo, string $email) : bool {
+    if(get_email($pdo, $email)){
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+
+
 function unset_signup_form(){
     unset($_SESSION["role_signup"]);
     unset($_SESSION["signup_data"]);
@@ -48,22 +61,6 @@ function switch_role_ID_to_Str(array &$signupData) {
             break;
     }
 }
-
-
-// function get_role_id_from_signup() {
-
-//     if($_SESSION["role_signup"] === "customer"){
-//         return 3;
-//     }
-    
-//     if($_SESSION["role_signup"] === "manager"){
-//         return 1;
-//     }
-
-//     if($_SESSION["role_signup"] === "agent"){
-//         return 2;
-//     }    
-// }
 
 
 function is_input_empty(array $signupData){
