@@ -31,8 +31,9 @@ require_once "./includes/signup_view.inc.php";
         </div>
 
         <div class="form-wrapper">
+        
             <h3>Signup</h3>
-
+            
             <?php if(!isset($_SESSION["role_signup"])){
                 display_signup_role_select();
             } else {
@@ -45,7 +46,8 @@ require_once "./includes/signup_view.inc.php";
 
         <section><?php check_signup_errors(); ?></section>
         <!-- <?php var_dump($_SESSION["signup_data"]);  ?>
-        <?php var_dump($_SESSION["test_value"]);  ?> -->
+        <?php var_dump($_SESSION["columns"]);  ?>
+        <?php var_dump($_SESSION["placeholders"]);  ?> -->
         
 
 

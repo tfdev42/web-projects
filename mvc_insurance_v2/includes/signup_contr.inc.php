@@ -1,6 +1,17 @@
 <?php
 declare(strict_types=1);
 
+function unset_signup_form(){
+    unset($_SESSION["role_signup"]);
+    unset($_SESSION["signup_data"]);
+    exit();
+}
+
+
+function create_user(object $pdo, array $signupData){
+    set_user($pdo, $signupData);
+}
+
 function switch_role_Str_to_ID(array &$signupData) {
     switch ($signupData["role_id"]) {
         case "manager":

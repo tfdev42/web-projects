@@ -21,12 +21,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $signupFieldsOpt = [];
 
         if ($_SESSION["role_signup"] === "customer"){
-            if ($_POST["payment_option"] === "2"){
-                $signupFieldsOpt = ["payment_option", "iban"];
+            if ($_POST["payment_options_id"] === "2"){
+                $signupFieldsOpt = ["payment_options_id", "iban"];
             } else {
-                $signupFieldsOpt = ["payment_option"];
+                $signupFieldsOpt = ["payment_options_id"];
             }            
         }
+
+        // if ($_SESSION["role_signup"] !== "customer"){
+        //     $signupFieldsOpt["payment_options_id"] = null;
+        //     $signupFieldsOpt["iban"] = null;
+        // }
         
         $signupFieldsReq = ["fname", "lname","email","pwd","street","city","country","zip"];
 
@@ -67,6 +72,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 header("Location: ../index.php");
                 die();
             }
+
+            // create the User
+            create_user($pdo, $signupData);
+
+            header("Location: ../index.php?signup=success");
+            $pdo = null;
+            $stmt = null;
+            unset_signup_form();
+            die();
 
 
         } catch (PDOException $e) {

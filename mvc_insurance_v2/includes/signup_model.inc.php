@@ -8,7 +8,7 @@ function set_user(object $pdo, array $signupData){
     $columns = implode(", ", array_keys($signupData));
 
     // values
-    $placeholders = ":" . implode(", ", array_keys($signupData));
+    $placeholders = ":" . implode(", :", array_keys($signupData));
 
     $query = "INSERT INTO users ($columns) VALUES ($placeholders)";
 
@@ -18,7 +18,7 @@ function set_user(object $pdo, array $signupData){
 
     foreach ($signupData as $key => $value) {
         // if $key === "pwd" $value = $hashedPwd else...
-        $stmt->bindParam(":$key", $value);
+        $stmt->bindValue(":$key", $value);
     }
     $stmt->execute();
 

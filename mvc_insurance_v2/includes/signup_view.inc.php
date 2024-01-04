@@ -2,6 +2,9 @@
 declare(strict_types=1);
 
 
+
+
+
 function check_signup_errors() {
     if(isset($_SESSION["errors_signup"])){
         $errors = $_SESSION["errors_signup"];
@@ -57,7 +60,7 @@ function display_payment_method() {
     // <!-- Display payment option field only for customers -->
     ?> <label>
         Payment Option:
-        <select name="payment_option">
+        <select name="payment_options_id">
             <option value="1">Bill</option>
             <option value="2">IBAN</option>
         </select>
