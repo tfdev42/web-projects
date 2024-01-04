@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $signupFieldsOpt = [];
 
         if ($_SESSION["role_signup"] === "customer"){
-            if ($_POST["payment_option"] === "iban"){
+            if ($_POST["payment_option"] === "2"){
                 $signupFieldsOpt = ["payment_option", "iban"];
             } else {
                 $signupFieldsOpt = ["payment_option"];
@@ -36,8 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $signupData[$field] = $_POST[$field];
         }
 
-        $signupData["role"] = $_SESSION["role_signup"];        
-        
+        $signupData["role_id"] = $_SESSION["role_signup"];
         
 
         try {
@@ -45,6 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             require_once "signup_model.inc.php";
             require_once "signup_contr.inc.php";
             
+            switch_role_Str_to_ID($signupData);
 
             if(is_input_empty($signupData)){
                 $errors["empty_input"] = "Fill in all fields!";
@@ -58,10 +58,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             if($errors){
                 $_SESSION["errors_signup"] = $errors;
-                $errors = [];
+                $errors = array();
 
+                switch_role_ID_to_Str($signupData);
                 $_SESSION["signup_data"] = $signupData;
-                $signupData = [];
+                $signupData = array();
 
                 header("Location: ../index.php");
                 die();

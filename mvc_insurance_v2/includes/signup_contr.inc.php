@@ -1,6 +1,43 @@
 <?php
 declare(strict_types=1);
 
+function switch_role_Str_to_ID(array &$signupData) {
+    switch ($signupData["role_id"]) {
+        case "manager":
+            $signupData["role_id"] = 1;
+            break;
+        case "agent":
+            $signupData["role_id"] = 2;
+            break;
+        case "customer":
+            $signupData["role_id"] = 3;
+            break;
+        
+        default:
+            
+            break;
+    }
+    // $_SESSION["test_value"] = $signupData["role_id"];
+}
+
+
+function switch_role_ID_to_Str(array &$signupData) {
+    switch ($signupData["role_id"]) {
+        case "1":
+            $signupData["role_id"] = "manager";
+            break;
+        case "2":
+            $signupData["role_id"] = "agent";
+            break;
+        case "3":
+            $signupData["role_id"] = "customer";
+            break;
+        
+        default:            
+            break;
+    }
+}
+
 
 // function get_role_id_from_signup() {
 

@@ -44,6 +44,8 @@ require_once "./includes/signup_view.inc.php";
         </div>
 
         <section><?php check_signup_errors(); ?></section>
+        <!-- <?php var_dump($_SESSION["signup_data"]);  ?>
+        <?php var_dump($_SESSION["test_value"]);  ?> -->
         
 
 

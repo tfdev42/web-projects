@@ -58,8 +58,8 @@ function display_payment_method() {
     ?> <label>
         Payment Option:
         <select name="payment_option">
-            <option value="bill">Bill</option>
-            <option value="iban">IBAN</option>
+            <option value="1">Bill</option>
+            <option value="2">IBAN</option>
         </select>
     </label>
     <input type="text" name="iban" placeholder="IBAN">
