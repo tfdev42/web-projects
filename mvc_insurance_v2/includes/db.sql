@@ -16,6 +16,8 @@ CREATE TABLE users (
     iban VARCHAR(100) DEFAULT NULL,
     PRIMARY KEY (id),
     UNIQUE KEY (email)
+    -- FOREIGN KEY (role_id) REFERENCES user_roles(role_id) ON DELETE CASCADE,
+    -- FOREIGN KEY (payment_options_id) REFERENCES payment_options(option_id) ON DELETE CASCADE;
 );
 
 CREATE TABLE user_roles (
@@ -34,6 +36,7 @@ CREATE TABLE role_permissions (
     role VARCHAR(50) NOT NULL,
     permission_name VARCHAR(255) NOT NULL,
     PRIMARY KEY (role, permission_name)
+    -- FOREIGN KEY (role) REFERENCES user_roles(role_name) ON DELETE CASCADE;
 );
 
 INSERT INTO role_permissions (role, permission_name) VALUES
@@ -47,6 +50,8 @@ CREATE TABLE user_has_role (
     user_id INT NOT NULL,
     role_id INT NOT NULL,
     PRIMARY KEY (user_id, role_id)
+    -- FOREIGN KEY (user_id) REFERENCES users(id),
+    -- FOREIGN KEY (role_id) REFERENCES user_roles(role_id);
 );
 
 
@@ -80,6 +85,8 @@ CREATE TABLE orders (
     comment TEXT,
     boat_registration_number VARCHAR(50) NOT NULL,
     PRIMARY KEY (id)
+    -- FOREIGN KEY (customer_id) REFERENCES users(id),
+    -- FOREIGN KEY (product_id) REFERENCES product(id);
 );
 
 
@@ -96,5 +103,7 @@ ALTER TABLE orders
 ADD FOREIGN KEY (customer_id) REFERENCES users(id),
 ADD FOREIGN KEY (product_id) REFERENCES product(id);
 
+ALTER TABLE role_permissions
+ADD FOREIGN KEY (role) REFERENCES user_roles(role_name) ON DELETE CASCADE;
 
 

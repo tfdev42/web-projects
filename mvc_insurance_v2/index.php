@@ -9,7 +9,7 @@ require_once "./includes/signup_view.inc.php";
 if($_SERVER["REQUEST_METHOD"] === "POST" 
     && isset($_GET["login"]) 
     && $_GET["login"] === "success"){
-    header("Location: ./dashboard.php");
+    header("Location: dashboard.php");
     die();
 }
 

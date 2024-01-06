@@ -4,6 +4,7 @@ ini_set('display_errors', '1');
 
 require_once "./includes/config_session.inc.php";
 require_once "./includes/dashboard.inc.php";
+require_once "./includes/dashboard_view.inc.php";
 
 ?>
 
@@ -17,7 +18,8 @@ require_once "./includes/dashboard.inc.php";
 </head>
 <body>
     <main>
-        <?php var_dump($_SESSION["user_id"]); ?>
+        <?php var_dump($_SESSION["user_permissions"]); ?>
+        <?php var_dump($_SESSION["user_role"]); ?>
     </main>
 </body>
 </html>
