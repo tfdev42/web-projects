@@ -27,11 +27,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $signupFieldsOpt = ["payment_options_id"];
             }            
         }
-
-        // if ($_SESSION["role_signup"] !== "customer"){
-        //     $signupFieldsOpt["payment_options_id"] = null;
-        //     $signupFieldsOpt["iban"] = null;
-        // }
         
         $signupFieldsReq = ["fname", "lname","email","pwd","street","city","country","zip"];
 

@@ -6,6 +6,12 @@ require_once "./includes/config_session.inc.php";
 require_once "./includes/signup_view.inc.php";
 require_once "./includes/login_view.inc.php";
 
+if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_GET["login"]) && $_GET["login"] === "success"){
+    header("Location: ./dashboard.php");
+    die();
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +37,7 @@ require_once "./includes/login_view.inc.php";
             </form>
         </div>
         <section><?php check_login_errors(); ?></section>
-        <?php var_dump($_SESSION["test_login"]);  ?>
+        <?php var_dump($_SESSION["redirect"]);  ?>
         
 
         <div class="form-wrapper">
