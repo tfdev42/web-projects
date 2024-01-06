@@ -4,6 +4,7 @@ ini_set('display_errors', '1');
 
 require_once "./includes/config_session.inc.php";
 require_once "./includes/signup_view.inc.php";
+require_once "./includes/login_view.inc.php";
 
 ?>
 
@@ -21,7 +22,7 @@ require_once "./includes/signup_view.inc.php";
 
             <form action="./includes/login.inc.php" method="post">
                 <input type="text"
-                        name="userid"
+                        name="id"
                         placeholder="UserID">
                 <input type="password"
                         name="pwd"
@@ -29,6 +30,9 @@ require_once "./includes/signup_view.inc.php";
                 <button type="submit" name="bt_login">Login</button>
             </form>
         </div>
+        <section><?php check_login_errors(); ?></section>
+        <?php var_dump($_SESSION["test_login"]);  ?>
+        
 
         <div class="form-wrapper">
         

@@ -3,7 +3,13 @@ declare(strict_types=1);
 
 
 function is_password_wrong(string $pwd, string $hashedPwd) : bool {
-    if ( ! password_verify($pwd, $hashedPwd)){
+    // if ( ! password_verify($pwd, $hashedPwd)){
+    //     return true;
+    // } else {
+    //     return false;
+    // }
+    // PW hash disabled for testing purposes
+    if ( $pwd !== $hashedPwd){
         return true;
     } else {
         return false;
@@ -16,4 +22,16 @@ function is_username_wrong(bool|array $result) : bool{
     } else {
         return false;
     }
+}
+
+function is_input_empty(string $userid, string $pwd){
+    if( ! isset($userid)
+        || empty($userid)
+        || empty($pwd)
+        || ! isset($pwd)){
+            return true;
+        }
+        else {
+            return false;
+        }
 }

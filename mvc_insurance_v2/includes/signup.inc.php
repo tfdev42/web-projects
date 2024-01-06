@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $signupFieldsReq = array_merge($signupFieldsReq, $signupFieldsOpt);
 
         foreach($signupFieldsReq as $field){
-            $signupData[$field] = $_POST[$field];
+            $signupData[$field] = stripslashes(trim($_POST[$field]));
         }
 
         $signupData["role_id"] = $_SESSION["role_signup"];
