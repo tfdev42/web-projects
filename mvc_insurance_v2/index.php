@@ -4,8 +4,9 @@ ini_set('display_errors', '1');
 
 require_once "./includes/config_session.inc.php";
 
-if(isset($_SESSION["user_id"])){
-    header("Location: http://localhost/web-projects/mvc_insurance_v2/dashboard.php");
+if(isset($_GET["login"]) && $_GET["login"] === "success" 
+    || isset($_SESSION["user_id"])){
+    header("Location: dashboard.php");
     die();
 }
 

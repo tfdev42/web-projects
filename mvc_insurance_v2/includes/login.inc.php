@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["bt_login"])) {
 
         $_SESSION["user_id"] = $result["id"];
 
-        header("Location: ../index.php");
+        header("Location: ../index.php?login=success");
 
         $pdo = null;
         $stmt = null;

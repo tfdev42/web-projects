@@ -4,6 +4,8 @@ ini_set('display_errors', '1');
 
 require_once "./includes/config_session.inc.php";
 require_once "./includes/dashboard.inc.php";
+require_once "./includes/dashboard_view.inc.php";
+
 ?>
 
 <!DOCTYPE html>
@@ -11,13 +13,12 @@ require_once "./includes/dashboard.inc.php";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dashboard</title>
 </head>
 <body>
-    <main>
-        <h3>Dashboard</h3>
-        
-        
-    </main>
+    <h3>Welcome to the Dashboard</h3>
+    <?php var_dump($_SESSION["user_id"]) ?>
+    <?php var_dump($_SESSION["session_user"]) ?>
+    <?php var_dump($user) ?>
 </body>
 </html>

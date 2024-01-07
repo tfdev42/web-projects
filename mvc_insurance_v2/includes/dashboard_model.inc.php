@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-function get_user_by_id(object $pdo, int $userId) : array | false {
+function get_user_by_id(object $pdo, $userId) : array | false {
     $query =
     "SELECT *
     FROM users
