@@ -3,15 +3,16 @@ error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
 require_once "./includes/config_session.inc.php";
+
+if(isset($_SESSION["user_id"])){
+    header("Location: http://localhost/web-projects/mvc_insurance_v2/dashboard.php");
+    die();
+}
+
+
 require_once "./includes/login_view.inc.php";
 require_once "./includes/signup_view.inc.php";
 
-if($_SERVER["REQUEST_METHOD"] === "POST" 
-    && isset($_GET["login"]) 
-    && $_GET["login"] === "success"){
-    header("Location: dashboard.php");
-    die();
-}
 
 ?>
 
@@ -60,6 +61,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"
         <!-- <?php var_dump($_SESSION["signup_data"]);  ?>
         <?php var_dump($_SESSION["columns"]);  ?>
         <?php var_dump($_SESSION["placeholders"]);  ?> -->
+        <?php var_dump($_SESSION["user_id"]);  ?>
         
 
 

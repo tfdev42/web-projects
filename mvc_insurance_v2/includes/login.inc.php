@@ -39,18 +39,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["bt_login"])) {
 
         
 
-        // add user id to session id and regenerate session_id
-        $newSessionId = session_id() . "_" . $result["id"];
+        // // add user id to session id and regenerate session_id
+        // $newSessionId = session_id() . "_" . $result["id"];
 
-        // set new session_id
-        session_id($newSessionId);
+        // // set new session_id
+        // session_id($newSessionId);
 
-        //regenerate session_id
-        session_regenerate_id(true);
+        // //regenerate session_id
+        // session_regenerate_id(true);
 
         $_SESSION["user_id"] = $result["id"];
 
-        header("Location: ../dashboard.php");
+        header("Location: ../index.php");
 
         $pdo = null;
         $stmt = null;
