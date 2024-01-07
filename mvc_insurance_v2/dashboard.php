@@ -16,14 +16,21 @@ require_once "./includes/dashboard_view.inc.php";
     <title>Dashboard</title>
 </head>
 <body>
-    <?php isset($_SESSION["user_id"]) ? include "./header.php" : ''; ?>
+    <?php isset($_SESSION["user_id"]) ? include "./includes/header.inc.php" : ''; ?>
     <main>
+        <div>
         <h3>Welcome to the <?php echo htmlspecialchars($_SESSION["user_role"]); ?> Dashboard</h3>
-        <?php var_dump($_SESSION["user_id"]) ?>
-        <?php var_dump($userId) ?>
-        <?php var_dump($_SESSION["user"]) ?>
-        <p><?php var_dump($_SESSION["user_role"]) ?></p>
-        <p><?php var_dump($_SESSION["user_permissions"]) ?></p>
+        <section><?php if ($_SESSION["user_role"] === "manager") { ?>
+            <form action="./dashboard.php" method="post">
+                <button type="submit" name="bt_product_add">Add Product</button>
+            </form>
+            <?php } ?></section>
+        <section><?php isset($_POST["bt_product_add"]) ? display_product_form() : ""; ?></section>
+        </div>
+            <?php var_dump ($_SESSION["products"]); ?>
+        <div>
+
+        </div>
     </main>
     
     

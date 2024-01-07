@@ -21,7 +21,13 @@ if ( ! empty([$_SESSION["user_id"]])){
         if ($user) {
             $_SESSION["user_permissions"] = get_user_role_permissions($user);
         }
-        
+
+        $products = get_products($pdo);
+        if ($products) {
+            $_SESSION["products"] = $products;
+        } else {
+            $_SESSION["products"] = "no products yet!";
+        }
 
     } catch (PDOException $e) {
         die("User query failed: " . $e->getMessage());

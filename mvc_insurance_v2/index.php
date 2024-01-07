@@ -40,8 +40,7 @@ require_once "./includes/signup_view.inc.php";
             </form>
         </div>
         <section><?php check_login_errors(); ?></section>
-        <?php if (isset($_GET)) var_dump($_GET);
-        ?>
+        
         
 
         <div class="form-wrapper">
@@ -59,10 +58,6 @@ require_once "./includes/signup_view.inc.php";
         </div>
 
         <section><?php check_signup_errors(); ?></section>
-        <!-- <?php var_dump($_SESSION["signup_data"]);  ?>
-        <?php var_dump($_SESSION["columns"]);  ?>
-        <?php var_dump($_SESSION["placeholders"]);  ?> -->
-        <?php var_dump($_SESSION["user_id"]);  ?>
         
 
 
