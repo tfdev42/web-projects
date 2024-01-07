@@ -19,19 +19,21 @@ function get_user_role(array $user){
 }
 
 function get_user_role_permissions(array $user){
-    $result = "view_dashboard";
+    $permissions = array(
+        "view_dashboard" => true,
+        "place_order" => false,
+        "manage_inventory" => false
+    );
 
     switch ($user["role_id"]){
         case "1":
-            $result = "manage_inventory";
-            break;
-        case "2":
+            $permissions["manage_inventory"] = true;
             break;
         case "3":
-            $result = "place_order";
+            $permissions["place_order"] = true;
             break;
         default:
             break;
     }
-    return $result;
+    return $permissions;
 }

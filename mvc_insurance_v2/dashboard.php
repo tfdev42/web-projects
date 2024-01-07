@@ -16,9 +16,16 @@ require_once "./includes/dashboard_view.inc.php";
     <title>Dashboard</title>
 </head>
 <body>
-    <h3>Welcome to the Dashboard</h3>
-    <?php var_dump($_SESSION["user_id"]) ?>
-    <?php var_dump($_SESSION["session_user"]) ?>
-    <?php var_dump($user) ?>
+    <?php isset($_SESSION["user_id"]) ? include "./header.php" : ''; ?>
+    <main>
+        <h3>Welcome to the <?php echo htmlspecialchars($_SESSION["user_role"]); ?> Dashboard</h3>
+        <?php var_dump($_SESSION["user_id"]) ?>
+        <?php var_dump($userId) ?>
+        <?php var_dump($_SESSION["user"]) ?>
+        <p><?php var_dump($_SESSION["user_role"]) ?></p>
+        <p><?php var_dump($_SESSION["user_permissions"]) ?></p>
+    </main>
+    
+    
 </body>
 </html>
