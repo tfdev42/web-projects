@@ -1,25 +1,26 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 require_once "./config_session.inc.php";
 
-if ($_SERVER["REQUEST_METHOD"] === "POST"){
+if (isset($_POST["bt_product_order"])){
+    $_SESSION["product_id"] = $_POST["product_id"];
+
     try {
         require_once "./dbh.inc.php";
-        require_once "./orders_model.inc.php";
+        require_once "./order_model.inc.php";
 
+        order_product($pdo, $_SESSION["product_id"], $_SESSION["user_id"]);
 
-        if($_SESSION["user_role"] === "customer"){
-            $_SESSION["orders"] = get_customer_orders($pdo, $_SESSION[user_id]);
-        }
+        $pdo = null;
+        $stmt = null;
+        $_SESSION["product_id"] = null;
+        header("Location: ../dashboard.php");
 
-        if($_SESSION["user_role"] === "agent"){
-            $_SESSION["orders"] = get_agent_orders($pdo);
-        }
+        
+
 
     } catch (PDOException $e) {
         die("Query failed: " . $e->getMessage());
     }
-
-} else {
-    header("Location: ../dashboard.php");
-    die();
 }

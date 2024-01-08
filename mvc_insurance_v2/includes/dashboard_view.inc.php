@@ -23,6 +23,14 @@ function display_products(array $products) {
                         </form>
                     </td>
                 <?php } ?>
+            <?php if($_SESSION["user_role"] === "customer") { ?> 
+                <td>
+                    <form action="./includes/orders.inc.php" method="post">
+                        <input type="hidden" name="product_id" value="<?php echo ($product["id"]); ?>">
+                        <button type="submit" name="bt_product_order">Order</button>
+                    </form>
+                </td>
+            <?php } ?>
         </tr>
     <?php }
     echo "</table>";
