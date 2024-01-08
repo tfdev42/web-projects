@@ -15,9 +15,8 @@ if (isset($_POST["bt_product_order"])){
         $pdo = null;
         $stmt = null;
         $_SESSION["product_id"] = null;
-        header("Location: ../dashboard.php");
 
-        
+        header("Location: ../dashboard.php");       
 
 
     } catch (PDOException $e) {
