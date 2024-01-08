@@ -27,7 +27,7 @@ require_once "./includes/dashboard_view.inc.php";
             <?php } ?></section>
         <section><?php isset($_POST["bt_product_add"]) ? display_product_form() : ""; ?></section>
         </div>
-            <?php var_dump ($_SESSION["products"]); ?>
+            <?php var_dump ($products); ?>
         <div>
 
         </div>

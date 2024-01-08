@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 require_once "./config_session.inc.php";
 
 if (isset($_POST["bt_product_confirm"])){
@@ -14,6 +16,7 @@ if (isset($_POST["bt_product_confirm"])){
 
         $pdo = null;
         $stmt = null;
+        header("Location: ../dashboard.php?product=success");
 
         
 
