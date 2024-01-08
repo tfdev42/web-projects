@@ -16,7 +16,28 @@ if (isset($_POST["bt_product_confirm"])){
 
         $pdo = null;
         $stmt = null;
-        header("Location: ../dashboard.php?product=success");
+        header("Location: ../dashboard.php");
+
+        
+
+
+    } catch (PDOException $e) {
+        die("Query failed: " . $e->getMessage());
+    }
+}
+
+if (isset($_POST["bt_product_remove"])){
+    $_SESSION["product_id"] = $_POST["product_id"];
+
+    try {
+        require_once "./dbh.inc.php";
+        require_once "./product_model.inc.php";
+
+        remove_product($pdo, $_SESSION["product_id"]);
+
+        $pdo = null;
+        $stmt = null;
+        header("Location: ../dashboard.php");
 
         
 

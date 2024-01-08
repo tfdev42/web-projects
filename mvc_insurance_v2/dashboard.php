@@ -6,6 +6,7 @@ require_once "./includes/config_session.inc.php";
 require_once "./includes/dashboard.inc.php";
 require_once "./includes/dashboard_view.inc.php";
 
+
 ?>
 
 <!DOCTYPE html>
@@ -27,9 +28,9 @@ require_once "./includes/dashboard_view.inc.php";
             <?php } ?></section>
         <section><?php isset($_POST["bt_product_add"]) ? display_product_form() : ""; ?></section>
         </div>
-            <?php var_dump ($products); ?>
+            <?php display_products($products); ?>
         <div>
-
+            <?php var_dump($_SESSION["test_id"]); ?>
         </div>
     </main>
     

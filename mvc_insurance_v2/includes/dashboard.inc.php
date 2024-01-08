@@ -29,15 +29,14 @@ if ( ! empty([$_SESSION["user_id"]])){
             $_SESSION["products"] = "no products yet!";
         }
 
+        $pdo = null;
+        $stmt = null;
+
     } catch (PDOException $e) {
         die("User query failed: " . $e->getMessage());
     }
     
-} else {
-    if (isset($_SESSION["user_id"])){
-        unset($_SESSION["user_id"]);
-    }
-    
+} else {    
     header("Location: ../index.php");
     die();
 }
