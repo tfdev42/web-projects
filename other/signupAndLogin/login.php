@@ -17,7 +17,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
   // if a record was found >> check password
   if ($user) {
     if (password_verify($_POST["password"], $user["password_hash"])){
-      die("Login successfull!");
+      // die("Login successfull!");
+      session_start();
+
+      session_regenerate_id(); // avoid session-fixation attack
+
+      $_SESSION["user_id"] = $user["id"];
+      header("Location: index.php");
+      exit;
     }
   }
 
