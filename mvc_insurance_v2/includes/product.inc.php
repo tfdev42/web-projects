@@ -37,6 +37,7 @@ if (isset($_POST["bt_product_remove"])){
 
         $pdo = null;
         $stmt = null;
+        $_SESSION["product_id"] = null;
         header("Location: ../dashboard.php");
 
         

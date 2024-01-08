@@ -30,7 +30,7 @@ require_once "./includes/dashboard_view.inc.php";
         </div>
             <?php display_products($products); ?>
         <div>
-            <?php var_dump($_SESSION["test_id"]); ?>
+            <!-- <?php var_dump($_SESSION["test_id"]); ?> -->
         </div>
     </main>
     

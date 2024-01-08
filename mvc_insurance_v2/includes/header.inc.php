@@ -12,7 +12,9 @@ require_once "./includes/config_session.inc.php";
         </li>
         <li>ID: <?php echo $_SESSION["user_id"] ?> </li>
         <li>
-            <a href="./product.inc.php">Products</a>
+            <?php if ($_SESSION["user_role"] !== "manager") { ?>
+                    <a href="./orders.inc.php">Orders</a>
+            <?php } ?>
         </li>
         <li>
             <form action="./includes/logout.inc.php" method="post">
