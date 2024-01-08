@@ -79,14 +79,15 @@ CREATE TABLE orders (
     id INT NOT NULL AUTO_INCREMENT,
     customer_id INT NOT NULL,
     product_id INT NOT NULL,
-    start_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    start_time DATETIME DEFAULT NULL,
     end_time DATETIME DEFAULT NULL,
-    status_name ENUM('pending', 'approved', 'denied') DEFAULT 'pending',
+    status_name ENUM('pending', 'approved', 'denied', 'done') DEFAULT 'pending',
     comment TEXT,
     boat_registration_number VARCHAR(50) NOT NULL,
     PRIMARY KEY (id)
     FOREIGN KEY (customer_id) REFERENCES users(id),
-    FOREIGN KEY (product_id) REFERENCES product(id);
+    FOREIGN KEY (product_id) REFERENCES product(id),
+    order_time DATETIME DEFAULT NOW()
 );
 
 
@@ -109,6 +110,12 @@ ADD FOREIGN KEY (role) REFERENCES user_roles(role_name) ON DELETE CASCADE;
 -- add "done" term to orders
 ALTER TABLE orders
 MODIFY COLUMN status_name ENUM('pending', 'approved', 'denied', 'done') DEFAULT 'pending';
+
+ALTER TABLE orders
+ADD COLUMN order_time DATETIME DEFAULT NOW();
+
+ALTER TABLE orders
+MODIFY COLUMN start_time DATETIME DEFAULT NULL;
 
 
 

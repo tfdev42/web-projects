@@ -11,11 +11,13 @@ require_once "./includes/config_session.inc.php";
             <a href="./dashboard.php">Home</a>
         </li>
         <li>ID: <?php echo $_SESSION["user_id"] ?> </li>
-        <li>
+        
             <?php if ($_SESSION["user_role"] !== "manager") { ?>
+                <li>
                     <a href="./orders.inc.php">Orders</a>
+                </li>
             <?php } ?>
-        </li>
+        
         <li>
             <form action="./includes/logout.inc.php" method="post">
                 <button type="submit" name="bt_logout">Logout</button>

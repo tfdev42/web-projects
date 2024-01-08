@@ -8,9 +8,9 @@ if (isset($_POST["bt_product_order"])){
 
     try {
         require_once "./dbh.inc.php";
-        require_once "./order_model.inc.php";
+        require_once "./orders_model.inc.php";
 
-        order_product($pdo, $_SESSION["product_id"], $_SESSION["user_id"]);
+        order_product($pdo, $_SESSION["user_id"], $_SESSION["product_id"]); // TODO: BOAT REGISTRATION NUMBER
 
         $pdo = null;
         $stmt = null;
