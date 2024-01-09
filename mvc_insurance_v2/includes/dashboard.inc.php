@@ -6,6 +6,7 @@ require_once "config_session.inc.php";
 
 if ( ! empty([$_SESSION["user_id"]])){
     $userId = $_SESSION["user_id"];
+    
 
     try {
         require_once "dbh.inc.php";
@@ -27,6 +28,11 @@ if ( ! empty([$_SESSION["user_id"]])){
             $_SESSION["products"] = $products;
         } else {
             $_SESSION["products"] = "no products yet!";
+        }
+
+        if($_SESSION["user_role"] === "customer"){
+            $orders = get_customer_orders($pdo, $_SESSION["user_id"]);
+            $_SESSION["customer_orders"] = $orders;
         }
 
         $pdo = null;

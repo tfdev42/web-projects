@@ -1,6 +1,15 @@
 <?php
 declare(strict_types=1);
 
+function get_customer_orders(object $pdo, int $customerId){
+    $query= "SELECT * FROM orders WHERE customer_id = :customer_id;";
+    $stmt=$pdo->prepare($query);
+    $stmt->bindValue(":customer_id", $customerId);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+}
+
 
 function get_products(object $pdo) : array | false {
     $query =

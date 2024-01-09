@@ -3,6 +3,7 @@ require_once "./includes/config_session.inc.php";
 
 
 
+
 ?>
 
 <header>
@@ -14,7 +15,10 @@ require_once "./includes/config_session.inc.php";
         
             <?php if ($_SESSION["user_role"] !== "manager") { ?>
                 <li>
-                    <a href="./orders.inc.php">Orders</a>
+                    <form action="./orders.inc.php" method="post">
+                        <input type="hidden" name="show_orders" value="<?php $_SESSION["user_id"] ?>">
+                        <button type="button">Orders</button>
+                    </form>                    
                 </li>
             <?php } ?>
         

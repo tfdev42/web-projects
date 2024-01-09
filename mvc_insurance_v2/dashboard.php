@@ -8,6 +8,7 @@ require_once "./includes/dashboard_view.inc.php";
 
 
 
+
 ?>
 
 <!DOCTYPE html>
@@ -23,6 +24,7 @@ require_once "./includes/dashboard_view.inc.php";
     <main>
         <div>
         <h3>Welcome to the <?php echo htmlspecialchars($_SESSION["user_role"]); ?> Dashboard</h3>
+        <!-- TODO: SWITCH DISPLAY VIEW HOME/ORDERS (cust, agent) -->
         <section><?php if ($_SESSION["user_role"] === "manager") { ?>
             <form action="./dashboard.php" method="post">
                 <button type="submit" name="bt_product_add">Add Product</button>
@@ -33,7 +35,7 @@ require_once "./includes/dashboard_view.inc.php";
             <?php display_products($products); ?>
         <div>
             <?php check_session_errors(); ?>
-            <!-- <?php var_dump($_SESSION["errors"]); ?> -->
+            <?php var_dump($orders); ?>
         </div>
     </main>
     

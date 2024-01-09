@@ -2,6 +2,11 @@
 declare(strict_types=1);
 
 
+function display_orders_customer(array $customer_orders) {
+    
+}
+
+
 function check_session_errors() {
     if (isset($_SESSION["errors"])){ 
         $errors = $_SESSION["errors"];
