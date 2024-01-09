@@ -2,5 +2,6 @@
 
 session_start();
 
-$errors = [];
+$errors = array();
 
+$messages = [];

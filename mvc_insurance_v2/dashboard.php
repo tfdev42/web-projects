@@ -7,6 +7,7 @@ require_once "./includes/dashboard.inc.php";
 require_once "./includes/dashboard_view.inc.php";
 
 
+
 ?>
 
 <!DOCTYPE html>
@@ -17,6 +18,7 @@ require_once "./includes/dashboard_view.inc.php";
     <title>Dashboard</title>
 </head>
 <body>
+    <!-- HEADER -->
     <?php isset($_SESSION["user_id"]) ? include "./includes/header.inc.php" : ''; ?>
     <main>
         <div>
@@ -30,7 +32,8 @@ require_once "./includes/dashboard_view.inc.php";
         </div>
             <?php display_products($products); ?>
         <div>
-            <!-- <?php var_dump($_SESSION["test_id"]); ?> -->
+            <?php check_session_errors(); ?>
+            <!-- <?php var_dump($_SESSION["errors"]); ?> -->
         </div>
     </main>
     

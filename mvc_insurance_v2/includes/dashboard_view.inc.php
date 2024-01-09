@@ -1,6 +1,20 @@
 <?php
 declare(strict_types=1);
 
+
+function check_session_errors() {
+    if (isset($_SESSION["errors"])){ 
+        $errors = $_SESSION["errors"];
+        foreach ($errors as $error){
+            echo '<p class="session-message">';
+            echo $error;
+            echo '</p><br>';
+        }
+        
+    }
+    unset($_SESSION["errors"]);
+}
+
 function display_products(array $products) {
     echo "<table>";
     ?>
@@ -27,6 +41,7 @@ function display_products(array $products) {
                 <td>
                     <form action="./includes/orders.inc.php" method="post">
                         <input type="hidden" name="product_id" value="<?php echo ($product["id"]); ?>">
+                        <input type="text" name="boat_registration_number" placeholder="Boat Registration Number">
                         <button type="submit" name="bt_product_order">Order</button>
                     </form>
                 </td>
