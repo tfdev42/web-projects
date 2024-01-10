@@ -42,8 +42,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["bt_product_order"])){
 }
 
 
-if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["show_orders"])){
-    $_SESSION["display"] = "orders";
-    header("Location: ../dashboard.php");
-    die();
-}
+

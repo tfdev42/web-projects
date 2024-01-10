@@ -1,8 +1,23 @@
 <?php
 declare(strict_types=1);
 
+function get_agent_orders(object $pdo){
+    $query= 
+    "SELECT o.id AS 'OrderID', o.customer_id AS 'CustomerID', p.name AS 'Product', o.boat_registration_number AS 'Registration', o.status_name AS 'Status', o.comment AS 'Comment'
+    FROM orders AS o 
+    JOIN product AS p ON p.id = o.product_id;";
+    $stmt=$pdo->prepare($query);    
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
+}
+
 function get_customer_orders(object $pdo, int $customerId){
-    $query= "SELECT * FROM orders WHERE customer_id = :customer_id;";
+    $query= 
+    "SELECT o.id AS 'OrderID', p.name AS 'Product', o.boat_registration_number AS 'Registration', o.status_name AS 'Status'
+    FROM orders AS o 
+    JOIN product AS p ON p.id = o.product_id
+    WHERE customer_id = :customer_id;";
     $stmt=$pdo->prepare($query);
     $stmt->bindValue(":customer_id", $customerId);
     $stmt->execute();

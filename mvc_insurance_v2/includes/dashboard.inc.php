@@ -6,6 +6,9 @@ require_once "config_session.inc.php";
 
 if ( ! empty([$_SESSION["user_id"]])){
     $userId = $_SESSION["user_id"];
+    if(!isset($_SESSION["display"])){
+        $_SESSION["display"] = "home";
+    }
     
 
     try {
@@ -35,6 +38,11 @@ if ( ! empty([$_SESSION["user_id"]])){
             $_SESSION["customer_orders"] = $orders;
         }
 
+        if($_SESSION["user_role"] === "agent"){
+            $orders = get_agent_orders($pdo);
+            $_SESSION["agent_orders"] = $orders;
+        }
+
         $pdo = null;
         $stmt = null;
 
@@ -44,5 +52,17 @@ if ( ! empty([$_SESSION["user_id"]])){
     
 } else {    
     header("Location: ../index.php");
+    die();
+}
+
+if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["show_orders"])){
+    $_SESSION["display"] = "orders";
+    header("Location: ../dashboard.php");
+    die();
+}
+
+if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["show_home"])){
+    $_SESSION["display"] = "home";
+    header("Location: ../dashboard.php");
     die();
 }

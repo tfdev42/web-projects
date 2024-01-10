@@ -23,19 +23,10 @@ require_once "./includes/dashboard_view.inc.php";
     <?php isset($_SESSION["user_id"]) ? include "./includes/header.inc.php" : ''; ?>
     <main>
         <div>
-        <h3>Welcome to the <?php echo htmlspecialchars($_SESSION["user_role"]); ?> Dashboard</h3>
-        <!-- TODO: SWITCH DISPLAY VIEW HOME/ORDERS (cust, agent) -->
-        <section><?php if ($_SESSION["user_role"] === "manager") { ?>
-            <form action="./dashboard.php" method="post">
-                <button type="submit" name="bt_product_add">Add Product</button>
-            </form>
-            <?php } ?></section>
-        <section><?php isset($_POST["bt_product_add"]) ? display_product_form() : ""; ?></section>
+         <?php switch_display($_SESSION["display"]); ?>
         </div>
-            <?php display_products($products); ?>
         <div>
             <?php check_session_errors(); ?>
-            <?php var_dump($orders); ?>
         </div>
     </main>
     
