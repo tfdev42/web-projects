@@ -22,8 +22,8 @@ class Form{
 
     function isInputEmpty(array $formData) {
         $this->formData = $formData;
-        foreach($formData as $key => $value){
-            if(empty($value)){
+        foreach($formData as $data){
+            if(empty($data)){
                 $errors[] = "Fill in all fields!";
             }
         }
