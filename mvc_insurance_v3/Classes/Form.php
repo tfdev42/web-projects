@@ -16,16 +16,34 @@ class Form{
             // check if input empty
             if(empty($value)){
                 $this->errors[$key] = ucfirst($key) . " is required!";
-            }            
+            }
+            
+            // check if Email Valid
+            if($key === '/^email*/' && $this->isEmailInvalid($key)){
+                $this->errors[$key] = "A valid ". $key . " is required!";                
+            }
         }
         return $this->errors;
     }
 
+
+    // for re-inserting input values into form if error
     function getInputData() : array {
         foreach($this->formData as $key => $value){
-            $this->inputData[$key] = $value;
+            // exclude password fields
+            if ($key === '/^pwd*/' || $key === '/^password*/'){
+                continue;
+            } else {
+                $this->inputData[$key] = htmlspecialchars($this->trimAndStrip($value));
+            }
+            
         }
         return $this->inputData;
+    }
+
+    function isEmailInvalid(string $key) : bool {
+        // Returns True if email is Invalid
+        return ! filter_var($key, FILTER_VALIDATE_EMAIL);
     }
 
     function trimAndStrip(string $data){

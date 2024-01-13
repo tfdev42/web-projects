@@ -14,11 +14,12 @@ class Utils{
         return empty($errors) ? false : $errors;
     }
 
-    public static function getPOSTasArray() {
+    public static function getPostInputFields() : array | null {
         $post = $_POST;
         $result = [];
         foreach($post as $key => $value){
-            if($key === "hidden" || $value === "bt_signup"){
+            // if HTML <input type=hidden> || Post value starts with any bt_ for Buttons -> dont add to array
+            if($key === "hidden" || $value === '/^bt_*/'){
                 continue;
             }
             $result[$key] = $value;
