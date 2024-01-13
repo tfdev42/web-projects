@@ -38,8 +38,16 @@ function showPOSTasArray(){
             <input type="email" name="email" id="email" placeholder="Email">
             <input type="hidden" name="hidden_NAME" value="hidden_value">  
             <button type="submit" name="bt_submit">Submit</button>          
+        </form>        
+    </div>
+    <div>
+        <h3>Sign Up</h3>
+        <form action="./index.php" method="post">
+            <p>Sign up as: </p>
+            <input type="button" value="Customer">
+            <input type="button" value="Agent">
+            <input type="button" value="Manager">
         </form>
-        
     </div>
     <div>
         <?php var_dump(showPOSTasArray()); ?>

@@ -9,12 +9,13 @@
     <main>
         <div class="form-wrapper">
             <div>
-
+                <h3>Login</h3>
             </div>
         </div>
         <div class="form-wrapper">
             <div>
-
+                <h3>Signup</h3>
+                <?php displayRoleSelect(); ?>
             </div>
         </div>
     </main>
