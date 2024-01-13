@@ -22,6 +22,8 @@ class Form{
             if($key === '/^email*/' && $this->isEmailInvalid($key)){
                 $this->errors[$key] = "A valid ". $key . " is required!";                
             }
+
+            
         }
         return $this->errors;
     }

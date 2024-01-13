@@ -3,17 +3,6 @@ declare(strict_types=1);
 
 class Utils{
     
-    public static function isInputEmpty(array $formData) : array | false{
-        $errors = [];
-        foreach($formData as $key => $value){
-            if (empty($value)){
-                // UpperCaseFirstLetter of $key
-                $errors[$key] = ucfirst($key) . " is required!";
-            }
-        }
-        return empty($errors) ? false : $errors;
-    }
-
     public static function getPostInputFields() : array | null {
         $post = $_POST;
         $result = [];

@@ -1,3 +1,11 @@
+<?php
+session_start();
+require_once "./includes/signup_view.inc.php";
+require_once "./includes/signup_contr.inc.php";
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +23,11 @@
         <div class="form-wrapper">
             <div>
                 <h3>Signup</h3>
-                <?php displayRoleSelect(); ?>
+                <?php if ( !isset($_SESSION["signup_role"]) && empty($_SESSION["signup_role"])){
+                    displayRoleSelect();
+                } else {
+                    
+                } ?>
             </div>
         </div>
     </main>

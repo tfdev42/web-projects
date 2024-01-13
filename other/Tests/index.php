@@ -1,5 +1,18 @@
 <?php
 session_start();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Handle POST request
+} else {
+    // Check if it's the first time loading
+    if (!isset($_SESSION['loaded'])) {
+        // This block will execute only the first time the page is loaded
+        $_SESSION['loaded'] = true;
+    }
+
+    // Rest of your code for GET requests
+}
+
 $foo = [];
 
 for ($i = 1; $i < 5; $i++){
@@ -52,7 +65,7 @@ function showPOSTasArray(){
     <div>
         <?php var_dump(showPOSTasArray()); ?>
         <br>
-        <!-- <?php var_dump($foo); ?> -->
+        <?php var_dump($_SESSION['loaded']); ?>
     </div>
 </body>
 </html>
