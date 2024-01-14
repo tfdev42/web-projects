@@ -8,8 +8,10 @@ class Child extends Person {
     
     public static $ageLimit = 8;
 
-    public function __construct() {
-        $this->person = new Person($this->name, $this->age);
+    public function __construct($name, $age) {
+        $this->name = $name;
+        $this->age = $age;
+
         
         
     }
