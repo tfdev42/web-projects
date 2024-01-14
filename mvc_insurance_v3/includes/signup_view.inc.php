@@ -1,6 +1,6 @@
 <?php
 
-function showSignupErrors() {
+function displaySignupErrors() {
     if(isset($_SESSION["signup_errors"])){
         $errors = $_SESSION["signup_errors"];
         foreach($errors as $e){
@@ -13,17 +13,27 @@ function showSignupErrors() {
     }
 }
 
-function displayRoleSelect() { ?>
-    <form action="/opt/lampp/htdocs/web-projects/mvc_insurance_v3/index.php" method="post">
-        <h5>Sign up as: </h5>
-        <input type="submit" name="signup_role" value="Customer">
-        <input type="submit" name="signup_role" value="Agent">
-        <input type="submit" name="signup_role" value="Manager">
-    </form>
-<?php }
+function displayRoleSelect() { 
+    if ( ! $_SESSION["signup_role"]) {?>
+        <form action="../index.php" method="post">
+            <label for="signup_role">Signup as: </label>
+            <input type="submit" name="signup_role" value="Customer">
+            <input type="submit" name="signup_role" value="Agent">
+            <input type="submit" name="signup_role" value="Manager">
+        </form>
 
-function displaySignUp() { ?>
-    <form action="./signup_contr.inc.php" method="post">
+    <?php }
+    else {
+        echo '<p>You are signing up as <strong><i>' . htmlspecialchars($_SESSION["signup_role"]) . '</i></strong></p>';
+        displayResetForm();
+        echo '<br>';
+    }
+}
+
+function displaySignUp() {
+    echo '<h3>Sign Up</h3>';
+    displayRoleSelect(); ?>
+    <form action="./signup.inc.php" method="post">
         <input type="text" name="firstname" placeholder="Firstname">
         <input type="text" name="lastname" placeholder="Lastname">
         <input type="email" name="email" placeholder="Email">
@@ -32,14 +42,34 @@ function displaySignUp() { ?>
         <input type="text" name="city" placeholder="City">
         <input type="text" name="country" placeholder="Country">
         <input type="text" name="zip" placeholder="ZIP">
-        <?php $_SESSION["signup_role"] == "customer" ? display_payment_method() : ""; ?>
+        <?php displayPaymentMethod() ?>
         <br>
         <button type="submit" name="bt_signup">Signup</button>
     </form>
 <?php }
 
-function displaySignupRoleResetBtn() { ?>
-    <form action="./index.php" method="post">
-        <input type="button" name="bt_role_reset" value="Reset">
-    </form>
+function displayPaymentMethod() {
+    // <!-- Display payment option field only for customers -->
+    if ($_SESSION["signup_role"] === "Customer"){
+        ?> <label>
+            Payment Option:
+            <select name="payment_option_id">
+                <option value="1">Bill</option>
+                <option value="2">IBAN</option>
+            </select>
+        </label>
+        <input type="text" name="iban" placeholder="IBAN">
 <?php }
+}
+
+function displayResetForm(){ ?>
+    <form action="../index.php" method="post">
+        <button type="submit" name="bt_reset">Reset</button>
+    </form> <?php
+    if(isset($_POST["bt_reset"])){
+        unset($_SESSION["signup_role"]);
+        unset($_SESSION["signup_data"]);
+        header("Location: ../index.php");
+        exit();
+    }    
+}

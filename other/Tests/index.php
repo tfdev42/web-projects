@@ -35,6 +35,9 @@ function showPOSTasArray(){
 }
 
 
+const __DEFAULT__ = 1;
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

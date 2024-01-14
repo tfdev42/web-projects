@@ -8,7 +8,7 @@ class Utils{
         $result = [];
         foreach($post as $key => $value){
             // if HTML <input type=hidden> || Post value starts with any bt_ for Buttons -> dont add to array
-            if($key === "hidden" || $value === '/^bt_*/'){
+            if($key === "bt_signup"){
                 continue;
             }
             $result[$key] = $value;

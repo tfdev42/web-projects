@@ -1,11 +1,15 @@
 <?php
-session_start();
+declare(strict_types=1);
 
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["signup_role"])){
-    $_SESSION["signup_role"] = $_POST["signup_role"];
-    header("Location: ../index.php");
-    
-} else {
-    header("Location: ../index.php");
-    die();
+function getPostInputFields() : array | null {
+    $post = $_POST;
+    $result = [];
+    foreach($post as $key => $value){
+        // if HTML post is Button -> dont add to array
+        if($key === "bt_signup"){
+            continue;
+        }
+        $result[$key] = $value;
+    }
+    return $result;
 }

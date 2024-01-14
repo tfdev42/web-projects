@@ -60,7 +60,7 @@ function display_payment_method() {
     // <!-- Display payment option field only for customers -->
     ?> <label>
         Payment Option:
-        <select name="payment_options_id">
+        <select name="payment_option_id">
             <option value="1">Bill</option>
             <option value="2">IBAN</option>
         </select>
