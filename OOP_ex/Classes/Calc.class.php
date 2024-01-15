@@ -30,7 +30,7 @@ class Calc {
                 return $result;
                 break;
             default:
-            echo "error";
+            return "error";
                 break;
             }
     }
