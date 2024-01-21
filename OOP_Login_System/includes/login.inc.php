@@ -18,12 +18,9 @@ if (isset($_POST["bt_login"])){
     
     // Runnin error handlers and user signup
     $user = $login->loginUser();
-    session_start();
-    $_SESSION["user_id"] = $user["users_id"];
-    $_SESSION["user_uid"] = $user["users_uid"];
-    $_SESSION["user_email"] = $user["users_email"];
+    
 
     // Goin back to front page
     header("location: ../index.php?error=none");
-    die();
+    exit();
 }

@@ -6,17 +6,22 @@ class Login extends Dbh {
 
 
     protected function getUserDataByUid($uid) {
-        $query=
-        "SELECT users_id, users_uid, users_email
-        FROM users
-        WHERE users_uid = :uid;";
+        try {
+            $query=
+            "SELECT users_id, users_uid, users_email
+            FROM users
+            WHERE users_uid = :uid;";
 
-        $stmt = $this->connect()->prepare($query);
-        $stmt->bindValue(":uid", $uid);
-        $stmt->execute();
+            $stmt = $this->connect()->prepare($query);
+            $stmt->bindValue(":uid", $uid);
+            $stmt->execute();
 
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $result;
+        } catch (PDOException $e) {
+            die("Query error: " . $e->getMessage());
+        }
+        
 
     }
 

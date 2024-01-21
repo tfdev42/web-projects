@@ -38,6 +38,7 @@ session_start();
                 </div>
             </div>
         </section>
+        <?php var_dump($_SESSION); ?>
     </main>
 </body>
 </html>

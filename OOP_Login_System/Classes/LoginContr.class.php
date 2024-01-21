@@ -5,6 +5,11 @@ class LoginContr extends Login {
     private $uid;
     private $pwd;
 
+    public function __construct($uid, $pwd) {
+        $this->uid = $uid;
+        $this->pwd = $pwd;
+    }
+
 
     private function isPwdWrong() {
         $result = true;
@@ -38,7 +43,12 @@ class LoginContr extends Login {
             die();
         }
 
-        $this->getUserDataByUid($this->uid);
+        $user = $this->getUserDataByUid($this->uid);
+
+        session_start();
+        $_SESSION["user_id"] = $user["users_id"];
+        $_SESSION["user_uid"] = $user["users_uid"];
+        $_SESSION["user_email"] = $user["users_email"];
         
     }
 
