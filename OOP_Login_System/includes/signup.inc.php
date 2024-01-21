@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 
 if (isset($_POST["submit"])){
     // Getting the data
@@ -9,14 +11,17 @@ if (isset($_POST["submit"])){
 
 
     // Instantiate SignupContr class
+    include "../Classes/Dbh.class.php";
     include "../Classes/Signup.class.php";
     include "../Classes/SignupContr.class.php";
 
     $signup = new SignupContr($uid, $pwd, $pwd_repeat, $email);
 
+    
     // Runnin error handlers and user signup
-
+    $signup->signupUser();
 
     // Goin back to front page
-
+    header("location: ../index.php?error=none");
+    die();
 }

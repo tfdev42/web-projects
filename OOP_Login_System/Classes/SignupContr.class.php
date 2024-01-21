@@ -1,6 +1,6 @@
 <?php
 
-class SignupContr {
+class SignupContr extends Signup {
 
     private $uid;
     private $pwd;
@@ -12,6 +12,53 @@ class SignupContr {
         $this->pwd = $pwd;
         $this->pwd_repeat = $pwd_repeat;
         $this->email = $email;
+    }
+
+
+    
+    /**
+     * Check Signup Errors
+     */
+    public function signupUser() {
+        if($this->isInputEmpty()) {
+            header("location: ../index.php?error=emptyinput");
+            exit();
+        }
+
+        if($this->isUidInvalid()) {
+            header("location: ../index.php?error=username");
+            exit();
+        }
+
+        if($this->isEmailInvalid()) {
+            header("location: ../index.php?error=email");
+            exit();
+        }
+
+        if($this->pwdDontMatchRepeatPwd()) {
+            header("location: ../index.php?error=pwdmatch");
+            exit();
+        }
+
+        if($this->isUidTaken()) {
+            header("location: ../index.php?error=uidemailtaken");
+            exit();
+        }
+
+        $this->setUser($this->uid, $this->pwd, $this->email);
+
+
+    }
+
+    /**
+     * Returns TRUE if uid is taken
+     */
+    private function isUidTaken() {
+        $result = true;
+        if ( ! $this->isUsernameOrEmailTaken($this->uid, $this->email)){
+            $result = false;
+        }
+        return $result;
     }
 
     /**
@@ -30,8 +77,10 @@ class SignupContr {
         return $result;
     }
 
+
+
     /**
-     * Return TRUE if Username contains NOT only [a-zA-Z0-9]
+     * Return TRUE if Username contains NOT ONLY [a-zA-Z0-9]
      */
     private function isUidInvalid() {
         $result = true;
@@ -53,7 +102,7 @@ class SignupContr {
     }
 
     /**
-     * Returns TRUE if the PWD and Repeat_Pwd don't match (should be de-hashed normally)
+     * Returns TRUE if the PWD and Repeat_Pwd don't match 
      */
     private function pwdDontMatchRepeatPwd() {
         $result = true;

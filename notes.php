@@ -147,3 +147,42 @@ HAVING total_sales > 1000
 ORDER BY total_sales DESC
 LIMIT 10;
 
+
+
+<?php
+/**
+ * fetch(): Fetches the next row from a result set. Returns an array containing the fetched row, or false if there are no more rows.
+ */
+$row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+/**
+ * fetchAll(): Fetches all rows from a result set. Returns an array containing all of the remaining rows in the result set.
+ */
+$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+/**
+ * fetchColumn(): Fetches a single column from the next row of a result set.
+ */
+$columnValue = $stmt->fetchColumn();
+
+
+/**
+ * bindParam(): Binds a parameter to the specified variable name.
+ */
+$stmt->bindParam(':parameterName', $variable, PDO::PARAM_TYPE);
+
+
+/**
+ * bindValue(): Binds a value to a parameter.
+ */
+$stmt->bindValue(':parameterName', $value, PDO::PARAM_TYPE);
+
+
+/**
+ * rowCount(): Returns the number of rows affected by the last SQL statement.
+ */
+$rowCount = $stmt->rowCount();
+
+

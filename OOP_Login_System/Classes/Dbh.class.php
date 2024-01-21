@@ -2,7 +2,10 @@
 
 class Dbh {
 
-    private function connect() {
+    /**
+     * PROTECTED visibility, so that extended classes can use Dbh.connect()
+     */
+    protected function connect() {
         try {
             $dbhost = "localhost";
             $dbname = "ooplogin_20240121";
