@@ -41,5 +41,27 @@ class SignupContr {
         return $result;
     }
 
+    /**
+     * Returns TRUE if the Email is Invalid
+     */
+    private function isEmailInvalid() {
+        $result = true;
+        if (filter_var($this->email, FILTER_VALIDATE_EMAIL)){
+            $result = false;
+        }
+        return $result;
+    }
+
+    /**
+     * Returns TRUE if the PWD and Repeat_Pwd don't match (should be de-hashed normally)
+     */
+    private function pwdDontMatchRepeatPwd() {
+        $result = true;
+        if ($this->pwd === $this->pwd_repeat){
+            $result = false;
+        }
+        return $result;
+    }
+
 
 }
