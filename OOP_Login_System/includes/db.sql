@@ -1,0 +1,10 @@
+CREATE DATABASE IF NOT EXISTS ooplogin_20240121;
+USE DATABASE ooplogin_20240121;
+
+CREATE TABLE users (
+    users_id INT(11) AUTO_INCREMENT NOT NULL,
+    users_uid TINYTEXT NOT NULL,
+    users_pwd VARCHAR(50) NOT NULL,
+    users_email VARCHAR(255) NOT NULL,
+    PRIMARY KEY (users_id)
+);
