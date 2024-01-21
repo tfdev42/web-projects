@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -10,6 +10,7 @@
     <title>OOP Login Index</title>
 </head>
 <body>
+    
     <main>
         <section class="index-login">
             <div class="wrapper">
@@ -22,7 +23,7 @@
                         <input type="password" name="pwd_repeat" placeholder="Repeat Password">
                         <input type="text" name="email" placeholder="E-mail">
                         <br>
-                        <button type="submit" name="submit">SIGN UP</button>
+                        <button type="submit" name="bt_signup">SIGN UP</button>
                     </form>
                 </div>
                 <div class="index-login-login">
@@ -32,7 +33,7 @@
                         <input type="text" name="uid" placeholder="Username">
                         <input type="password" name="pwd" placeholder="Password">
                         <br>
-                        <button type="submit" name="submit">LOGIN</button>
+                        <button type="submit" name="bt_login">LOGIN</button>
                     </form>
                 </div>
             </div>

@@ -2,7 +2,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
-if (isset($_POST["submit"])){
+if (isset($_POST["bt_signup"])){
     // Getting the data
     $uid = $_POST["uid"];
     $pwd = $_POST["pwd"];
