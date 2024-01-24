@@ -7,3 +7,10 @@ CREATE TABLE users (
     users_lastname VARCHAR(255) NOT NULL,
     user_dateofbirth DATE NOT NULL
 );
+
+
+-- some Test Data
+
+
+INSERT INTO users (users_firstname, users_lastname, user_dateofbirth)
+VALUES ("Tim", "Testarosa", )

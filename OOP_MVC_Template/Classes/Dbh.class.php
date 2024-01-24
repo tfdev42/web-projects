@@ -1,18 +1,13 @@
 <?php
 
 class Dbh {
-    private $dbHost;
-    private $dbName;
-    private $dbUser;
-    private $dbPwd;
+    private $dbHost = "localhost";
+    private $dbName = "templateDb_20240124";
+    private $dbUser = "root";
+    private $dbPwd = "";
 
     protected function connect() {
         try {
-
-            $this->dbHost = "localhost";
-            $this->dbName = "";
-            $this->dbUser = "root";
-            $this->dbPwd = "";
 
             $pdo = new PDO("mysql:host=$this->dbHost;dbname=$this->dbName", $this->dbUser, $this->dbPwd);
 
@@ -25,12 +20,12 @@ class Dbh {
              * Set Default FETCH
              */
             $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-            
+
             return $pdo;
 
 
         } catch (PDOException $e) {
-            die("DB Query failed: " . $e->getMessage());
+            die("DB Connection failed: " . $e->getMessage());
         }
         
     }
