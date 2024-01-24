@@ -13,4 +13,7 @@ CREATE TABLE users (
 
 
 INSERT INTO users (users_firstname, users_lastname, user_dateofbirth)
-VALUES ("Tim", "Testarosa", )
+VALUES ("Tim", "Testarosa", "1969-04-12"),
+    ("Tom", "Testarosa", "1988-06-22"),
+    ("Elise", "Testarosa", "1993-08-19"),
+    ("Sarah", "Testarosa", "2000-03-21");
