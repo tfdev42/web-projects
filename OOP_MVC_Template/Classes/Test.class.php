@@ -54,7 +54,15 @@ class Test extends Dbh {
         WHERE users_firstname = :firstName;";
 
         $stmt = $this->connect()->prepare($query);
-        // TODO
+        $stmt->bindValue(":firstName", $firstName, PDO::PARAM_STR);
+        $stmt->bindValue(":newLastName", $newLastName, PDO::PARAM_STR);
+
+        $result = $stmt->execute();
+
+        if ($result){
+            echo "OK";
+        } else echo "NOK";
+        $stmt=null;
     }
 
 }

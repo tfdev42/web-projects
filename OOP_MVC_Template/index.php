@@ -27,5 +27,11 @@ include_once "./includes/autoload_classes.inc.php";
             $test->setUser("Pipi", "Langstrumpf", "2004-03-28");
         ?>
     </p>
+
+    <p>Modify User <br>
+        <?php
+            $test->updateLastname("Pipi", "Langstrumpf-Testarosa");
+        ?>
+    </p>
 </body>
 </html>
