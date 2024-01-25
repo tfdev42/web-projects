@@ -186,3 +186,57 @@ $stmt->bindValue(':parameterName', $value, PDO::PARAM_TYPE);
 $rowCount = $stmt->rowCount();
 
 
+?>
+
+users
+--------------
+user_id (PK)
+username
+password
+email
+...other user details
+
+carts
+--------------
+cart_id (PK)
+user_id (FK to users.user_id)
+status (active/inactive)
+created_at
+...other cart details
+
+products
+--------------
+product_id (PK)
+name
+price
+...other product details
+
+cart_items
+--------------
+cart_item_id (PK)
+cart_id (FK to carts.cart_id)
+product_id (FK to products.product_id)
+quantity
+...other cart item details
+
+addresses
+--------------
+address_id (PK)
+user_id (FK to users.user_id)
+type (billing/delivery)
+street
+city
+country
+zip
+...other address details
+
+payments
+--------------
+payment_id (PK)
+cart_id (FK to carts.cart_id)
+user_id (FK to users.user_id) 
+amount
+payment_type (bill/creditcard)
+...other payment details
+
+

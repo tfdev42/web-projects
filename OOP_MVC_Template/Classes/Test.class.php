@@ -30,6 +30,25 @@ class Test extends Dbh {
         $stmt=null;
     }
 
+    public function getUsersStmt($firstName, $lastName) {
+        $query = 
+        "SELECT users_firstname, users_lastname
+        FROM users
+        WHERE users_firstname = :firstName
+        AND users_lastname = :lastName;";
+
+        $stmt = $this->connect()->prepare($query);
+        $stmt->bindValue(":firstName", $firstName);
+        $stmt->bindValue(":lastName", $lastName);
+        $stmt->execute();
+
+        $result = $stmt->fetchAll();
+        foreach($result as $usersName){
+            echo $usersName["users_firstname"] . $usersName["users_lastname"] . "<br>";
+        }
+        $stmt=null;
+    }
+
     public function setUser($firstName, $lastName, $dob){
         $query=
         "INSERT INTO users (users_firstname, users_lastname, user_dateofbirth)

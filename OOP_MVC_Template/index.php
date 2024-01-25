@@ -19,18 +19,24 @@ include_once "./includes/autoload_classes.inc.php";
     ?>
     <p>getUsers function <br>
         <?php
-        $test->getUsers();
+        // $test->getUsers();
         ?>
     </p>
     <p>Set User <br>
         <?php
-            $test->setUser("Pipi", "Langstrumpf", "2004-03-28");
+            // $test->setUser("Pipi", "Langstrumpf", "2004-03-28");
         ?>
     </p>
 
     <p>Modify User <br>
         <?php
-            $test->updateLastname("Pipi", "Langstrumpf-Testarosa");
+            // $test->updateLastname("Pipi", "Langstrumpf-Testarosa");
+        ?>
+    </p>
+
+    <p>getUsersStmt <br>
+        <?php
+            $test->getUsersStmt("Pipi", "Langstrumpf-Testarosa");
         ?>
     </p>
 </body>
