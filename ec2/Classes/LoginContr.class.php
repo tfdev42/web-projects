@@ -6,7 +6,13 @@ class LoginContr extends UserModel {
     private $pwd;
     private $userRole;
 
-    public function __construct(Type $var = null) {
-        $this->var = $var;
+    public function __construct($email, $pwd) {
+        $this->email = $email;
+        $this->email = $pwd;
+        $this->userId = null;
+        $this->userRole = null;
     }
+
+
+    
 }

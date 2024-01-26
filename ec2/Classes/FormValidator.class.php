@@ -12,6 +12,10 @@ class FormValidator {
         self::$inputData = null;
     }
 
+    public static function getInputDataArray(){
+        return self::$inputData;
+    }
+
     public static function trimInputDataArray() {
         $fields = self::$inputData;
         foreach ($fields as $key => $value){
@@ -19,11 +23,17 @@ class FormValidator {
         }
     }
 
+    /**
+     * returns TRUE if any input field left empty
+     */
     public static function isAnyInputEmpty() {
-        return empty(self::$inputData);
-    }
-
-    
+        foreach (self::$inputData as $value) {
+            if (empty($value)) {
+                return true;
+            }
+        }
+        return false;
+    }    
 
     /**
      * single field inputEmpty Test returns TRUE if $inputField is empty
