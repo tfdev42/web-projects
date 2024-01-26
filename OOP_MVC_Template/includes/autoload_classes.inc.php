@@ -7,10 +7,10 @@ function autoload($className){
     $prefix = "./Classes/";
     $suffix = ".class.php";
 
-    if( ! stripos($currentDir, "includes")){
+    if(strpos($currentDir, "includes") !== false){
         $prefix = "../Classes/";
     }
-    
+
     include_once $prefix . $className . $suffix;
     
 }

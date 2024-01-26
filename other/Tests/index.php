@@ -37,7 +37,7 @@ function showPOSTasArray(){
 
 const __DEFAULT__ = 1;
 
-
+$dt = date();
 ?>
 <!DOCTYPE html>
 <html lang="en">
