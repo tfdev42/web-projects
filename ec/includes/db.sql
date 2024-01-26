@@ -77,3 +77,6 @@ CREATE TABLE orders (
 
 INSERT INTO users (users_email, users_pwd, users_role)
 VALUES ('admin@admin.com', '123', 'admin');
+
+ALTER TABLE products
+ADD COLUMN products_pic VARCHAR(255) NOT NULL;
