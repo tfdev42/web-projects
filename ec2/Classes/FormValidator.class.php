@@ -7,7 +7,7 @@ class FormValidator {
     public static function setInputData($postArray){
         self::$inputData = $postArray;
     }
-    
+
     public static function isAnyInputEmpty() {
         return empty(self::$inputData);
     }
@@ -30,7 +30,7 @@ class FormValidator {
      * returns TRUE if pwd length < 13
      */
     public static function isPwdNOTLongEnough(){
-        return strlen(self::$inputData["pwd"]) < 8;
+        return strlen(self::$inputData["pwd"]) < 13;
     }
 
     /**
