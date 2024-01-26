@@ -1,3 +1,10 @@
+<?php
+session_start();
+
+include "./Classes/Utils.class.php";
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,11 +13,14 @@
     <title>Home</title>
 </head>
 <body>
+    <?php include_once "./includes/header.inc.php"; ?>
     <main>
         <div>
             <h3>Welcome to the shop</h3>
         </div>
-        <div></div>
+        <div>
+            
+        </div>
     </main>
 </body>
 </html>

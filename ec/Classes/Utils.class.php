@@ -32,6 +32,26 @@ class Utils {
     }
 
 
+    public static function showLoginButton() { ?>
+        <form action="../includes/login.inc.php" method="post">
+            <button type="submit">Login</button>
+        </form>        
+    <?php }
+
+
+    public static function showSignupButton() { ?>
+        <form action="../includes/signup.inc.php" method="post">
+            <button type="submit">Signup</button>
+        </form>        
+    <?php }
+
+    public static function showLogoutButton() { ?>
+        <form action="../includes/logout.inc.php" method="post">
+            <button type="submit">Signup</button>
+        </form>        
+    <?php }
+
+
 
 
 

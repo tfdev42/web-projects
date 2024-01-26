@@ -9,6 +9,21 @@ class User extends Dbh {
         $this->userPwd;
     }
 
+    protected function setUserEmail($userEmail) {
+        $this->userEmail = $userEmail;
+    }
+
+    protected function setUserPwd($userPwd) {
+        $this->userPwd = $userPwd;
+    }
+
+    public function getUserEmail() {
+        return $this->userEmail;
+    }
+
+    public function getUserPwd() {
+        return $this->userPwd;
+    }
 
     /**
      * returns TRUE if user has been set
@@ -39,5 +54,19 @@ class User extends Dbh {
         $result = $stmt->fetch();
 
         return $result !== false;
+    }
+
+    /**
+     * returns Assoc Array of userdata
+     */
+    protected function getUserByEmail($userEmail) {
+        $query=
+        "SELECT users_id, users_email
+        WHERE users_email = :userEmail";
+        $stmt = $this->connect()->prepare($query);
+        $stmt->bindValue(":userEmail", $userEmail);
+        $stmt->execute();
+
+        return $stmt->fetch();
     }
 }
