@@ -240,3 +240,53 @@ payment_type (bill/creditcard)
 ...other payment details
 
 
+
+
+
+preg_match:
+
+    Basic Characters:
+        abc: Matches the exact characters 'abc'.
+
+    Character Classes:
+        [a-z]: Matches any lowercase letter.
+        [A-Z]: Matches any uppercase letter.
+        [0-9]: Matches any digit.
+
+    Quantifiers:
+        *: Matches 0 or more occurrences of the preceding character.
+        +: Matches 1 or more occurrences of the preceding character.
+        ?: Matches 0 or 1 occurrence of the preceding character.
+        {n}: Matches exactly n occurrences of the preceding character.
+        {n,}: Matches n or more occurrences of the preceding character.
+        {n,m}: Matches between n and m occurrences of the preceding character.
+
+    Anchors:
+        ^: Matches the start of the string.
+        $: Matches the end of the string.
+
+    Escaping:
+        \: Escapes a special character, allowing you to match it literally.
+
+    Character Sets and Ranges:
+        .: Matches any character except a newline.
+        \d: Matches any digit (equivalent to [0-9]).
+        \w: Matches any word character (alphanumeric + underscore).
+        \s: Matches any whitespace character.
+        \D, \W, \S: Negations of \d, \w, \s respectively.
+
+    Groups:
+        (): Groups together expressions.
+        (?: ...): Non-capturing group.
+
+    Alternation:
+        |: Acts like a logical OR. Matches either the pattern on the left or the pattern on the right.
+
+    Modifiers:
+        i: Case-insensitive matching.
+        m: Multi-line matching.
+        u: Enables correct matching for Unicode.
+
+    Assertions:
+        (?= ...): Positive lookahead assertion.
+        (?! ...): Negative lookahead assertion.
