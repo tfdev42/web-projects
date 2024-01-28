@@ -2,7 +2,8 @@
 
 class FormValidator {
 
-    private static $inputData = [];
+    public static $inputData = array();
+    public static $errors = array();
 
     public static function setInputDataArray($postArray){
         self::$inputData = $postArray;
@@ -14,6 +15,22 @@ class FormValidator {
 
     public static function getInputDataArray(){
         return self::$inputData;
+    }
+
+    public static function setErrorsArray($errors) {
+        self::$errors = $errors;
+    }
+
+    public static function addErrorToArray($error) {
+        self::$errors[] = $error;
+    }
+
+    public static function unsetErrorsArray() {
+        self::$errors = [];
+    }
+
+    public static function getErrorsArray(){
+        return self::$errors;
     }
 
     public static function trimInputDataArray() {

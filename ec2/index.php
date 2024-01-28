@@ -3,10 +3,16 @@ session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
-include "./Classes/Controller.class.php";
-include "./Classes/View.class.php";
+include_once "./Classes/Dbh.class.php";
+include_once "./Classes/UserModel.class.php";
+include_once "./Classes/IndexController.class.php";
+include_once "./Classes/View.class.php";
+include_once "./Classes/LoginContr.class.php";
+include_once "./Classes/FormValidator.class.php";
+include_once "./includes/login.inc.php";
 
-$controller = new Controller();
+
+$controller = new IndexController();
 $currentView = $controller->getCurrentView();
 $view = new View();
 
@@ -22,15 +28,15 @@ $view = new View();
 </head>
 <body>
     <main>
-        <div>
-            <p>
-                <?php $view->renderCurrentView($currentView); ?>
-            </p>
+        <div>            
+        <?php $view->renderCurrentView($currentView); ?>            
         </div>
-        <div>
-            <p>
-                <?php $view->renderErrors(); ?>
-            </p>
+        <div>Errors
+        <?php $view->renderErrors(); ?>
+        <?php 
+        if (isset($_SESSION["errors"])){echo "Yay";};
+        // FormValidator::addErrorToArray("test");
+        // var_dump(FormValidator::getErrorsArray()); ?>
         </div>
     </main>
 </body>

@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 class View {
 
@@ -27,13 +28,15 @@ class View {
 
 
     public function renderErrors() {
-        if ( ! empty($_SESSION["errors"])){
+
+        if(isset($_SESSION["errors"])){
             $errors = $_SESSION["errors"];
             foreach ($errors as $error){
-                echo '<div class="error">';
-                echo "$error";
-                echo '</div><br>';
+                echo '<p class="error">';
+                echo htmlspecialchars($error);
+                echo '</p><br>';
             }
         }
+        unset($_SESSION["errors"]);
     }
 }
