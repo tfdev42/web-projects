@@ -54,7 +54,7 @@ class BuyProduct {
     public function pay(PaymentInterface $paymentType){
         $paymentType->paymentProcess();
     }
-    public function onlinePay(LoginInterface $paymentType) {
+    public function onlinePay(BankTransfer $paymentType) {
         $paymentType->paymentProcess();
     }
 }
