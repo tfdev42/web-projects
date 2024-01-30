@@ -23,7 +23,7 @@ CREATE TABLE product (
     product_desc TEXT NOT NULL,
     product_available TINYINT(1) DEFAULT 1,
     product_price DECIMAL(10, 2),
-    product_img_path VARCHAR(255)
+    product_img_path VARCHAR(255) DEFAULT 'web-projects/ec3/imgs/default.webp'
 );
 
 CREATE TABLE cart_item (
@@ -65,3 +65,10 @@ CREATE TABLE orders (
 );
 
 INSERT INTO users (user_email, user_pwd_hash) VALUES ('admin@admin.com', '123');
+
+INSERT INTO product (article_nr, product_name, product_desc, product_available, product_price)
+VALUES
+    ('ABC123', 'Sample Product 1', 'Description of Sample Product 1', 1, 19.99),
+    ('DEF456', 'Sample Product 2', 'Description of Sample Product 2', 1, 29.99),
+    ('GHI789', 'Sample Product 3', 'Description of Sample Product 3', 1, 39.99),
+    ('JKL012', 'Sample Product 4', 'Description of Sample Product 4', 1, 49.99);
