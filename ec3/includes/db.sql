@@ -72,3 +72,6 @@ VALUES
     ('DEF456', 'Sample Product 2', 'Description of Sample Product 2', 1, 29.99),
     ('GHI789', 'Sample Product 3', 'Description of Sample Product 3', 1, 39.99),
     ('JKL012', 'Sample Product 4', 'Description of Sample Product 4', 1, 49.99);
+
+ALTER TABLE users
+ADD COLUMN user_role VARCHAR(255) NOT NULL DEFAULT 'customer';

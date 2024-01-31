@@ -1,6 +1,6 @@
 <header>
     <nav>
-        <li><a href="index.php">Home</a></li>
+        <li><a href="index.php?view=home">Home</a></li>
         <ul>
             <li><a href="index.php?view=products">Products</a></li>
         </ul>
@@ -9,7 +9,7 @@
         ?>
             <ul>            
                 <li><a href="index.php?view=cart">Cart</a></li>
-                <li><a href="index.php?view=myorders">My Orders</a></li>
+                <li><a href="index.php?view=orders">My Orders</a></li>
                 <li><a href="index.php?view=profile">Profile</a></li>                
             </ul>
         <?php endif; ?>

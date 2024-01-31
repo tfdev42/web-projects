@@ -1,8 +1,14 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
+session_start();
 
 include "./Classes/Utils.class.php";
+include "./Classes/IndexView.class.php";
+include "./Classes/IndexContr.class.php";
+
+
+$indexContr = new IndexContr();
 
 ?>
 
@@ -16,5 +22,12 @@ include "./Classes/Utils.class.php";
 </head>
 <body>
     <?php include "./includes/header.inc.php"; ?>
+    <main>
+        <section><?php isset($_SESSION["errors"]) ? $indexContr->renderErrors() : ' ' ?></section>
+        <section> <?php var_dump($_SESSION["test"]); ?> </section>
+        <div class="main-view">
+            <?php $indexContr->renderView(); ?>
+        </div>
+    </main>
 </body>
 </html>
