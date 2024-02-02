@@ -3,13 +3,15 @@
 spl_autoload_register("autoload");
 
 function autoload($className) {
-    $currentDir = __DIR__;
+    $currentDir = dirname(__DIR__);
 
-    // Check if the autoloader is called from the 'inc' directory
-    if (strpos($currentDir, "inc") !== false) {
+    /**
+     * Returns false if the needle was not found. 
+     *  */ 
+    if (str_contains($currentDir, "inc") === true) {
         $prefix = "../Classes/";
     } else {
-        $prefix = "Classes/";
+        $prefix = "./Classes/";
     }
 
     $suffix = ".class.php";

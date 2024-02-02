@@ -6,18 +6,18 @@ class Dbh {
     private $dbUser = "root";
     private $dbPwd = "";
 
-    public function connect() {
+    protected function connect() {
         try {
 
             $pdo = new PDO("mysql:host=$this->dbHost;dbname=$this->dbName", $this->dbUser, $this->dbPwd);
 
             /**
-             * Show DB errors
+             * Show PDO errors
              */
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             
             /**
-             * Set Default FETCH
+             * Set Default FETCH as Associative Array
              */
             $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
