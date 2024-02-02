@@ -290,3 +290,22 @@ preg_match:
     Assertions:
         (?= ...): Positive lookahead assertion.
         (?! ...): Negative lookahead assertion.
+
+
+
+
+        [
+	{
+		"name": "localhost",
+		// ip
+		"host": "",
+		"port": 21,
+		// sftp = port 22
+		"type": "ftp",
+		"username": "",
+		"password": "",
+		"path": "/",
+		"autosave": true,
+		"confirm": true
+	}
+]
