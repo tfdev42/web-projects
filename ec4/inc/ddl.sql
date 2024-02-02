@@ -1,11 +1,11 @@
-CREATE DATABASE IF NOT EXISTS _20240129_ec3;
-USE _20240129_ec3;
+CREATE DATABASE IF NOT EXISTS ecommerce_template;
+USE ecommerce_template;
 
 CREATE TABLE users (
     user_id INT PRIMARY KEY AUTO_INCREMENT,
     user_pwd_hash VARCHAR(255) NOT NULL,
     user_email VARCHAR(255) NOT NULL UNIQUE KEY,
-    user_role ENUM ('customer', 'admin') DEFAULT customer,
+    user_role ENUM ('customer', 'admin') DEFAULT 'customer',
     created_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -61,6 +61,6 @@ CREATE TABLE orders (
     order_payment_type ENUM ('bill', 'visa') NOT NULL,
     FOREIGN KEY (fk_user_id) REFERENCES users(user_id),
     FOREIGN KEY (fk_cart_id) REFERENCES cart(cart_id),
-    FOREIGN KEY (fk_billing_addr) REFERENCES addresses(address_id),
-    FOREIGN KEY (fk_delivery_addr) REFERENCES addresses(address_id)
+    FOREIGN KEY (fk_billing_address) REFERENCES addresses(address_id),
+    FOREIGN KEY (fk_delivery_address) REFERENCES addresses(address_id)
 );
