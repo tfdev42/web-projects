@@ -26,8 +26,12 @@ class IndexView {
                 include_once "./templates/admin.temp.php";
                 break;
 
-            default:
+            case ("index"):
                 include_once "./templates/index.temp.php";
+                break;
+
+            default:
+                include_once "./templates/404.temp.php";
                 break;
         }       
     }
