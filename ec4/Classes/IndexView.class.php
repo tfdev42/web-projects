@@ -4,7 +4,7 @@ class IndexView {
 
     /**
      * Renders the Current View after the GET request to display the
-     * appropiate template
+     * appropriate template
      */
     public function renderCurrentView(){        
 

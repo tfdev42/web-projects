@@ -3,8 +3,9 @@ USE ecommerce_template;
 
 CREATE TABLE users (
     user_id INT PRIMARY KEY AUTO_INCREMENT,
-    user_pwd_hash VARCHAR(255) NOT NULL,
+    user_name VARCHAR(15) NOT NULL,
     user_email VARCHAR(255) NOT NULL UNIQUE KEY,
+    user_pwd_hash VARCHAR(255) NOT NULL,    
     user_role ENUM ('customer', 'admin') DEFAULT 'customer',
     created_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -24,7 +25,8 @@ CREATE TABLE product (
     product_desc TEXT NOT NULL,
     product_available TINYINT(1) DEFAULT 1,
     product_price DECIMAL(10, 2) NOT NULL,
-    product_img_path VARCHAR(255)
+    product_img_path VARCHAR(255),
+    created_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE cart_item (
@@ -46,6 +48,7 @@ CREATE TABLE addresses (
     street VARCHAR(255) NOT NULL,
     zip VARCHAR(50) NOT NULL,
     address_type ENUM ('billing', 'delivery') NOT NULL,
+    created_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (fk_user_id) REFERENCES users(user_id)
 );
 
