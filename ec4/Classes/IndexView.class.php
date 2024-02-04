@@ -11,27 +11,43 @@ class IndexView {
         switch ($_SESSION['current_view']){
                             
             case ("login"):
-                include_once "./templates/login.temp.php";
+                include "./templates/login.temp.php";
                 break;
 
             case ("signup"):
-                include_once "./templates/signup.temp.php";
+                include "./templates/signup.temp.php";
                 break;
 
             case ("products"):
-                include_once "./templates/products.temp.php";
+                include "./templates/products.temp.php";
                 break;
             
             case ("admin"):
-                include_once "./templates/admin.temp.php";
+                include "./templates/admin.temp.php";
                 break;
 
             case ("index"):
-                include_once "./templates/index.temp.php";
+                include "./templates/index.temp.php";
+                break;
+            
+            case ("cart"):
+                include "./templates/cart.temp.php";
+                break;
+
+            case ("orders"):
+                include "./templates/orders.temp.php";
+                break;
+
+            case ("profile"):
+                include "./templates/profile.temp.php";
+                break;
+
+            case ("analytics"):
+                include "./templates/analytics.temp.php";
                 break;
 
             default:
-                include_once "./templates/404.temp.php";
+                include "./templates/404.temp.php";
                 break;
         }       
     }
