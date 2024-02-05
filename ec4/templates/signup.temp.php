@@ -6,6 +6,6 @@
     <label for="password">Password</label><br>
     <input type="password" name="password"><br>
     <label for="password_repeat">Repeat Password</label><br>
-    <input type="password" name="password"><br>
+    <input type="password" name="password_repeat"><br>
     <button type="submit">Signup</button>
 </form>

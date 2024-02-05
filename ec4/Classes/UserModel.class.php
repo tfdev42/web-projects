@@ -81,4 +81,40 @@ class UserModel extends Dbh {
         $stmt->bindValue(":userPwd", $hashedPwd);
         return $stmt->execute();
     }
+
+
+
+    /**
+     * SELECT user by user_name
+     */
+    protected function selectUserByUname(UserModel $user) {
+        $query=
+        "SELECT * FROM users WHERE user_name = :userName;";
+
+        $stmt = Dbh::connect()->prepare($query);
+
+        $stmt->bindValue(":userName", $this->getUserName());
+        $stmt->execute();
+
+        $result = $stmt->fetchObject(PDO::FETCH_OBJ);
+
+        return $result;
+    }
+
+    /**
+     * SELECT user by user_email
+     */
+    protected function selectUserByEmail(UserModel $user) {
+        $query=
+        "SELECT * FROM users WHERE user_name = :userEmail;";
+
+        $stmt = Dbh::connect()->prepare($query);
+
+        $stmt->bindValue(":userEmail", $this->getUserEmail());
+        $stmt->execute();
+
+        $result = $stmt->fetchObject(PDO::FETCH_OBJ);
+
+        return $result;
+    }
 }
