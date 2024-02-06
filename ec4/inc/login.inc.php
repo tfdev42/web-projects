@@ -4,7 +4,6 @@ ini_set('display_errors', '1');
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST)) {
-    
     $errors = [];
 
     // Set a unique key
@@ -15,27 +14,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST)) {
         
         include_once "./autoloader.php";
 
-        $loginContr = new SignupContr();
+        $loginContr = new LoginContr();
 
         try {
 
-            $loginContr->checkSignupErrors();
+            $loginContr->checkLoginErrors();
 
-            $loginContr->setSignupUser();
+            $loginContr->setLoginUser();
 
-            $loginContr->validateSignup();
+            $loginContr->validateLogin();
 
             $errors = $loginContr->getErrors();
 
             if (count($errors) > 0) {
                 $_SESSION["errors"] = $errors;
-                $errors = null;
-                $_SESSION["signup_data"] = $loginContr->getPostArray();
-                header("Location: ../index.php?view=signup&key=$uniqueKey");
+                $errors = null;                
+                header("Location: ../index.php?view=login&key=$uniqueKey");
                 exit();
             } else {
-                $loginContr->createUser();
-                unset($_SESSION["signup_data"]);
+                $loginContr->loginUser();                
                 header("Location: ../index.php?view=success&key=$uniqueKey");
                 exit();
             }

@@ -30,7 +30,7 @@ class SignupContr extends UserModel {
 
         $this->postArray = $this->sanitize->getPostArray();
 
-        $this->sanitize->sanitize();        
+        $this->sanitize->sanitize();
 
         $this->errors = $this->sanitize->getErrors();
 

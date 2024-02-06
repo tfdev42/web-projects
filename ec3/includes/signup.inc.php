@@ -15,26 +15,26 @@ if (isset($_POST["bt_signup"])){
     $_SESSION["test"] = $postArray = $_POST;
     
     
-    $signupContr = new SignupContr($postArray);
+    $loginContr = new SignupContr($postArray);
 
     /**
      * empty or invalid
      */
-    if($signupContr->signupHasErrors()){
-        $errors = $signupContr->getErrors();
+    if($loginContr->signupHasErrors()){
+        $errors = $loginContr->getErrors();
     }
 
     /**
      * email already exist in DB
      */
-    if($signupContr->getUserByEmail($postArray["email"]) === "true"){
+    if($loginContr->getUserByEmail($postArray["email"]) === "true"){
         $errors = "Email already registered!";
     }
     
     /**
      * pw wrong
      */
-    if ($signupContr->pwdDoesntMatchRepeatPwd()){
+    if ($loginContr->pwdDoesntMatchRepeatPwd()){
         $errors[] = "Passwords don't match!";
     }
     
@@ -50,7 +50,7 @@ if (isset($_POST["bt_signup"])){
      * Signup User
      */
     try {
-        $signupContr->signupUser();        
+        $loginContr->signupUser();        
     } catch (PDOException $e) {
         die("Query failed: " . $e->getMessage());
     }
