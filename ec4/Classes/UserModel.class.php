@@ -8,7 +8,7 @@ class UserModel extends Dbh {
     private $userPwd;
     private $userRole = "customer";
     private $createdOn;
-    private $userCart;
+    private $userCartId;
 
     public function __construct() {
         $this->userId;
@@ -17,49 +17,53 @@ class UserModel extends Dbh {
         $this->userPwd;
         $this->userRole;
         $this->createdOn;
-        $this->userCart;
+        $this->userCartId;
     }
 
     // Getters
-    protected function getUserId(){
+    public function getUserId(){
         return $this->userId;
     }
 
-    protected function getUserName(){
+    public function getUserName(){
         return $this->userName;
     }
 
-    protected function getUserEmail(){
+    public function getUserEmail(){
         return $this->userEmail;
     }
 
-    protected function getUserPwd(){
+    public function getUserPwd(){
         return $this->userPwd;
     }
 
-    protected function getUserRole(){
+    public function getUserRole(){
         return $this->userRole;
     }
 
-    protected function getUserCreatedOnDate(){
+    public function getUserCreatedOnDate(){
         return $this->createdOn;
     }
 
+    public function getUserCartId(){
+        return $this->userCartId;
+    }
+
     // Setters
-    protected function setUserName($userName){
+    public function setUserName($userName){
         $this->userName = $userName;
     }
 
-    protected function setUserEmail($userEmail){
+    public function setUserEmail($userEmail){
         $this->userEmail = $userEmail;
     }
 
-    protected function setUserPwd($userPwd){
+    public function setUserPwd($userPwd){
         $this->userPwd = $userPwd;
     }
 
-    protected function setUserCart(Cart $userCart){
-        $this->userCart = $userCart;
+    public function setUserCartId($userCartId){
+        $this->userCartId = $userCartId;
     }
 
     // CRUD
@@ -67,7 +71,7 @@ class UserModel extends Dbh {
     /**
      * returns TRUE on user INSERT into DB
      */
-    protected function insertUser(UserModel $user) {
+    public function insertUser() {
         $query=
         "INSERT INTO users (user_name, user_email, user_pwd_hash)
         VALUES (:userName, :userEmail, :userPwd)";
@@ -87,7 +91,7 @@ class UserModel extends Dbh {
     /**
      * SELECT user by user_name
      */
-    protected function selectUserByUname(UserModel $user) {
+    public function selectUserByUname() {
         $query=
         "SELECT * FROM users WHERE user_name = :userName;";
 
@@ -96,7 +100,7 @@ class UserModel extends Dbh {
         $stmt->bindValue(":userName", $this->getUserName());
         $stmt->execute();
 
-        $result = $stmt->fetchObject(PDO::FETCH_OBJ);
+        $result = $stmt->fetch();
 
         return $result;
     }
@@ -104,7 +108,7 @@ class UserModel extends Dbh {
     /**
      * SELECT user by user_email
      */
-    protected function selectUserByEmail(UserModel $user) {
+    public function selectUserByEmail() {
         $query=
         "SELECT * FROM users WHERE user_name = :userEmail;";
 
@@ -113,8 +117,30 @@ class UserModel extends Dbh {
         $stmt->bindValue(":userEmail", $this->getUserEmail());
         $stmt->execute();
 
-        $result = $stmt->fetchObject(PDO::FETCH_OBJ);
+        $result = $stmt->fetch();
 
         return $result;
     }
+
+    /**
+     * SELECT user by Id
+     */
+    public function selectUserById() {
+        $query=
+        "SELECT * FROM users WHERE user_id = :userId;";
+
+        $stmt = Dbh::connect()->prepare($query);
+
+        $stmt->bindValue(":userId", $this->getUserId());
+        $stmt->execute();
+
+        $result = $stmt->fetch();
+
+        return $result;
+    }
+
+    /**
+     * UPDATE user_name
+     */
+    
 }

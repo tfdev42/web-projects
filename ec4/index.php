@@ -17,6 +17,7 @@ $indexContr = new IndexContr();
 </head>
 <body>
     <?php include_once "./inc/header.inc.php"; ?>
+    <section><?php $indexContr->renderErrors(); ?></section>
     <main>
         <div>
             <?php $indexContr->renderCurrentView(); ?>

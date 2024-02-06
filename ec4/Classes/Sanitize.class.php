@@ -4,10 +4,6 @@ class Sanitize {
 
     protected $postArray;
     protected $errors = [];
-
-    /**
-     * FILTER Arguments
-     */
     
 
     /**
@@ -43,9 +39,16 @@ class Sanitize {
     }
 
 
-    public function sanitize() {
+    public function sanitize() {    
         
         foreach ($this->postArray as $key => &$value) {
+
+            
+            if (empty($value)) {
+                $this->errors[] = "Fill in all fields!";
+                break;
+            }
+
             switch ($key){
                 
                 case "user_name":
@@ -58,7 +61,7 @@ class Sanitize {
                     break;
 
                 case "password":
-                    $pattern = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/";
+                    $pattern = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[;:#?!@$%^&*-])[A-Za-z\d@$!%*?&]{8,}$/";
                     if (preg_match($pattern, $value) === 0) {
                         $this->errors[] = "Password Min. lenght: 8. 1 Upper, 1 Lower, 1 Number, 1 Special Char!";
                     }                    

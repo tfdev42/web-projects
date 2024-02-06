@@ -46,6 +46,10 @@ class IndexView {
                 include "./templates/analytics.temp.php";
                 break;
 
+            case ("success"):
+                include "./templates/success.temp.php";
+                break;
+
             default:
                 include "./templates/404.temp.php";
                 break;
@@ -61,11 +65,13 @@ class IndexView {
 
         if(isset($_SESSION["errors"])){
             $errors = $_SESSION["errors"];
+            echo '<ul class="error">';
             foreach ($errors as $error){
-                echo '<p class="error">';
+                echo '<li>';
                 echo htmlspecialchars($error);
-                echo '</p><br>';
+                echo '</li>';
             }
+            echo '</ul>';
         }
         $_SESSION["errors"] = null;
     }
