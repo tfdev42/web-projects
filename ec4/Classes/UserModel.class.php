@@ -130,17 +130,25 @@ class UserModel extends Dbh {
         "SELECT * FROM users WHERE user_id = :userId;";
 
         $stmt = Dbh::connect()->prepare($query);
-
         $stmt->bindValue(":userId", $this->getUserId());
         $stmt->execute();
-
         $result = $stmt->fetch();
-
         return $result;
     }
 
     /**
-     * UPDATE user_name
+     * SELECT hashedPwd by user_id
      */
+    public function selectPwdHashByUserId() {
+        $query=
+        "SELECT user_pwd_hash FROM users WHERE user_id = :userId;";
+
+        $stmt = Dbh::connect()->prepare($query);
+        $stmt->bindValue(":userId", $this->getUserId());
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result;
+
+    }
     
 }

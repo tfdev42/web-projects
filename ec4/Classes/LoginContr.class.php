@@ -5,6 +5,8 @@ class LoginContr extends UserModel {
     private $postArray;
     private $errors;
     private $loginByEmail;
+
+    private $tempUser;
     
 
     public function __construct() {
@@ -12,7 +14,8 @@ class LoginContr extends UserModel {
         $this->sanitize = new Sanitize();
         $this->postArray;
         $this->errors;  
-        $this->loginByEmail = false;      
+        $this->loginByEmail = false;  
+        $this->tempUser;    
     }
 
     public function getErrors() {
@@ -41,7 +44,7 @@ class LoginContr extends UserModel {
     public function setLoginUser() {
         /**
          * these get only trimmed and checked for empty
-         * by sanitize() because the different $value naming
+         * by sanitize() because the different input $value naming
          * from login.temp.php
          */
         $this->setUserName($this->postArray["uname"]);
@@ -55,8 +58,10 @@ class LoginContr extends UserModel {
 
         if ($loginByEmail) {
             $userExists = $this->selectUserByEmail();
+            $this->tempUser = $userExists;
         } else {
             $userExists = $this->selectUserByUname();
+            $this->tempUser = $userExists;
         }
 
         if (!$userExists) {
@@ -68,11 +73,22 @@ class LoginContr extends UserModel {
         
     }
 
-    public function loginUser() {
-        if ($this->loginByEmail) {
-            // Login by email
-        } else {
-            // Login by username
+    public function verifyCredentials() {
+        // Verify Pwd
+        $hashedPwd = $this->tempUser->getUserPwd();
+        $result = password_verify($this->getUserPwd(), $hashedPwd);
+
+        if (!$result) {
+            $this->errors[] = "Wrong credentials!";
         }
+    }
+
+
+    public function loginUser() {
+        $userContr = new UserContr();
+        $userContr->setUserName($this->tempUser->getUserName());
+        $userContr->setUserId($this->tempUser->getUserId());
+        $userContr->setEmail($this->tempUser->getEmail());
+        
     }
 }
