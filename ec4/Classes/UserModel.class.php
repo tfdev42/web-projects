@@ -8,7 +8,6 @@ class UserModel extends Dbh {
     private $userPwd;
     private $userRole = "customer";
     private $createdOn;
-    private $userCartId;
 
     public function __construct() {
         $this->userId;
@@ -17,13 +16,10 @@ class UserModel extends Dbh {
         $this->userPwd;
         $this->userRole;
         $this->createdOn;
-        $this->userCartId;
     }
 
     // Getters
-    public function getUserId(){
-        return $this->userId;
-    }
+    
 
     public function getUserName(){
         return $this->userName;
@@ -45,13 +41,18 @@ class UserModel extends Dbh {
         return $this->createdOn;
     }
 
-    public function getUserCartId(){
-        return $this->userCartId;
+    public function getUserId(){
+        return (int)$this->userId;
     }
+
 
     // Setters
     public function setUserName($userName){
         $this->userName = $userName;
+    }
+
+    public function setUserId($userId){
+        $this->userId = $userId;
     }
 
     public function setUserEmail($userEmail){
@@ -106,11 +107,30 @@ class UserModel extends Dbh {
     }
 
     /**
+     * SELECT user ID by user_name (can be email or username)
+     */
+    public function selectUserIdByUnameOrEmail() {
+        $query=
+        "SELECT user_id 
+        FROM users 
+        WHERE user_name = :userName OR user_email = :userName;";
+
+        $stmt = Dbh::connect()->prepare($query);
+
+        $stmt->bindValue(":userName", $this->getUserName());        
+        $stmt->execute();
+
+        $result = $stmt->fetch();
+
+        return $result;
+    }
+
+    /**
      * SELECT user by user_email
      */
     public function selectUserByEmail() {
         $query=
-        "SELECT * FROM users WHERE user_name = :userEmail;";
+        "SELECT * FROM users WHERE user_email = :userEmail;";
 
         $stmt = Dbh::connect()->prepare($query);
 
@@ -146,8 +166,8 @@ class UserModel extends Dbh {
         $stmt = Dbh::connect()->prepare($query);
         $stmt->bindValue(":userId", $this->getUserId());
         $stmt->execute();
-        $result = $stmt->fetch();
-        return $result;
+        $result = $stmt->fetch(PDO::FETCH_ASSOC); // Fetch as associative array
+        return $result["user_pwd_hash"];
 
     }
     

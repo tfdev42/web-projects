@@ -1,6 +1,6 @@
 <?php
 
-class LoginContr extends UserModel {
+class LoginContr {
     private $sanitize;
     private $postArray;
     private $errors;
@@ -9,13 +9,12 @@ class LoginContr extends UserModel {
     private $tempUser;
     
 
-    public function __construct() {
-        parent::__construct();
+    public function __construct() {        
         $this->sanitize = new Sanitize();
         $this->postArray;
         $this->errors;  
         $this->loginByEmail = false;  
-        $this->tempUser;    
+        $this->tempUser = new UserModel();    
     }
 
     public function getErrors() {
@@ -47,8 +46,8 @@ class LoginContr extends UserModel {
          * by sanitize() because the different input $value naming
          * from login.temp.php
          */
-        $this->setUserName($this->postArray["uname"]);
-        $this->setUserPwd($this->postArray["pwd"]);       
+        $this->tempUser->setUserName($this->postArray["uname"]);
+        $this->tempUser->setUserPwd($this->postArray["pwd"]);       
     }
 
 
@@ -57,16 +56,14 @@ class LoginContr extends UserModel {
         $loginByEmail = filter_var($this->postArray["uname"], FILTER_VALIDATE_EMAIL);
 
         if ($loginByEmail) {
-            $userExists = $this->selectUserByEmail();
-            $this->tempUser = $userExists;
+            $userExists = $this->tempUser->selectUserByEmail();
         } else {
-            $userExists = $this->selectUserByUname();
-            $this->tempUser = $userExists;
+            $userExists = $this->tempUser->selectUserByUname();
         }
 
         if (!$userExists) {
             $this->errors[] = "Wrong login data!";                
-        }
+        }        
 
         // Set flag for login method
         $this->loginByEmail = $loginByEmail;
@@ -74,10 +71,13 @@ class LoginContr extends UserModel {
     }
 
     public function verifyCredentials() {
-        // Verify Pwd
-        $hashedPwd = $this->tempUser->getUserPwd();
-        $result = password_verify($this->getUserPwd(), $hashedPwd);
 
+        $id = $this->tempUser->selectUserIdByUnameOrEmail();
+        $this->tempUser->setUserId($id);
+        // Verify Pwd 
+        $hashedPwd = $this->tempUser->selectPwdHashByUserId();
+        
+        $result = password_verify($this->tempUser->getUserPwd(), $hashedPwd);
         if (!$result) {
             $this->errors[] = "Wrong credentials!";
         }
@@ -89,6 +89,8 @@ class LoginContr extends UserModel {
         $userContr->setUserName($this->tempUser->getUserName());
         $userContr->setUserId($this->tempUser->getUserId());
         $userContr->setEmail($this->tempUser->getEmail());
+        $userContr->setUserRole($this->tempUser->getUserRole());
+        $userContr->setUserToSession();
         
     }
 }

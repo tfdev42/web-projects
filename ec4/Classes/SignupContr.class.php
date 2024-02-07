@@ -1,16 +1,17 @@
 <?php
 
-class SignupContr extends UserModel {
+class SignupContr {
 
     private $sanitize;
     private $postArray;
     private $errors;
+    private $user;
 
-    public function __construct() {
-        parent::__construct();
+    public function __construct() {        
         $this->sanitize = new Sanitize();
         $this->postArray;
         $this->errors;
+        $this->user = new UserModel();
     }
 
     public function getErrors() {
@@ -40,8 +41,8 @@ class SignupContr extends UserModel {
     public function validateSignup() {
 
         if ( !empty($this->postArray["user_name"]) && !empty($this->postArray["email"])) {
-            $usernameTaken = $this->selectUserByUname();
-            $emailTaken = $this->selectUserByEmail();
+            $usernameTaken = $this->user->selectUserByUname();
+            $emailTaken = $this->user->selectUserByEmail();
 
             if ($usernameTaken !== false ) {
                 $this->errors[] = "Username is taken!";
@@ -56,14 +57,14 @@ class SignupContr extends UserModel {
 
     public function setSignupUser() {
 
-        $this->setUserName($this->postArray["user_name"]);
-        $this->setUserEmail($this->postArray["email"]);
-        $this->setUserPwd($this->postArray["password"]);        
+        $this->user->setUserName($this->postArray["user_name"]);
+        $this->user->setUserEmail($this->postArray["email"]);
+        $this->user->setUserPwd($this->postArray["password"]);        
     }
 
     public function createUser() {
         // inserts into DB
-        $this->insertUser();
+        $this->user->insertUser();
     }
 
 

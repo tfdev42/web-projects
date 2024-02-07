@@ -24,6 +24,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST)) {
 
             $loginContr->validateLogin();
 
+            $loginContr->verifyCredentials();
+
             $errors = $loginContr->getErrors();
 
             if (count($errors) > 0) {
