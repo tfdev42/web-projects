@@ -1,12 +1,12 @@
 <?php
 
 class LoginContr {
-    private $sanitize;
-    private $postArray;
-    private $errors;
-    private $loginByEmail;
-
-    private $tempUser;
+    protected $sanitize;
+    protected $postArray;
+    protected $errors;
+    protected $loginByEmail;
+    protected $tempUser;
+    protected $pwdHash;
     
 
     public function __construct() {        
@@ -14,7 +14,8 @@ class LoginContr {
         $this->postArray;
         $this->errors;  
         $this->loginByEmail = false;  
-        $this->tempUser = new UserModel();    
+        $this->tempUser = new UserModel(); 
+        $this->pwdHash;   
     }
 
     public function getErrors() {
@@ -23,6 +24,13 @@ class LoginContr {
 
     public function getPostArray() {
         return $this->postArray;
+    }
+    public function getPwdHash() {
+        return $this->pwdHash;
+    }
+
+    public function setPwdHash($pwdHash) {
+        $this->pwdHash = $pwdHash;
     }
 
     /**
@@ -47,6 +55,7 @@ class LoginContr {
          * from login.temp.php
          */
         $this->tempUser->setUserName($this->postArray["uname"]);
+        $this->tempUser->setUserEmail($this->postArray["uname"]);
         $this->tempUser->setUserPwd($this->postArray["pwd"]);       
     }
 
@@ -54,16 +63,30 @@ class LoginContr {
     public function validateLogin() {
 
         $loginByEmail = filter_var($this->postArray["uname"], FILTER_VALIDATE_EMAIL);
+        $userExists = false;
 
-        if ($loginByEmail) {
+        // Check if user exists
+        if ($loginByEmail) {     
+
             $userExists = $this->tempUser->selectUserByEmail();
+            
         } else {
+
             $userExists = $this->tempUser->selectUserByUname();
+            
         }
 
-        if (!$userExists) {
-            $this->errors[] = "Wrong login data!";                
-        }        
+        if ($userExists) {
+            $this->tempUser->setUserId($userExists->getUserId());
+            $this->tempUser->setUserName($userExists->getUserName());
+            $this->tempUser->setUserEmail($userExists->getUserEmail());
+            $this->tempUser->setUserPwd($this->postArray["pwd"]);
+            $hash = $userExists->getUserPwd();
+            $this->pwdHash = $hash;
+                            
+        } else {
+            $this->errors[] = "User doesn't exist!";
+        }
 
         // Set flag for login method
         $this->loginByEmail = $loginByEmail;
@@ -72,24 +95,21 @@ class LoginContr {
 
     public function verifyCredentials() {
 
-        $id = $this->tempUser->selectUserIdByUnameOrEmail();
-        $this->tempUser->setUserId($id);
-        // Verify Pwd 
         $hashedPwd = $this->tempUser->selectPwdHashByUserId();
         
-        $result = password_verify($this->tempUser->getUserPwd(), $hashedPwd);
-        if (!$result) {
+        if ( ! password_verify($this->tempUser->getUserPwd(), $hashedPwd)){
             $this->errors[] = "Wrong credentials!";
         }
+    
     }
 
 
     public function loginUser() {
         $userContr = new UserContr();
-        $userContr->setUserName($this->tempUser->getUserName());
-        $userContr->setUserId($this->tempUser->getUserId());
-        $userContr->setEmail($this->tempUser->getEmail());
-        $userContr->setUserRole($this->tempUser->getUserRole());
+        $userContr->userModel->setUserName($this->tempUser->getUserName());
+        $userContr->userModel->setUserId($this->tempUser->getUserId());
+        $userContr->userModel->setUserEmail($this->tempUser->getUserEmail());
+        $userContr->userModel->setUserRole($this->tempUser->getUserRole());
         $userContr->setUserToSession();
         
     }

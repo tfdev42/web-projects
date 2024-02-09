@@ -1,27 +1,28 @@
 <?php
 
 
-class UserContr extends UserModel {
-    private $cartModel;
+class UserContr {
+    public $cartModel;
+    public $userModel;
     
     
     public function __construct() {
-        parent::__construct();
+        $this->userModel = new UserModel();
         $this->cartModel = new CartModel();
     }
 
 
     public function setUserToSession() {
-        $_SESSION["user"]["id"] = $this->getUserId();
-        $_SESSION["user"]["name"] = $this->getUserName();
-        $_SESSION["user"]["email"] = $this->getUserEmail();
-        $_SESSION["user"]["role"] = $this->getUserRole();
+        $_SESSION["user"]["id"] = $this->userModel->getUserId();
+        $_SESSION["user"]["name"] = $this->userModel->getUserName();
+        $_SESSION["user"]["email"] = $this->userModel->getUserEmail();
+        $_SESSION["user"]["role"] = $this->userModel->getUserRole();
     }
 
 
 
     public function initializeCart() {
-        $this->cartModel->setUserId($this->getUserId());
+        $this->cartModel->setUserId($this->userModel->getUserId());
         $hasOpenCart = $this->cartModel->selectOpenCartIdByUserId();
         if ($hasOpenCart) {
             $_SESSION["user"]["cart_id"] = $hasOpenCart->getCartId();

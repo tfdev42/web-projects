@@ -2,12 +2,12 @@
 
 class UserModel extends Dbh {
     
-    private $userId;
-    private $userName;
-    private $userEmail;
-    private $userPwd;
-    private $userRole = "customer";
-    private $createdOn;
+    protected $userId;
+    protected $userName;
+    protected $userEmail;
+    protected $userPwd;
+    protected $userRole = "customer";
+    protected $createdOn;
 
     public function __construct() {
         $this->userId;
@@ -42,7 +42,7 @@ class UserModel extends Dbh {
     }
 
     public function getUserId(){
-        return (int)$this->userId;
+        return $this->userId;
     }
 
 
@@ -65,6 +65,13 @@ class UserModel extends Dbh {
 
     public function setUserCartId($userCartId){
         $this->userCartId = $userCartId;
+    }
+
+    public function setUserRole($userRole){
+        $this->userRole = $userRole;
+    }
+    public function setUserCreatedOnDate($date){
+        $this->createdOn = $date;   
     }
 
     // CRUD
@@ -100,9 +107,24 @@ class UserModel extends Dbh {
 
         $stmt->bindValue(":userName", $this->getUserName());
         $stmt->execute();
-
         $result = $stmt->fetch();
 
+        if ($result){
+            $user = new UserModel();
+            $id = $result->user_id;
+            $name  = $result->user_name;
+            $email = $result->user_email;
+            $hash = $result->user_pwd_hash;            
+            $role = $result->user_role;
+            
+            $user->setUserId($id);
+            $user->setUserName($name);
+            $user->setUserEmail($email);
+            $user->setUserPwd($hash);
+            $user->setUserRole($role);
+            
+            return $user;
+        }
         return $result;
     }
 
@@ -113,15 +135,23 @@ class UserModel extends Dbh {
         $query=
         "SELECT user_id 
         FROM users 
-        WHERE user_name = :userName OR user_email = :userName;";
+        WHERE user_name = :userName OR user_email = :userEmail;";
 
         $stmt = Dbh::connect()->prepare($query);
 
         $stmt->bindValue(":userName", $this->getUserName());        
+        $stmt->bindValue(":userEmail", $this->getUserEmail());
         $stmt->execute();
-
         $result = $stmt->fetch();
 
+        if ($result){
+            $user = new UserModel();            
+            $id = $result->user_id;            
+            
+            $user->setUserPwd($id);            
+            
+            return $user;
+        }
         return $result;
     }
 
@@ -136,10 +166,26 @@ class UserModel extends Dbh {
 
         $stmt->bindValue(":userEmail", $this->getUserEmail());
         $stmt->execute();
-
         $result = $stmt->fetch();
 
+        if ($result){
+            $user = new UserModel();
+            $id = $result->user_id;
+            $name  = $result->user_name;
+            $email = $result->user_email;
+            $hash = $result->user_pwd_hash;            
+            $role = $result->user_role;
+            
+            $user->setUserId($id);
+            $user->setUserName($name);
+            $user->setUserEmail($email);
+            $user->setUserPwd($hash);
+            $user->setUserRole($role);
+            
+            return $user;
+        }
         return $result;
+        
     }
 
     /**
@@ -151,9 +197,27 @@ class UserModel extends Dbh {
 
         $stmt = Dbh::connect()->prepare($query);
         $stmt->bindValue(":userId", $this->getUserId());
-        $stmt->execute();
+        $stmt->execute();               
         $result = $stmt->fetch();
+
+        if ($result){
+            $user = new UserModel();
+            $id = $result->user_id;
+            $name  = $result->user_name;
+            $email = $result->user_email;
+            $hash = $result->user_pwd_hash;            
+            $role = $result->user_role;
+            
+            $user->setUserId($id);
+            $user->setUserName($name);
+            $user->setUserEmail($email);
+            $user->setUserPwd($hash);
+            $user->setUserRole($role);
+            
+            return $user;
+        }
         return $result;
+        
     }
 
     /**
@@ -166,8 +230,25 @@ class UserModel extends Dbh {
         $stmt = Dbh::connect()->prepare($query);
         $stmt->bindValue(":userId", $this->getUserId());
         $stmt->execute();
+        // $result = $stmt->fetch();
+
+        // if ($result){
+        //     $user = new UserModel();            
+        //     $hash = $result->user_pwd_hash;            
+            
+        //     $user->setUserPwd($hash);
+            
+            
+        //     return $user;
+        // }
+        // return $result;
         $result = $stmt->fetch(PDO::FETCH_ASSOC); // Fetch as associative array
-        return $result["user_pwd_hash"];
+
+        if ($result) {
+            return $result['user_pwd_hash'];
+        }
+
+        return false; // Or handle empty result as needed
 
     }
     

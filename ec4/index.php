@@ -18,6 +18,7 @@ $indexContr = new IndexContr();
 <body>
     <?php include_once "./inc/header.inc.php"; ?>
     <section><?php $indexContr->renderErrors(); ?></section>
+    <!-- <section><?php var_dump($_SESSION["test"]); ?></section> -->
     <main>
         <div>
             <?php $indexContr->renderCurrentView(); ?>
