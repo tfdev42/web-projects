@@ -6,7 +6,7 @@ class UserModel extends Dbh {
     protected $userName;
     protected $userEmail;
     protected $userPwd;
-    protected $userRole = "customer";
+    protected $userRole;
     protected $createdOn;
 
     public function __construct() {

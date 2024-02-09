@@ -1,18 +1,17 @@
 <?php
 
-class CartItemModel extends CartModel {
+class CartItemModel{
 
-    private $product;
+    protected $productId;
 
-    private $quantity;
+    protected $quantity;
 
-    private $unitPrice;
+    protected $unitPrice;
 
-    private $totalPrice;
+    protected $totalPrice;
 
 
-    public function __construct(){
-        parent::__construct();        
+    public function __construct(){        
         $this->product = new ProductModel();
         $this->quantity;
         $this->unitPrice;

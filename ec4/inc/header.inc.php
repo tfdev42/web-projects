@@ -27,7 +27,7 @@ $_SESSION['redirect_key'] = $uniqueKey;
                 <a href="index.php?view=login&key=<?php echo $uniqueKey ?>">Login</a></li>
             <?php endif; ?>
             <?php if (Utils::isLoggedIn()) : ?>
-            <li><a href="index.php?view=logout&key=<?php echo $uniqueKey ?>">Logout</a></li>
+            <li><a href="./inc/logout.inc.php">Logout</a></li>
             <?php endif; ?>
         </ul>
     </nav>

@@ -80,6 +80,7 @@ class LoginContr {
             $this->tempUser->setUserId($userExists->getUserId());
             $this->tempUser->setUserName($userExists->getUserName());
             $this->tempUser->setUserEmail($userExists->getUserEmail());
+            $this->tempUser->setUserRole($userExists->getUserRole());
             $this->tempUser->setUserPwd($this->postArray["pwd"]);
             $hash = $userExists->getUserPwd();
             $this->pwdHash = $hash;
