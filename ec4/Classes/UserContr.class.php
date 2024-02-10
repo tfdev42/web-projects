@@ -28,8 +28,8 @@ class UserContr {
         // select open cart from DB if any
         $hasOpenCart = $this->cartModel->selectOpenCartIdByUserId();
 
-        // ONLY ID HERE ... TODO!
-        
+        // ONLY ID HERE ... TODO! into session user cartItems array through CartContrl
+
         if ($hasOpenCart) {
             // load open cart to Session
             $_SESSION["user"]["cart_id"] = $hasOpenCart->getCartId();
