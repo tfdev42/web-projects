@@ -51,6 +51,9 @@ class CartModel {
     public function setCartStatus(string $status){
         $this->cartStatus = $status;
     }
+    public function setCreatedOn($createdOn){
+        $this->createdOn = $createdOn;
+    }
 
 
     public function selectOpenCartItemsByUserId() {
@@ -100,6 +103,29 @@ class CartModel {
         $stmt->execute();
 
         return $stmt->fetch();
+    }
+
+    public function selectOpenCartByUserId() {
+        $query =
+        "SELECT * 
+            FROM cart 
+            WHERE fk_user_id = :userId 
+                AND cart_status = 'open';";
+
+        $stmt = $this->dbh->connect()->prepare($query);
+        $stmt->bindValue(":userId", $_SESSION["user"]["id"]);
+        $stmt->execute();
+        $result = $stmt->fetch();
+
+        if ($result) {
+            $cart = new CartModel();
+            $cart->setCartId($result->cart_id);
+            $cart->setCartUserId($result->fk_user_id);
+            $cart->setCreatedOn($result->created_on);
+            $cart->setCartStatus($result->cart_status);
+            return $cart;
+        }
+        return $result;
     }
 
 

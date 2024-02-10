@@ -26,7 +26,7 @@ class UserContr {
 
         $this->cartModel->setCartUserId($_SESSION["user"]["id"]);
         // select open cart from DB if any
-        $hasOpenCart = $this->cartModel->selectOpenCartIdByUserId();
+        $hasOpenCart = $this->cartModel->selectOpenCartByUserId();
 
         // ONLY ID HERE ... TODO! into session user cartItems array through CartContrl
 
