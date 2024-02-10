@@ -72,12 +72,15 @@ class ProductModel {
         $this->productImgPath = $productImgPath;
     }
 
+
+    /**
+     * return TRUE if insert successfull
+     */
     public function insertProduct(){
         $query=
         "INSERT INTO product 
             (product_article_number, product_name, product_desc, product_available, product_price, product_img_path)
-            VALUES 
-            (:pan, :pn, :pd, :pa, :pp, :pip);";
+            VALUES (:pan, :pn, :pd, :pa, :pp, :pip);";
 
         $stmt = $this->dbh->prepare($query);
         $stmt->bindValue(":pan", $this->getProductId(), PDO::PARAM_INT);

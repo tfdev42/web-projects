@@ -16,7 +16,7 @@ class CartModel {
         $this->createdOn;
         $this->cartStatus;
         $this->dbh = new Dbh();
-        $this->userModel = new UserModel();
+        // $this->userModel = new UserModel();
     }
 
     public function getCartStatus(){
@@ -48,8 +48,12 @@ class CartModel {
         $this->cartStatus = 'closed';
     }
 
+    public function setCartStatus(string $status){
+        $this->cartStatus = $status;
+    }
 
-    public function selectCartItemsByUserId() {
+
+    public function selectOpenCartItemsByUserId() {
         $query =
         "SELECT cart.cart_id AS 'cartId', cart_item.fk_product_id AS 'ProductID', cart_item.quantity
             FROM cart
@@ -92,10 +96,19 @@ class CartModel {
                 AND cart_status = 'open';";
 
         $stmt = $this->dbh->connect()->prepare($query);
-        $stmt->bindValue(":userId", $this->userModel->getUserId());
+        $stmt->bindValue(":userId", $_SESSION["user"]["id"]);
         $stmt->execute();
 
         return $stmt->fetch();
+    }
+
+
+    public function insertNewCartByUserId() {
+        $query =
+        "INSERT INTO cart (fk_user_id) VALUES (:userId);";
+        $stmt = $this->dbh->connect()->prepare($query);
+        $stmt->bindValue(":userId", $_SESSION["user"]["id"], PDO::PARAM_INT);
+        return $stmt->execute();
     }
 
 
