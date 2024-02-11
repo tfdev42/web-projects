@@ -1,15 +1,15 @@
 <?php
 
 class ProductModel {
-    protected $productId;
-    protected $productArticleNr;
-    protected $productName;
-    protected $productDesc;
-    protected $productPrice;
-    protected $productAvailable;
-    protected $productImgPath;
-    protected $productAddedOnDate;
-    private $dbh;
+    public $productId;
+    public $productArticleNr;
+    public $productName;
+    public $productDesc;
+    public $productPrice;
+    public $productAvailable;
+    public $productImgPath;
+    public $productAddedOnDate;
+    public $dbh;
 
     public function __construct() {
         $this->productId;
@@ -92,6 +92,22 @@ class ProductModel {
 
         return $stmt->execute();
     }
+
+
+    public function selectProductPriceByProdId(){
+        $query=
+        "SELECT product_price
+            FROM products
+            WHERE product_id = :pid;";
+
+        $stmt = $this->dbh->connect()->prepare($query);
+        $stmt->bindValue(":pid", $this->getProductId(), PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result ?: $result->product_price;
+    }
+
+    
 
     
 }

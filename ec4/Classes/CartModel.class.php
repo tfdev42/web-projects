@@ -2,32 +2,30 @@
 
 class CartModel {
     
-    protected $cartId;
-    protected $userId;
-    protected $createdOn;
-    protected $cartStatus;
-    protected $dbh;
-    protected $userModel;
+    public $cartId;
+    public $fkUserId;
+    public $createdOn;
+    public $cartStatus;
+    public $dbh;    
 
 
     public function __construct() {          
         $this->cartId;
-        $this->userId;
+        $this->fkUserId;
         $this->createdOn;
         $this->cartStatus;
-        $this->dbh = new Dbh();
-        // $this->userModel = new UserModel();
+        $this->dbh = new Dbh();        
     }
 
-    public function getCartStatus(){
-        return $this->cartStatus;
-    }
     public function getCartId(){
         return $this->cartId;
     }
     public function getCartUserId(){
-        return $this->userId;
+        return $this->fkUserId;
     }
+    public function getCartStatus(){
+        return $this->cartStatus;
+    }    
     public function getCreatedOn(){
         return $this->createdOn;
     }
@@ -36,19 +34,13 @@ class CartModel {
     public function setCartId($cartId){
         $this->cartId = $cartId;
     }
-    public function setCartUserId($cartId){
-        $this->cartId = $cartId;
+    public function setCartUserId($fkUserId){
+        $this->fkUserId = $fkUserId;
     }
-
-    public function setCartStatusOpen(){
-        $this->cartStatus = 'open';
-    }
-
     public function setCartStatusClosed(){
         $this->cartStatus = 'closed';
     }
-
-    public function setCartStatus(string $status){
+    public function setCartStatus($status){
         $this->cartStatus = $status;
     }
     public function setCreatedOn($createdOn){
@@ -56,15 +48,18 @@ class CartModel {
     }
 
 
-    public function selectOpenCartItemsByUserId() {
-        $query =
-        "SELECT cart.cart_id AS 'cartId', cart_item.fk_product_id AS 'ProductID', cart_item.quantity
-            FROM cart
-                INNER JOIN cart_item ON cart.cart_id = cart_item.fk_cart_id
-                WHERE cart.fk_user_id = :userId
-                AND cart.cart_status = 'open';";
-    }
-
+    // public function selectOpenCartItemsByUserId() {
+    //     $query =
+    //     "SELECT cart.cart_id AS 'cartId', cart_item.fk_product_id AS 'ProductID', cart_item.quantity
+    //         FROM cart
+    //             INNER JOIN cart_item ON cart.cart_id = cart_item.fk_cart_id
+    //             WHERE cart.fk_user_id = :userId
+    //             AND cart.cart_status = 'open';";
+    // }
+    
+    /**
+     * returns an Array() of cartItems or empty Array()!
+     */
     public function selectCartItemsByCartId(){
         $query =
         "SELECT * 
@@ -80,8 +75,8 @@ class CartModel {
             // Create a CartItem object and populate its properties
             $cartItem = new CartItemModel();
             $cartItem->setCartItemId($row->cart_item_id);
-            $cartItem->setCartId($row->fk_cart_id);
-            $cartItem->setProductId($row->fk_product_id);
+            $cartItem->setFkCartId($row->fk_cart_id);
+            $cartItem->setFkProductId($row->fk_product_id);
             $cartItem->setQuantity($row->quantity);
             
             // Add the CartItem object to the array
@@ -105,6 +100,9 @@ class CartModel {
         return $stmt->fetch();
     }
 
+    /**
+     * returns an open CartModel by UserId if found
+     */
     public function selectOpenCartByUserId() {
         $query =
         "SELECT * 
@@ -128,13 +126,16 @@ class CartModel {
         return $result;
     }
 
-
+    /**
+     * returns the new cart_id (LastInsertedID) if true, or false
+     */
     public function insertNewCartByUserId() {
         $query =
         "INSERT INTO cart (fk_user_id) VALUES (:userId);";
         $stmt = $this->dbh->connect()->prepare($query);
         $stmt->bindValue(":userId", $_SESSION["user"]["id"], PDO::PARAM_INT);
-        return $stmt->execute();
+        
+        $stmt->execute() ? $this->dbh->connect()->lastInsertId() : false;
     }
 
 

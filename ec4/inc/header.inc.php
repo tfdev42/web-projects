@@ -9,7 +9,7 @@ $_SESSION['redirect_key'] = $uniqueKey;
             <li><a href="./">Home</a></li>
             <li><a href="index.php?view=products&key=<?php echo $uniqueKey ?>">Products</a></li>
             <?php if (Utils::isCustomerLoggedIn()) : ?>
-            <li><a href="index.php?view=cart&key=<?php echo $uniqueKey ?>">Cart</a></li>
+            <li><a href="index.php?view=cart&key=<?php echo $uniqueKey ?>">Cart(<?php echo isset($_SESSION["user"]["cartItems"]) ? count($_SESSION["user"]["cartItems"]) : '0'; ?>)</a></li>
             <li><a href="index.php?view=orders&key=<?php echo $uniqueKey ?>">Orders</a></li>        
             <?php endif; ?>
             <?php if (Utils::isAdminLoggedIn()) : ?>
