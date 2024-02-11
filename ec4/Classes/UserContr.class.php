@@ -37,8 +37,6 @@ class UserContr {
             if ($newCartId) {
                 $this->cartModel->setCartId($newCartId);
                 $this->loadOpenCartToSession($this->cartModel);
-            } else {
-                $_SESSION["errors"] = "Cart could not be set.";
             }
         }
     }

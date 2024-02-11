@@ -1,12 +1,12 @@
 <?php
 
 class LoginContr {
-    protected $sanitize;
-    protected $postArray;
-    protected $errors;
-    protected $loginByEmail;
-    protected $tempUser;
-    protected $pwdHash;
+    public $sanitize;
+    public $postArray;
+    public $errors;
+    public $loginByEmail;
+    public $tempUser;
+    public $pwdHash;
     
 
     public function __construct() {        

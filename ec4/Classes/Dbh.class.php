@@ -6,7 +6,7 @@ class Dbh {
     private $dbUser = "root";
     private $dbPwd = "";
 
-    protected function connect() {
+    public function connect() {
         try {
 
             $pdo = new PDO("mysql:host=$this->dbHost;dbname=$this->dbName", $this->dbUser, $this->dbPwd);
